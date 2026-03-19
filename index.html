@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Arms Child Development Center | Growing Hearts, Minds, and Faith</title>
+  <meta name="description" content="NAEYC-accredited childcare in Fairbanks, Alaska. A Christ-centered Child Development Ministry serving families since 2000. Licensed for 236 children." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── PASSWORD GATE ──────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      transition: opacity 0.5s ease;
+    }
+    #gate.hidden { opacity: 0; pointer-events: none; }
+    .gate-box {
+      background: #fff; border-radius: 24px;
+      padding: 48px 40px; max-width: 420px; width: 100%;
+      text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+    .gate-box img { height: 56px; margin: 0 auto 28px; }
+    .gate-box h2 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; color: var(--black); }
+    .gate-box p { font-size: 14px; color: var(--gray); margin-bottom: 28px; line-height: 1.6; }
+    .gate-input-wrap { position: relative; margin-bottom: 16px; }
+    .gate-input-wrap input {
+      width: 100%; padding: 14px 48px 14px 18px;
+      border: 2px solid #E5E7EB; border-radius: 12px;
+      font-family: 'Open Sans', sans-serif; font-size: 16px;
+      letter-spacing: 2px; color: var(--black);
+      transition: border-color 0.2s;
+    }
+    .gate-input-wrap input:focus { outline: none; border-color: var(--blue); }
+    .gate-input-wrap input.error { border-color: var(--red); animation: shake 0.35s ease; }
+    .gate-toggle {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--gray); padding: 4px;
+    }
+    .gate-error { font-size: 13px; color: var(--red); font-weight: 600; min-height: 18px; margin-bottom: 16px; }
+    .gate-btn {
+      width: 100%; padding: 15px; border-radius: 50px;
+      background: var(--blue); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800;
+      border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,113,176,0.35); }
+    .gate-note { font-size: 12px; color: var(--gray); margin-top: 16px; }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)}
+      60%{transform:translateX(-6px)}
+      80%{transform:translateX(6px)}
+    }
+
+    /* ── RESET & BASE ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:  #7BC07E;
+      --blue:   #2A71B0;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --black:  #1A1A1A;
+      --cream:  #F9F6F0;
+      --white:  #FFFFFF;
+      --gray:   #6B7280;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+      --radius: 16px;
+      --nav-h:  72px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--black); background: var(--white); overflow-x: hidden; }
+    h1,h2,h3,h4,h5 { font-family: 'Nunito', sans-serif; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ── UTILITIES ──────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 900; line-height: 1.15; margin-bottom: 16px; }
+    .section-sub { font-size: 18px; color: var(--gray); line-height: 1.7; max-width: 640px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 16px; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+    .btn-red   { background: var(--red);  color: #fff; }
+    .btn-blue  { background: var(--blue); color: #fff; }
+    .btn-white { background: #fff; color: var(--blue); }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid #fff; }
+    .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── NAV ────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(42,113,176,0.97);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+      display: flex; align-items: center;
+      transition: background 0.3s;
+    }
+    #nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    #nav-logo img { height: 44px; }
+    #nav-links { display: flex; align-items: center; gap: 32px; }
+    #nav-links a { color: rgba(255,255,255,0.9); font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 15px; transition: color 0.2s; }
+    #nav-links a:hover { color: var(--yellow); }
+    #nav-cta { background: var(--red); color: #fff; padding: 10px 22px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; transition: transform 0.2s, box-shadow 0.2s; }
+    #nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233,78,65,0.4); }
+    #hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+    #hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s; }
+    #mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--blue); padding: 24px; z-index: 999; flex-direction: column; gap: 20px; }
+    #mobile-menu a, #mobile-menu button { color: #fff; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 18px; text-align: left; }
+    #mobile-menu.open { display: flex; }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    #hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    #hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    #hero-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(160deg, rgba(42,113,176,0.72) 0%, rgba(26,26,26,0.65) 100%);
+    }
+    #hero-content {
+      position: relative; z-index: 2;
+      text-align: center; color: #fff;
+      padding: 0 24px; max-width: 860px;
+    }
+    #hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50px; padding: 8px 18px;
+      font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px;
+      color: var(--yellow);
+    }
+    #hero h1 {
+      font-size: clamp(36px, 6vw, 72px); font-weight: 900; line-height: 1.1;
+      margin-bottom: 20px; text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    #hero h1 span { color: var(--yellow); }
+    #hero p {
+      font-size: clamp(16px, 2vw, 20px); opacity: 0.92; line-height: 1.7;
+      margin-bottom: 36px; font-weight: 400;
+    }
+    #hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    #scroll-arrow {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      z-index: 2; animation: bounce 2s infinite;
+      color: rgba(255,255,255,0.7);
+    }
+    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+
+    /* ── TRUST STRIP ────────────────────────────────────── */
+    #trust {
+      background: var(--blue); color: #fff;
+      padding: 48px 0;
+    }
+    #trust .container { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+    .trust-card {
+      text-align: center; padding: 24px 16px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+    }
+    .trust-card:last-child { border-right: none; }
+    .trust-card .icon { margin: 0 auto 12px; color: var(--yellow); }
+    .trust-card .num { font-family: 'Nunito', sans-serif; font-size: 42px; font-weight: 900; line-height: 1; }
+    .trust-card .label { font-size: 14px; opacity: 0.85; margin-top: 6px; font-weight: 500; }
+
+    /* ── PHILOSOPHY ─────────────────────────────────────── */
+    #philosophy { padding: 96px 0; background: var(--white); }
+    #philosophy .container { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    #philosophy-img { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    #philosophy-img img { width: 100%; height: 480px; object-fit: cover; }
+    .accordion-item { border-bottom: 1px solid #E5E7EB; }
+    .accordion-btn {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 0; background: none; text-align: left;
+      font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800;
+      color: var(--black); gap: 12px;
+    }
+    .accordion-btn .icon-wrap {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .accordion-btn .chevron { flex-shrink: 0; transition: transform 0.3s; color: var(--gray); }
+    .accordion-btn.open .chevron { transform: rotate(180deg); }
+    .accordion-body { display: none; padding: 0 0 20px 52px; color: var(--gray); font-size: 15px; line-height: 1.7; }
+    .accordion-body.open { display: block; }
+
+    /* ── PROGRAMS ───────────────────────────────────────── */
+    #programs { padding: 96px 0; background: var(--cream); }
+    #programs .header { text-align: center; margin-bottom: 56px; }
+    #programs .header .section-sub { margin: 0 auto; }
+    .programs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .program-card {
+      background: #fff; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .program-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
+    .program-card-top { height: 8px; }
+    .program-card-body { padding: 28px 24px; }
+    .program-card-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .program-card h3 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+    .program-card .age { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+    .program-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+    .program-card-footer { padding: 16px 24px 24px; display: flex; align-items: center; gap: 6px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; }
+
+    /* ── STAFF ──────────────────────────────────────────── */
+    #staff { padding: 96px 0; background: var(--white); }
+    #staff .header { text-align: center; margin-bottom: 56px; }
+    .staff-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+    .staff-card {
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s; background: #fff;
+    }
+    .staff-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.14); }
+    .staff-card { text-align: center; }
+    .staff-card-avatar-wrap { padding: 24px 24px 0; display: flex; justify-content: center; }
+    .staff-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; object-position: center 18%; border: 3px solid var(--cream); box-shadow: 0 4px 14px rgba(0,0,0,0.12); }
+    .staff-card-info { padding: 14px 16px 20px; }
+    .staff-card-info h4 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+    .staff-card-info .role { font-size: 12px; color: var(--gray); font-weight: 500; }
+    .staff-card-info .dept { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+
+    /* ── TESTIMONIALS ───────────────────────────────────── */
+    #testimonials { padding: 96px 0; background: var(--blue); color: #fff; }
+    #testimonials .section-label { color: var(--yellow); }
+    #testimonials .section-title { color: #fff; }
+    #testimonials .header { text-align: center; margin-bottom: 64px; }
+    .t-stage { position: relative; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+    .t-quote-mark {
+      position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+      font-family: 'Nunito', sans-serif; font-size: 160px; font-weight: 900;
+      color: rgba(255,255,255,0.08); line-height: 1; pointer-events: none;
+      user-select: none;
+    }
+    .t-slide {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 0 48px;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      pointer-events: none;
+    }
+    .t-slide.active {
+      opacity: 1; transform: none; pointer-events: auto;
+    }
+    .t-slide blockquote {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 700; line-height: 1.5;
+      color: #fff; margin-bottom: 32px;
+      font-style: italic;
+    }
+    .t-stars { color: var(--yellow); font-size: 18px; letter-spacing: 3px; margin-bottom: 20px; }
+    .t-author { display: flex; align-items: center; gap: 14px; }
+    .t-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900;
+      flex-shrink: 0; border: 2px solid rgba(255,255,255,0.3);
+    }
+    .t-author-info strong { display: block; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; }
+    .t-author-info span { font-size: 13px; opacity: 0.7; }
+    .t-controls { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 48px; }
+    .t-arrow {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; cursor: pointer; transition: background 0.2s;
+    }
+    .t-arrow:hover { background: rgba(255,255,255,0.25); }
+    #testimonial-dots { display: flex; gap: 8px; }
+    .t-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; border: none; }
+    .t-dot.active { background: #fff; width: 28px; border-radius: 4px; }
+
+    /* ── ENROLLMENT ─────────────────────────────────────── */
+    #enrollment { padding: 96px 0; background: var(--cream); }
+    #enrollment .container { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    #enrollment-img { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+    #enrollment-img img { width: 100%; height: 500px; object-fit: cover; }
+    .enroll-form { background: #fff; border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow); }
+    .enroll-form h3 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+    .enroll-form .sub { color: var(--gray); font-size: 15px; margin-bottom: 28px; line-height: 1.6; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--black); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 16px; border: 1.5px solid #E5E7EB;
+      border-radius: 10px; font-family: 'Open Sans', sans-serif; font-size: 15px;
+      color: var(--black); transition: border-color 0.2s, box-shadow 0.2s;
+      background: #fff;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42,113,176,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .submit-btn {
+      width: 100%; padding: 16px; border-radius: 50px;
+      background: var(--red); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,78,65,0.35); }
+    .form-note { text-align: center; font-size: 12px; color: var(--gray); margin-top: 12px; }
+
+    /* ── FAQ ────────────────────────────────────────────── */
+    #faq { padding: 96px 0; background: var(--white); }
+    #faq .container { display: grid; grid-template-columns: 1fr 2fr; gap: 72px; align-items: start; }
+    #faq .faq-sidebar h2 { font-size: 36px; font-weight: 900; margin-bottom: 16px; }
+    #faq .faq-sidebar p { color: var(--gray); font-size: 15px; line-height: 1.7; margin-bottom: 28px; }
+    .faq-item { border-bottom: 1px solid #E5E7EB; }
+    .faq-btn {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; background: none; text-align: left;
+      font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800;
+      color: var(--black); gap: 16px;
+    }
+    .faq-btn .chevron { flex-shrink: 0; transition: transform 0.3s; color: var(--gray); }
+    .faq-btn.open .chevron { transform: rotate(180deg); }
+    .faq-body { display: none; padding: 0 0 22px; color: var(--gray); font-size: 15px; line-height: 1.8; }
+    .faq-body.open { display: block; }
+
+    /* ── CONTACT ────────────────────────────────────────── */
+    #contact { padding: 96px 0; background: var(--cream); }
+    #contact .header { text-align: center; margin-bottom: 56px; }
+    #contact .container > div { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .contact-info { background: #fff; border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow); }
+    .contact-info h3 { font-size: 24px; font-weight: 900; margin-bottom: 24px; }
+    .contact-row { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .contact-row .c-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--cream); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue); }
+    .contact-row .c-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 4px; }
+    .contact-row .c-val { font-size: 15px; font-weight: 600; line-height: 1.5; }
+    .contact-row .c-val a { color: var(--blue); }
+    .contact-hours { margin-top: 28px; padding-top: 28px; border-top: 1px solid #E5E7EB; }
+    .contact-hours h4 { font-size: 16px; font-weight: 800; margin-bottom: 12px; }
+    .hours-row { display: flex; justify-content: space-between; font-size: 14px; padding: 6px 0; border-bottom: 1px solid #F3F4F6; color: var(--gray); }
+    .map-wrap { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); height: 420px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    #footer { background: var(--black); color: rgba(255,255,255,0.8); padding: 64px 0 32px; }
+    #footer .top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    #footer .brand img { height: 48px; margin-bottom: 16px; }
+    #footer .brand p { font-size: 14px; line-height: 1.7; opacity: 0.7; max-width: 320px; }
+    #footer h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 16px; }
+    #footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    #footer ul li a { font-size: 14px; opacity: 0.7; transition: opacity 0.2s; }
+    #footer ul li a:hover { opacity: 1; color: var(--yellow); }
+    #footer .bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    #footer .bottom p { font-size: 13px; opacity: 0.5; }
+    .zion-link { color: var(--yellow); opacity: 1 !important; }
+    .accred-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); }
+
+    /* ── MODALS ─────────────────────────────────────────── */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 20px; max-width: 560px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp { from{transform:translateY(40px);opacity:0} to{transform:none;opacity:1} }
+    .modal-header { padding: 28px 28px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+    .modal-close { width: 36px; height: 36px; border-radius: 50%; background: var(--cream); display: flex; align-items: center; justify-content: center; color: var(--gray); flex-shrink: 0; font-size: 20px; line-height: 1; }
+    .modal-close:hover { background: #E5E7EB; }
+    .modal-body { padding: 20px 28px 32px; }
+    .modal-tag { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px; }
+    .modal h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+    .modal .modal-age { font-size: 14px; color: var(--gray); margin-bottom: 20px; }
+    .modal-detail { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid #F3F4F6; font-size: 14px; }
+    .modal-detail svg { flex-shrink: 0; color: var(--blue); }
+    .modal-detail strong { font-weight: 600; margin-right: 4px; }
+    .modal p.modal-desc { font-size: 15px; line-height: 1.8; color: var(--gray); margin: 20px 0; }
+    .modal-highlights { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .modal-highlight { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray); line-height: 1.5; }
+    .modal-highlight svg { flex-shrink: 0; margin-top: 2px; }
+    .modal-enroll-btn { display: block; width: 100%; padding: 15px; border-radius: 50px; background: var(--red); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 16px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+    .modal-enroll-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(233,78,65,0.35); }
+
+    /* Staff modal */
+    .staff-modal-avatar-wrap { display: flex; flex-direction: column; align-items: center; padding: 32px 28px 0; }
+    .staff-modal-avatar {
+      width: 180px; height: 180px; border-radius: 50%;
+      object-fit: cover; object-position: center 18%;
+      border: 4px solid var(--cream);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+      margin-bottom: 16px;
+    }
+    .staff-modal-dept { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .staff-modal-name { font-size: 26px; font-weight: 900; margin-bottom: 4px; text-align: center; }
+    .staff-modal-role { font-size: 15px; color: var(--gray); margin-bottom: 0; text-align: center; }
+    .staff-modal-bio { font-size: 15px; color: var(--gray); line-height: 1.75; margin: 20px 0 24px; padding-top: 20px; border-top: 1px solid #F3F4F6; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .staff-grid { grid-template-columns: repeat(3,1fr); }
+      .programs-grid { grid-template-columns: repeat(2,1fr); }
+      #philosophy .container { grid-template-columns: 1fr; gap: 40px; }
+      #philosophy-img { order: -1; }
+      #philosophy-img img { height: 320px; }
+      #enrollment .container { grid-template-columns: 1fr; gap: 40px; }
+      #enrollment-img { display: none; }
+      #faq .container { grid-template-columns: 1fr; gap: 32px; }
+      #contact .container > div { grid-template-columns: 1fr; }
+      #trust .container { grid-template-columns: repeat(2,1fr); }
+      .trust-card:nth-child(2) { border-right: none; }
+    }
+    @media (max-width: 768px) {
+      #nav-links, #nav-cta { display: none; }
+      #hamburger { display: flex; }
+      #hero h1 { font-size: 36px; }
+      .staff-grid { grid-template-columns: repeat(2,1fr); }
+      .programs-grid { grid-template-columns: 1fr; }
+      .testimonial-card { flex: 0 0 85vw; }
+      #footer .top { grid-template-columns: 1fr; gap: 32px; }
+      #footer .bottom { flex-direction: column; align-items: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .staff-grid { grid-template-columns: repeat(2,1fr); }
+      .trust-card .num { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════ PASSWORD GATE ═════════════════════════ -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms" />
+    <h2>Preview Access</h2>
+    <p>This page is password protected.<br>Please enter the access password to continue.</p>
+    <div class="gate-input-wrap">
+      <input type="password" id="gate-input" placeholder="Enter password" autocomplete="off" />
+      <button class="gate-toggle" id="gate-toggle" aria-label="Show password" tabindex="-1">
+        <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <p class="gate-error" id="gate-error"></p>
+    <button class="gate-btn" id="gate-submit">Enter Site</button>
+    <p class="gate-note">This is a private preview for Open Arms stakeholders.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav id="nav">
+  <div class="container">
+    <a id="nav-logo" href="#hero">
+      <img src="images/open-arms-logo-white-no-tag.png" alt="Open Arms Child Development Center" />
+    </a>
+    <div id="nav-links">
+      <a href="#programs">Programs</a>
+      <a href="#philosophy">Our Philosophy</a>
+      <a href="#staff">Our Staff</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a id="nav-cta" href="#enrollment">Secure Your Spot</a>
+    <button id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <a href="#programs" onclick="closeMobile()">Programs</a>
+  <a href="#philosophy" onclick="closeMobile()">Our Philosophy</a>
+  <a href="#staff" onclick="closeMobile()">Our Staff</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#enrollment" onclick="closeMobile()" style="color:var(--yellow)">Secure Your Spot →</a>
+</div>
+
+<!-- ═══════════════════════════════ HERO ══════════════════════════════ -->
+<section id="hero">
+  <video id="hero-video" autoplay muted loop playsinline poster="generated_imgs/generated-2026-03-19T21-32-30-658Z-ea5rnr.png">
+    <source src="https://res.cloudinary.com/dsbllwpbh/video/upload/v1773955352/open-arms-facility-gemini-video_no01vj.mp4" type="video/mp4" />
+  </video>
+  <div id="hero-overlay"></div>
+  <div id="hero-content">
+    <div id="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      NAEYC Accredited · Est. 2000 · Fairbanks, Alaska
+    </div>
+    <h1>Growing <span>Hearts,</span><br>Minds, and Faith.</h1>
+    <p>A Christ-centered Child Development Ministry serving families<br>across interior Alaska for over 25 years.</p>
+    <div id="hero-btns">
+      <a href="#enrollment" class="btn btn-red">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Secure Your Spot
+      </a>
+      <a href="#programs" class="btn btn-outline">Explore Programs</a>
+    </div>
+  </div>
+  <div id="scroll-arrow">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
+  </div>
+</section>
+
+<!-- ══════════════════════════ TRUST STRIP ═══════════════════════════ -->
+<section id="trust">
+  <div class="container">
+    <div class="trust-card fade-up">
+      <div class="icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      </div>
+      <div class="num" data-target="25">0</div>
+      <div class="label">Years Serving Families</div>
+    </div>
+    <div class="trust-card fade-up">
+      <div class="icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="num" data-target="236">0</div>
+      <div class="label">Licensed Capacity</div>
+    </div>
+    <div class="trust-card fade-up">
+      <div class="icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="num">8:1</div>
+      <div class="label">Student-Teacher Ratio</div>
+    </div>
+    <div class="trust-card fade-up">
+      <div class="icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="num">NAEYC</div>
+      <div class="label">Nationally Accredited</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ PHILOSOPHY ════════════════════════════ -->
+<section id="philosophy">
+  <div class="container">
+    <div id="philosophy-img" class="fade-up">
+      <img src="generated_imgs/generated-2026-03-19T21-32-30-658Z-ea5rnr.png" alt="Children learning in a warm Alaska classroom" loading="lazy" />
+    </div>
+    <div class="fade-up">
+      <p class="section-label">Our Approach</p>
+      <h2 class="section-title">Developing the<br><em style="color:var(--green);font-style:normal;">Whole Child</em></h2>
+      <p class="section-sub" style="margin-bottom:32px;">We believe every child deserves to grow in heart, mind, body, and spirit — in a safe, predictable, and loving environment rooted in Christian values.</p>
+      <div id="pillars">
+        <div class="accordion-item">
+          <button class="accordion-btn" data-acc="p1">
+            <span style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-wrap" style="background:rgba(233,78,65,0.12);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </span>
+              Academic Readiness
+            </span>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body" id="p1">Literacy, early mathematics, and science are woven into natural, hands-on activities. Children learn by doing — through field trips, experiments, and creative exploration that sparks genuine curiosity.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" data-acc="p2">
+            <span style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-wrap" style="background:rgba(123,192,126,0.15);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </span>
+              Social-Emotional Growth
+            </span>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body" id="p2">Trained educators foster kindness, confidence, and curiosity. Predictable routines help children feel secure, and small class sizes ensure every child is truly known and celebrated.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" data-acc="p3">
+            <span style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-wrap" style="background:rgba(42,113,176,0.12);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              Spiritual Foundation
+            </span>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body" id="p3">Daily prayer, Bible stories, and weekly pastoral visits from Zion Lutheran nurture faith in every child. Our Christ-centered mission welcomes families of every background with open arms.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" data-acc="p4">
+            <span style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-wrap" style="background:rgba(255,212,59,0.18);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2.5"><circle cx="12" cy="5" r="3"/><path d="M6.5 8a6 6 0 0 0 0 8"/><path d="M17.5 8a6 6 0 0 1 0 8"/><path d="M9 13l3 3 3-3"/><path d="M12 16v5"/></svg>
+              </span>
+              Physical Activity
+            </span>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body" id="p4">Daily outdoor play and structured movement build motor skills and resilience — even in the Alaskan winter. We believe a healthy body supports a healthy mind.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-btn" data-acc="p5">
+            <span style="display:flex;align-items:center;gap:12px;">
+              <span class="icon-wrap" style="background:rgba(233,78,65,0.08);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </span>
+              Creative Expression
+            </span>
+            <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-body" id="p5">Art, music, and imaginative play are not extras — they are essential. We celebrate each child's unique gifts and encourage them to express who God made them to be.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PROGRAMS ═════════════════════════════ -->
+<section id="programs">
+  <div class="container">
+    <div class="header fade-up">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title">Programs for Every Stage</h2>
+      <p class="section-sub">From 6 weeks to 12 years old, we walk alongside your family every step of the way.</p>
+    </div>
+    <div class="programs-grid" id="programs-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ STAFF ════════════════════════════ -->
+<section id="staff">
+  <div class="container">
+    <div class="header fade-up">
+      <p class="section-label">The People Behind the Mission</p>
+      <h2 class="section-title">Meet Our Dedicated Staff</h2>
+      <p class="section-sub" style="margin:0 auto;">Our educators are passionate, trained professionals who show up every day with warmth and purpose.</p>
+    </div>
+    <div class="staff-grid" id="staff-grid"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════ TESTIMONIALS ════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="header fade-up">
+      <p class="section-label">Family Stories</p>
+      <h2 class="section-title">What Families Are Saying</h2>
+    </div>
+    <div class="t-stage fade-up" id="t-stage">
+      <div class="t-quote-mark">"</div>
+      <div class="t-slide active">
+        <div class="t-stars">★★★★★</div>
+        <blockquote>"Finding Open Arms was one of the best decisions we've made as a family. From day one, Sherry and the infant team made our daughter feel completely at home. The security system gives us real peace of mind, and the Christian environment is exactly what we were looking for in Fairbanks."</blockquote>
+        <div class="t-author">
+          <div class="t-avatar">SM</div>
+          <div class="t-author-info"><strong>Sarah M.</strong><span>Infant Parent · Fairbanks, AK</span></div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-stars">★★★★★</div>
+        <blockquote>"My son has grown so much here — academically, socially, and spiritually. Miss Carol and Mr. Jacob genuinely know every child in their room. He comes home singing Bible songs and excited about what he learned. As a working parent, that peace of mind is everything."</blockquote>
+        <div class="t-author">
+          <div class="t-avatar">JT</div>
+          <div class="t-author-info"><strong>James T.</strong><span>Preschool Parent · Fairbanks, AK</span></div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-stars">★★★★★</div>
+        <blockquote>"We moved to Fairbanks for a Fort Wainwright posting and were nervous about finding childcare on short notice. Open Arms welcomed us like family immediately. The staff went above and beyond to make the transition smooth for our kids. We are so grateful for this community."</blockquote>
+        <div class="t-author">
+          <div class="t-avatar">RF</div>
+          <div class="t-author-info"><strong>The Rodriguez Family</strong><span>Military Family · Fort Wainwright</span></div>
+        </div>
+      </div>
+      <div class="t-slide">
+        <div class="t-stars">★★★★★</div>
+        <blockquote>"Tina and the administration team have been so communicative throughout our enrollment process. The NAEYC accreditation really shows in the quality of the curriculum. Our daughter is thriving in Miss Kiann's preschool room — her vocabulary has exploded this year!"</blockquote>
+        <div class="t-author">
+          <div class="t-avatar">LP</div>
+          <div class="t-author-info"><strong>Linda P.</strong><span>Preschool Parent · Fairbanks, AK</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="t-controls">
+      <button class="t-arrow" id="t-prev" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div id="testimonial-dots"></div>
+      <button class="t-arrow" id="t-next" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ENROLLMENT ═══════════════════════════ -->
+<section id="enrollment">
+  <div class="container">
+    <div id="enrollment-img" class="fade-up">
+      <img src="generated_imgs/generated-2026-03-19T21-33-44-074Z-v852bp.png" alt="Children at lunch at Open Arms" loading="lazy" />
+    </div>
+    <div class="fade-up">
+      <p class="section-label">Join Our Family</p>
+      <h2 class="section-title" style="margin-bottom:16px;">Secure Your<br>Child's Spot Today</h2>
+      <p class="section-sub" style="margin-bottom:36px;">Enrollment spots fill quickly. Complete this form and our team will reach out within one business day to discuss availability and next steps.</p>
+      <div class="enroll-form">
+        <h3>Enrollment Inquiry</h3>
+        <p class="sub">Non-refundable registration: $70/child · $130/family</p>
+        <form name="enrollment" method="POST" netlify data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="enrollment" />
+          <p style="display:none;"><input name="bot-field" /></p>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Parent First Name *</label>
+              <input type="text" id="fname" name="first_name" required placeholder="Sarah" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" name="last_name" required placeholder="Johnson" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="sarah@email.com" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="(907) 555-0100" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="program">Program of Interest *</label>
+              <select id="program" name="program" required>
+                <option value="">Select a program…</option>
+                <option>Infants (6 wks – 1 yr)</option>
+                <option>Wobblers (12–18 mo)</option>
+                <option>Toddlers (18 mo – 3 yrs)</option>
+                <option>Preschool (3–5 yrs)</option>
+                <option>Before &amp; After School</option>
+                <option>Summer Program</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="start">Desired Start Date</label>
+              <input type="date" id="start" name="start_date" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Anything else you'd like us to know?</label>
+            <textarea id="message" name="message" placeholder="Tell us about your child…"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit Enrollment Inquiry →</button>
+          <p class="form-note">🔒 Your information is private and never shared. We'll respond within 1 business day.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ FAQ ═══════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-sidebar fade-up">
+      <p class="section-label">Common Questions</p>
+      <h2>We're Here<br>to Help</h2>
+      <p>Can't find your answer? Give us a call or send us a message and we'll get right back to you.</p>
+      <a href="#contact" class="btn btn-blue" style="font-size:15px;padding:12px 24px;">Get in Touch</a>
+    </div>
+    <div class="fade-up" id="faq-list">
+      <div class="faq-item">
+        <button class="faq-btn" data-faq="f1">
+          Is there currently a waitlist?
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body" id="f1">Yes — due to high demand for quality childcare in Fairbanks, many of our programs maintain a waitlist. We encourage families to inquire as early as possible. Submitting an enrollment form above secures your place in line and our team will contact you as soon as a spot becomes available.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" data-faq="f2">
+          Do I need to be Lutheran or Christian to enroll?
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body" id="f2">Absolutely not. Open Arms welcomes families of every background, faith tradition, and walk of life. While our environment is rooted in Christian values — daily prayer, Bible stories, and character development — we serve the whole Fairbanks community, including military families, and students of all ethnicities and beliefs.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" data-faq="f3">
+          What does NAEYC accreditation mean for my child?
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body" id="f3">NAEYC (National Association for the Education of Young Children) accreditation is the gold standard in early childhood education. It means our curriculum, teacher qualifications, classroom ratios, health and safety practices, and family engagement all meet rigorous, research-based national standards — well beyond Alaska's basic state licensing requirements.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" data-faq="f4">
+          What meals and snacks are provided?
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body" id="f4">Open Arms participates in the USDA Food Program, which ensures all children receive nutritious, balanced meals throughout the day. The Before &amp; After School program includes breakfast and afternoon snacks. Jovani, our Kitchen Manager, oversees daily meal preparation with care and consistency.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" data-faq="f5">
+          How is the facility secured?
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body" id="f5">Our facility features a secure keypad entry system at all entrances. Only authorized staff and pre-approved family members can access the building. This system, combined with our low student-teacher ratio of 8:1, ensures every child is accounted for and supervised at all times.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-btn" data-faq="f6">
+          What are the registration fees?
+          <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faq-body" id="f6">The annual registration fee is $70 per child or $130 per family. This fee is non-refundable and is required at the time of enrollment to secure your placement. Monthly tuition rates vary by program — please contact our office for the current tuition schedule and to discuss subsidy eligibility.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ CONTACT ════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="header fade-up">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Come Visit Open Arms</h2>
+    </div>
+    <div>
+      <div class="contact-info fade-up">
+        <h3>Get in Touch</h3>
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Address</div>
+            <div class="c-val">2980 Davis Road<br>Fairbanks, AK 99709</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Phone</div>
+            <div class="c-val"><a href="tel:+19074566020">(907) 456-6020</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="c-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Website</div>
+            <div class="c-val"><a href="http://www.openarmsfairbanks.org" target="_blank">openarmsfairbanks.org</a></div>
+          </div>
+        </div>
+        <div class="contact-hours">
+          <h4>Hours of Operation</h4>
+          <div class="hours-row"><span>Monday – Friday</span><span>6:00 AM – 6:00 PM</span></div>
+          <div class="hours-row"><span>Saturday – Sunday</span><span>Closed</span></div>
+          <div class="hours-row"><span>Major Holidays</span><span>Closed</span></div>
+        </div>
+      </div>
+      <div class="map-wrap fade-up">
+        <iframe
+          src="https://maps.google.com/maps?q=2980+Davis+Road,+Fairbanks,+AK+99709&output=embed"
+          title="Open Arms Child Development Center Location"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="top">
+      <div class="brand">
+        <img src="images/open-arms-logo-white-no-tag.png" alt="Open Arms Child Development Center" />
+        <p>A Child Development Ministry of Zion Lutheran Church. Developing body, mind and spirit in children since 2000.</p>
+        <div style="margin-top:20px;">
+          <span class="accred-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            NAEYC Accredited · License #11975
+          </span>
+        </div>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#philosophy">Our Philosophy</a></li>
+          <li><a href="#staff">Our Staff</a></li>
+          <li><a href="#enrollment">Enrollment</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#programs">Infant Care</a></li>
+          <li><a href="#programs">Wobblers</a></li>
+          <li><a href="#programs">Toddlers</a></li>
+          <li><a href="#programs">Preschool</a></li>
+          <li><a href="#programs">Before &amp; After School</a></li>
+          <li><a href="#programs">Summer Program</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">
+      <p>© 2026 Open Arms Child Development Center. A Ministry of <a class="zion-link" href="https://www.zionfairbanks.org" target="_blank">Zion Lutheran Church</a>.</p>
+      <p>2980 Davis Road · Fairbanks, AK 99709</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════ MODALS ════════════════════════════ -->
+<div id="program-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div id="pm-tag-wrap"><span id="pm-tag" class="modal-tag"></span></div>
+      <button class="modal-close" onclick="closeModal('program-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <h2 id="pm-title"></h2>
+      <p class="modal-age" id="pm-age"></p>
+      <div id="pm-details"></div>
+      <p class="modal-desc" id="pm-desc"></p>
+      <div class="modal-highlights" id="pm-highlights"></div>
+      <a href="#enrollment" class="modal-enroll-btn" onclick="closeModal('program-modal')">Inquire About This Program →</a>
+    </div>
+  </div>
+</div>
+
+<div id="staff-modal" class="modal-backdrop" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header" style="padding:16px 20px 0;justify-content:flex-end;">
+      <button class="modal-close" onclick="closeModal('staff-modal')">✕</button>
+    </div>
+    <div class="staff-modal-avatar-wrap">
+      <img id="sm-img" class="staff-modal-avatar" src="" alt="" />
+      <span id="sm-dept" class="staff-modal-dept"></span>
+      <h2 id="sm-name" class="staff-modal-name"></h2>
+      <p id="sm-role" class="staff-modal-role"></p>
+    </div>
+    <div class="modal-body" style="padding-top:0;">
+      <p id="sm-bio" class="staff-modal-bio"></p>
+      <a href="#enrollment" class="modal-enroll-btn" onclick="closeModal('staff-modal')">Enroll Your Child →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── PASSWORD GATE ──────────────────────────────────────────────────────
+(function() {
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gate-input');
+  const errEl = document.getElementById('gate-error');
+  const submitBtn = document.getElementById('gate-submit');
+  const toggleBtn = document.getElementById('gate-toggle');
+
+  if (sessionStorage.getItem('oa-access') === '1') {
+    gate.style.display = 'none';
+    return;
+  }
+
+  document.body.style.overflow = 'hidden';
+
+  function unlock() {
+    if (input.value.trim().toLowerCase() === 'openarms') {
+      sessionStorage.setItem('oa-access', '1');
+      gate.classList.add('hidden');
+      document.body.style.overflow = '';
+      setTimeout(() => gate.style.display = 'none', 500);
+    } else {
+      errEl.textContent = 'Incorrect password. Please try again.';
+      input.classList.add('error');
+      input.value = '';
+      setTimeout(() => input.classList.remove('error'), 400);
+      input.focus();
+    }
+  }
+
+  submitBtn.addEventListener('click', unlock);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+  input.addEventListener('input', () => errEl.textContent = '');
+
+  toggleBtn.addEventListener('click', () => {
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+    toggleBtn.querySelector('svg').style.opacity = isPassword ? '0.4' : '1';
+  });
+
+  input.focus();
+})();
+
+// ── DATA ──────────────────────────────────────────────────────────────
+const programs = [
+  {
+    id: 'infants', title: 'Infant Care', age: '6 Weeks to 1 Year',
+    color: '#E94E41', bg: 'rgba(233,78,65,0.10)',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    ratio: '4:1', schedule: 'Full-day, Mon–Fri',
+    desc: 'Our infant room is a warm, nurturing haven designed around bonding, sensory exploration, and developmental milestones. Caregivers build secure, consistent relationships with every baby.',
+    highlights: ['Secure, calm environment tailored to each infant\'s rhythm','Sensory play, tummy time, and milestone tracking','Daily communication with families on feeding, sleep, and development','Small group sizes for maximum one-on-one attention']
+  },
+  {
+    id: 'wobblers', title: 'Wobblers', age: '12 to 18 Months',
+    color: '#FFD43B', bg: 'rgba(255,212,59,0.15)',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8960A" stroke-width="2"><circle cx="12" cy="5" r="3"/><path d="M12 8v8"/><path d="M9 12l-3 5"/><path d="M15 12l3 5"/></svg>`,
+    ratio: '5:1', schedule: 'Full-day, Mon–Fri',
+    desc: 'The Wobbler room celebrates every first step. We support emerging mobility, initial social interactions, and the explosion of language development that happens in this magical stage.',
+    highlights: ['Safe, padded environments for confident exploration','Language-rich activities: songs, books, and simple words','Introduction to social play alongside peers','Daily outdoor time (weather permitting)']
+  },
+  {
+    id: 'toddlers', title: 'Toddlers', age: '18 Months to 3 Years',
+    color: '#7BC07E', bg: 'rgba(123,192,126,0.12)',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>`,
+    ratio: '6:1', schedule: 'Full-day, Mon–Fri',
+    desc: 'Toddlers are natural explorers. Our program fosters independence, vocabulary expansion, and social-emotional skills in a structured yet playful environment with consistent routines.',
+    highlights: ['Developmentally appropriate independence activities','Building blocks, art, music, and dramatic play','Consistent routines for security and confidence','Gentle introduction to group social norms']
+  },
+  {
+    id: 'preschool', title: 'Preschool', age: '3 to 5 Years',
+    color: '#2A71B0', bg: 'rgba(42,113,176,0.10)',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+    ratio: '10:1', schedule: 'Full-day, Mon–Fri',
+    desc: 'Our NAEYC-accredited preschool program blends academic readiness with joyful, hands-on learning. Children develop pre-literacy, math, and science skills through real-world exploration.',
+    highlights: ['Pre-reading, early math & science curriculum','Field trips and special community experiences','Weekly pastoral visits for character development','School readiness preparation with a 1:10 ratio']
+  },
+  {
+    id: 'afterschool', title: 'Before & After School', age: '5 to 12 Years',
+    color: '#7BC07E', bg: 'rgba(123,192,126,0.12)',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+    ratio: '10:1', schedule: 'Before & After school hours',
+    desc: 'Our Before & After School program provides a safe, structured bridge between school and home. Children receive homework support, nutritious meals, and enrichment activities.',
+    highlights: ['Morning breakfast program before school','Homework help and quiet reading time','Transportation coordination with local elementary schools','Afternoon snacks and creative enrichment activities']
+  },
+  {
+    id: 'summer', title: 'Summer Program', age: 'School-Age through 6th Grade',
+    color: '#FFD43B', bg: 'rgba(255,212,59,0.15)',
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8960A" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+    ratio: '10:1', schedule: 'Full-day during school breaks',
+    desc: 'A full-day summer adventure for school-age children! Packed with field trips, hands-on science, art, outdoor play, and community exploration that makes every Alaska summer unforgettable.',
+    highlights: ['Field trips exploring Fairbanks and the Interior','Hands-on science experiments and STEM activities','Art projects, music, and creative expression','Outdoor adventures suited to Alaska\'s summer days']
+  }
+];
+
+const staff = [
+  { name:'Tina', role:'Interim Director', dept:'Administration', deptColor:'#2A71B0', img:'staff_photos/web/Tina%20-%20Interim%20Director.jpg',
+    bio:'Tina brings years of experience in early childhood education leadership to Open Arms. As Interim Director, she is dedicated to ensuring every family and staff member feels supported, valued, and heard. Her calm presence and deep commitment to the center\'s mission make her an anchor for the whole community.' },
+  { name:'Jovani', role:'Kitchen Manager', dept:'Administration', deptColor:'#2A71B0', img:'staff_photos/web/Jovani%20-%20Kitchen%20Manager.jpg',
+    bio:'Jovani keeps our community nourished and cared for, one meal at a time. As Kitchen Manager, he ensures every child receives nutritious, balanced meals through our USDA Food Program each day. His reliability and warmth are felt by staff and families from the first morning bell.' },
+  { name:'Sherry', role:'Lead Teacher', dept:'Infants', deptColor:'#E94E41', img:'staff_photos/web/Sherry%20-%20Lead%20Teacher%20(Infants).jpg',
+    bio:'Sherry has a remarkable gift for nurturing the youngest members of our community. As Lead Teacher in the Infant room, she creates a calm, bonding-centered environment where babies and their families feel completely at ease. Parents consistently remark on her patience, attentiveness, and genuine love for every child in her care.' },
+  { name:'Brandon', role:'Assistant', dept:'Infants', deptColor:'#E94E41', img:'staff_photos/web/Brandon%20-%20Assistant%20(Infants).jpg',
+    bio:'Brandon\'s gentle energy is a perfect match for our Infant room. He works alongside Sherry to ensure every baby is safe, stimulated, and loved throughout the day. Families frequently comment on how quickly their little ones settle in and how comfortable they are in his care.' },
+  { name:'Wobblers Teacher', role:'Lead Teacher', dept:'Wobblers', deptColor:'#B8960A', img:'staff_photos/web/Wobblers%20Lead%20Teacher.jpg',
+    bio:'Our Wobblers Lead Teacher celebrates every first step — literally. She brings enthusiasm, creativity, and a whole lot of patience to the Wobbler room, supporting children through one of the most exciting developmental stages with songs, movement, and endless encouragement.' },
+  { name:'Carol', role:'Teacher', dept:'Toddlers', deptColor:'#4A9B4E', img:'staff_photos/web/Carol%20-%20Teacher%20(Toddlers).jpg',
+    bio:'Carol is a beloved cornerstone of our Toddler program. Her classroom is a place of discovery, laughter, and genuine warmth. She has a remarkable ability to meet each child exactly where they are and help them blossom at their own pace, building confidence one small victory at a time.' },
+  { name:'Jacob', role:'Assistant', dept:'Toddlers', deptColor:'#4A9B4E', img:'staff_photos/web/Jacob%20-%20Assistant%20(Toddlers).jpg',
+    bio:'Jacob brings a calm, playful presence to the Toddler room that children and families adore. He is endlessly patient and creative, always finding new ways to engage little learners and turn an ordinary Tuesday into a memorable adventure.' },
+  { name:'Princess', role:'Assistant', dept:'Toddlers', deptColor:'#4A9B4E', img:'staff_photos/web/Princess%20-%20Assistant%20(Toddlers).jpg',
+    bio:'Princess has a natural ability to connect with toddlers and create a sense of safety and fun that is truly special. She is a vital support in the classroom and brings a joyful, steady energy that both children and co-teachers lean on every day.' },
+  { name:'Ms. Chandeth', role:'Lead Teacher', dept:'Toddler 2', deptColor:'#4A9B4E', img:'staff_photos/web/Ms%20Chandeth%20-%20Lead%20Teacher%20(Toddler%202).jpg',
+    bio:'Ms. Chandeth leads her Toddler classroom with warmth, structure, and clear intentionality. Her developmentally-appropriate curriculum keeps children engaged while building the foundational social and language skills they need to thrive in preschool and beyond.' },
+  { name:'Miss Kiann', role:'Teacher', dept:'Preschool 3 & 4', deptColor:'#2A71B0', img:'staff_photos/web/Miss%20Kiann%20(Preschool%203%20%26%204).jpg',
+    bio:'Miss Kiann\'s preschool classroom is alive with curiosity and creativity. She weaves academic readiness into every activity — from storytelling circles to hands-on science experiments — while ensuring each child feels genuinely seen, celebrated, and ready for what comes next.' },
+  { name:'Preschool Teacher', role:'Teacher', dept:'Preschool 3 & 4', deptColor:'#2A71B0', img:'staff_photos/web/Unnamed%20(Preschool%203%20%26%204).jpg',
+    bio:'A dedicated member of our Preschool 3 & 4 team, she brings enthusiasm and care to every lesson. Her classroom is a place where children build confidence, form lasting friendships, and develop a genuine love of learning that will carry them through kindergarten and beyond.' },
+  { name:'Wesley', role:'Floater', dept:'All Classrooms', deptColor:'#4A9B4E', img:'staff_photos/web/Wesley%20-%20Floater.jpg',
+    bio:'Wesley is the glue that holds our classrooms together. As our Floater, he brings flexibility, positivity, and skill to whatever room needs him most. His familiar face reassures children across all age groups, and his steady presence keeps the daily rhythm flowing smoothly for every team.' },
+  { name:'Miss Sunshine', role:'Lead Teacher', dept:'School Age', deptColor:'#E94E41', img:'staff_photos/web/Miss%20Sunshine%20-%20Lead%20Teacher%20(School%20Age).jpg',
+    bio:'Miss Sunshine — the name truly says it all. As Lead Teacher in our School Age program, she creates an after-school environment that is safe, stimulating, and genuinely fun. From homework support to creative projects and outdoor exploration, she brings out the very best in every student who walks through her door.' },
+];
+
+// ── RENDER PROGRAMS ────────────────────────────────────────────────────
+const pgrid = document.getElementById('programs-grid');
+programs.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'program-card fade-up';
+  card.innerHTML = `
+    <div class="program-card-top" style="background:${p.color}"></div>
+    <div class="program-card-body">
+      <div class="program-card-icon" style="background:${p.bg}">${p.icon}</div>
+      <h3>${p.title}</h3>
+      <div class="age" style="color:${p.color}">${p.age}</div>
+      <p>${p.desc.substring(0,110)}…</p>
+    </div>
+    <div class="program-card-footer" style="color:${p.color}">
+      Learn More
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </div>`;
+  card.addEventListener('click', () => openProgramModal(p));
+  pgrid.appendChild(card);
+});
+
+// ── RENDER STAFF ───────────────────────────────────────────────────────
+const sgrid = document.getElementById('staff-grid');
+staff.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'staff-card fade-up';
+  card.innerHTML = `
+    <div class="staff-card-avatar-wrap"><img src="${s.img}" alt="${s.name}" loading="lazy" /></div>
+    <div class="staff-card-info">
+      <h4>${s.name}</h4>
+      <div class="role">${s.role}</div>
+      <span class="dept" style="background:${s.deptColor}22;color:${s.deptColor}">${s.dept}</span>
+    </div>`;
+  card.addEventListener('click', () => openStaffModal(s));
+  sgrid.appendChild(card);
+});
+
+// ── PROGRAM MODAL ──────────────────────────────────────────────────────
+function openProgramModal(p) {
+  document.getElementById('pm-tag').textContent = p.age;
+  document.getElementById('pm-tag').style.background = p.bg;
+  document.getElementById('pm-tag').style.color = p.color;
+  document.getElementById('pm-title').textContent = p.title;
+  document.getElementById('pm-age').textContent = 'Ages: ' + p.age;
+  document.getElementById('pm-details').innerHTML = `
+    <div class="modal-detail">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span><strong>Ratio:</strong> ${p.ratio} teacher-to-child</span>
+    </div>
+    <div class="modal-detail">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <span><strong>Schedule:</strong> ${p.schedule}</span>
+    </div>`;
+  document.getElementById('pm-desc').textContent = p.desc;
+  document.getElementById('pm-highlights').innerHTML = p.highlights.map(h => `
+    <div class="modal-highlight">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${p.color}" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>${h}</span>
+    </div>`).join('');
+  document.getElementById('program-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ── STAFF MODAL ────────────────────────────────────────────────────────
+function openStaffModal(s) {
+  document.getElementById('sm-img').src = s.img;
+  document.getElementById('sm-img').alt = s.name;
+  document.getElementById('sm-dept').textContent = s.dept;
+  document.getElementById('sm-dept').style.background = s.deptColor + '22';
+  document.getElementById('sm-dept').style.color = s.deptColor;
+  document.getElementById('sm-name').textContent = s.name;
+  document.getElementById('sm-role').textContent = s.role + ' · ' + s.dept;
+  document.getElementById('sm-bio').textContent = s.bio;
+  document.getElementById('staff-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.modal-backdrop').forEach(b => {
+  b.addEventListener('click', e => { if (e.target === b) { b.classList.remove('open'); document.body.style.overflow = ''; }});
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { document.querySelectorAll('.modal-backdrop.open').forEach(b => { b.classList.remove('open'); document.body.style.overflow = ''; }); }
+});
+
+// ── ACCORDIONS ─────────────────────────────────────────────────────────
+document.querySelectorAll('.accordion-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.acc;
+    const body = document.getElementById(id);
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+  });
+});
+
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.faq;
+    const body = document.getElementById(id);
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+  });
+});
+
+// ── TESTIMONIAL FADE CAROUSEL ──────────────────────────────────────────
+const slides = document.querySelectorAll('.t-slide');
+const dotsWrap = document.getElementById('testimonial-dots');
+const stage = document.getElementById('t-stage');
+let current = 0;
+let autoTimer;
+
+// Set stage min-height dynamically to tallest slide
+function setStageHeight() {
+  let max = 0;
+  slides.forEach(s => {
+    s.style.position = 'relative';
+    max = Math.max(max, s.offsetHeight);
+    s.style.position = '';
+  });
+  stage.style.minHeight = max + 'px';
+}
+window.addEventListener('load', setStageHeight);
+window.addEventListener('resize', setStageHeight);
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 't-dot' + (i === 0 ? ' active' : '');
+  dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+  dot.addEventListener('click', () => { goTo(i); stopAuto(); startAuto(); });
+  dotsWrap.appendChild(dot);
+});
+
+function goTo(idx) {
+  slides[current].classList.remove('active');
+  current = (idx + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  dotsWrap.querySelectorAll('.t-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+function next() { goTo(current + 1); }
+function prev() { goTo(current - 1); }
+function startAuto() { autoTimer = setInterval(next, 5500); }
+function stopAuto() { clearInterval(autoTimer); }
+
+document.getElementById('t-next').addEventListener('click', () => { next(); stopAuto(); startAuto(); });
+document.getElementById('t-prev').addEventListener('click', () => { prev(); stopAuto(); startAuto(); });
+stage.addEventListener('mouseenter', stopAuto);
+stage.addEventListener('mouseleave', startAuto);
+startAuto();
+
+// ── COUNTER ANIMATION ──────────────────────────────────────────────────
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  if (!target) return;
+  let start = 0;
+  const dur = 2000;
+  const step = timestamp => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / dur, 1);
+    el.textContent = Math.floor(progress * target) + (el.dataset.suffix || '');
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + (el.dataset.suffix || '');
+  };
+  requestAnimationFrame(step);
+}
+
+// ── INTERSECTION OBSERVER ──────────────────────────────────────────────
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      const counters = entry.target.querySelectorAll('[data-target]');
+      counters.forEach(animateCounter);
+      if (entry.target.dataset.target) animateCounter(entry.target);
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up, [data-target]').forEach(el => io.observe(el));
+
+// ── MOBILE NAV ─────────────────────────────────────────────────────────
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('open');
+});
+function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
+</script>
+</body>
+</html>
