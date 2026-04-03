@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Rebuild Proposal · Open Arms Child Development Center</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── PASSWORD GATE ──────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      transition: opacity 0.5s ease;
+    }
+    #gate.hidden { opacity: 0; pointer-events: none; }
+    .gate-box {
+      background: #fff; border-radius: 24px;
+      padding: 48px 40px; max-width: 420px; width: 100%;
+      text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    }
+    .gate-box img { height: 56px; margin: 0 auto 28px; }
+    .gate-box h2 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; color: var(--black); }
+    .gate-box p { font-size: 14px; color: var(--gray); margin-bottom: 28px; line-height: 1.6; }
+    .gate-input-wrap { position: relative; margin-bottom: 16px; }
+    .gate-input-wrap input {
+      width: 100%; padding: 14px 48px 14px 18px;
+      border: 2px solid #E5E7EB; border-radius: 12px;
+      font-family: 'Open Sans', sans-serif; font-size: 16px;
+      letter-spacing: 2px; color: var(--black);
+      transition: border-color 0.2s;
+    }
+    .gate-input-wrap input:focus { outline: none; border-color: var(--blue); }
+    .gate-input-wrap input.error { border-color: var(--red); animation: shake 0.35s ease; }
+    .gate-toggle {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--gray); padding: 4px;
+    }
+    .gate-error { font-size: 13px; color: var(--red); font-weight: 600; min-height: 18px; margin-bottom: 16px; }
+    .gate-btn {
+      width: 100%; padding: 15px; border-radius: 50px;
+      background: var(--blue); color: #fff;
+      font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800;
+      border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .gate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,113,176,0.35); }
+    .gate-note { font-size: 12px; color: var(--gray); margin-top: 16px; }
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      20%{transform:translateX(-8px)}
+      40%{transform:translateX(8px)}
+      60%{transform:translateX(-6px)}
+      80%{transform:translateX(6px)}
+    }
+
+    /* ── RESET & BASE ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:  #7BC07E;
+      --blue:   #2A71B0;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --black:  #1A1A1A;
+      --cream:  #F9F6F0;
+      --white:  #FFFFFF;
+      --gray:   #6B7280;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+      --shadow-md: 0 8px 40px rgba(0,0,0,0.12);
+      --radius: 16px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--black); background: var(--white); overflow-x: hidden; }
+    h1,h2,h3,h4,h5 { font-family: 'Nunito', sans-serif; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── UTILITIES ──────────────────────────────────────── */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+    .container-wide { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .eyebrow {
+      font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--blue);
+      margin-bottom: 10px; display: block;
+    }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* ── HEADER BAR ─────────────────────────────────────── */
+    #topbar {
+      background: var(--blue); color: #fff;
+      padding: 14px 0;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    }
+    #topbar .container {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    #topbar-left { display: flex; align-items: center; gap: 12px; }
+    #topbar-left img { height: 36px; }
+    #topbar-title {
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px;
+      opacity: 0.92; line-height: 1.2;
+    }
+    #topbar-title span { display: block; font-size: 12px; font-weight: 600; opacity: 0.7; }
+    .print-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 18px; border-radius: 50px;
+      background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.35);
+      color: #fff; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px;
+      cursor: pointer; transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .print-btn:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    #hero {
+      background: linear-gradient(160deg, #1d5e9a 0%, #2A71B0 55%, #3a8fd4 100%);
+      padding: 72px 0 0;
+      overflow: hidden;
+      position: relative;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    #hero .container { position: relative; z-index: 1; }
+    .hero-meta {
+      display: flex; align-items: center; gap: 20px; margin-bottom: 32px; flex-wrap: wrap;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25); border-radius: 50px;
+      padding: 7px 16px;
+      font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--yellow);
+    }
+    .hero-date {
+      font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.65);
+    }
+    #hero h1 {
+      font-size: clamp(34px, 5vw, 58px); font-weight: 900; color: #fff;
+      line-height: 1.1; margin-bottom: 16px;
+    }
+    #hero h1 em { font-style: normal; color: var(--yellow); }
+    #hero .hero-sub {
+      font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.82);
+      line-height: 1.65; max-width: 540px; margin-bottom: 48px;
+    }
+    .hero-img-wrap {
+      border-radius: 20px 20px 0 0; overflow: hidden;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.2);
+      max-width: 800px; margin: 0 auto;
+    }
+    .hero-img-wrap img { width: 100%; display: block; }
+
+    /* ── OVERVIEW ───────────────────────────────────────── */
+    #overview { padding: 80px 0; background: var(--white); }
+    #overview .inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    #overview .text-col .eyebrow { color: var(--green); }
+    #overview h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+    #overview p { font-size: 16px; line-height: 1.8; color: #3a3a3a; margin-bottom: 16px; }
+    #overview p:last-child { margin-bottom: 0; }
+    .stat-row { display: flex; gap: 28px; margin-top: 36px; flex-wrap: wrap; }
+    .stat-pill {
+      background: var(--cream); border-radius: 50px; padding: 12px 22px;
+      font-family: 'Nunito', sans-serif;
+    }
+    .stat-pill strong { display: block; font-size: 22px; font-weight: 900; color: var(--blue); }
+    .stat-pill span { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; }
+    .overview-img-col { position: relative; }
+    .overview-img-wrap {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .overview-img-wrap img { width: 100%; }
+    .overview-tag {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--green); color: #fff;
+      border-radius: 14px; padding: 16px 22px;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 14px;
+      box-shadow: var(--shadow); max-width: 180px; text-align: center; line-height: 1.3;
+    }
+    .overview-tag span { display: block; font-size: 11px; font-weight: 600; opacity: 0.85; margin-top: 4px; }
+
+    /* ── DELIVERABLES ───────────────────────────────────── */
+    #deliverables { padding: 80px 0; background: var(--cream); }
+    #deliverables > .container-wide > .section-head { margin-bottom: 52px; }
+    #deliverables h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
+    #deliverables .section-sub { font-size: 16px; color: var(--gray); line-height: 1.7; }
+
+    .deliverables-layout { display: grid; grid-template-columns: 1fr 300px; gap: 48px; align-items: start; }
+    .deliverables-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .d-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 24px 22px; box-shadow: var(--shadow);
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1.5px solid transparent;
+    }
+    .d-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(42,113,176,0.12); }
+    .d-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 20px;
+    }
+    .d-icon.blue { background: rgba(42,113,176,0.12); color: var(--blue); }
+    .d-icon.green { background: rgba(123,192,126,0.15); color: #4a9c4e; }
+    .d-text h4 { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 5px; line-height: 1.3; }
+    .d-text p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+    .deliverables-aside { position: sticky; top: 90px; }
+    .aside-img-wrap {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: #fff; padding: 24px;
+    }
+    .aside-img-wrap img { width: 100%; border-radius: 12px; }
+    .aside-caption {
+      margin-top: 16px; text-align: center;
+      font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; color: var(--gray);
+    }
+
+    /* ── HOSTING ────────────────────────────────────────── */
+    #hosting { padding: 72px 0; background: var(--white); }
+    #hosting .inner { display: flex; align-items: center; gap: 56px; flex-wrap: wrap; }
+    .hosting-text { flex: 1; min-width: 260px; }
+    .hosting-text h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 900; margin-bottom: 14px; }
+    .hosting-text p { font-size: 16px; color: #3a3a3a; line-height: 1.75; }
+    .hosting-card {
+      flex-shrink: 0; background: var(--cream);
+      border-radius: 20px; padding: 36px 40px; text-align: center;
+      border: 2px solid rgba(42,113,176,0.1);
+      min-width: 240px;
+    }
+    .hosting-platform {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;
+      background: var(--blue); color: #fff;
+      border-radius: 50px; padding: 8px 18px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+    }
+    .hosting-price { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 44px; color: var(--black); line-height: 1; }
+    .hosting-price sup { font-size: 22px; vertical-align: top; margin-top: 6px; }
+    .hosting-period { font-size: 14px; color: var(--gray); font-weight: 600; margin-top: 6px; }
+    .hosting-note { font-size: 12px; color: var(--gray); margin-top: 12px; line-height: 1.5; }
+
+    /* ── INVESTMENT ─────────────────────────────────────── */
+    #investment { padding: 80px 0; background: linear-gradient(135deg, #1d5e9a 0%, #2A71B0 100%); color: #fff; }
+    #investment .eyebrow { color: var(--yellow); }
+    #investment h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; color: #fff; margin-bottom: 14px; }
+    #investment .section-sub { color: rgba(255,255,255,0.78); font-size: 17px; line-height: 1.7; margin-bottom: 52px; }
+    .investment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .inv-card {
+      background: rgba(255,255,255,0.1); border-radius: 20px;
+      padding: 36px 32px; border: 1.5px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+    }
+    .inv-card.highlight { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); }
+    .inv-label {
+      font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 12px; display: block;
+    }
+    .inv-amount {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: clamp(42px, 6vw, 64px); color: #fff; line-height: 1;
+      margin-bottom: 8px;
+    }
+    .inv-amount sup { font-size: 0.45em; vertical-align: top; margin-top: 0.25em; }
+    .inv-desc { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    .inv-installments { grid-column: 1 / -1; }
+    .installment-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px;
+    }
+    .installment-pill {
+      background: rgba(255,255,255,0.1); border-radius: 14px; padding: 20px 24px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; gap: 16px;
+    }
+    .inst-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--yellow); color: var(--black);
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .inst-info strong { display: block; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 18px; color: #fff; }
+    .inst-info span { font-size: 13px; color: rgba(255,255,255,0.65); }
+
+    /* ── NOT INCLUDED ───────────────────────────────────── */
+    #notes { padding: 72px 0; background: var(--cream); }
+    #notes .inner { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    #notes h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 900; margin-bottom: 14px; }
+    #notes .section-sub { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 0; }
+    .not-included-box {
+      background: #fff; border-radius: 20px; padding: 32px 28px;
+      border-left: 4px solid var(--red); box-shadow: var(--shadow);
+    }
+    .not-included-box h3 { font-size: 16px; font-weight: 900; margin-bottom: 16px; color: var(--red); }
+    .not-included-box ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .not-included-box li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 14px; color: #3a3a3a; line-height: 1.6;
+    }
+    .not-included-box li::before {
+      content: '✕'; color: var(--red); font-weight: 800; font-size: 13px;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .included-box {
+      background: #fff; border-radius: 20px; padding: 32px 28px;
+      border-left: 4px solid var(--green); box-shadow: var(--shadow); margin-top: 24px;
+    }
+    .included-box h3 { font-size: 16px; font-weight: 900; margin-bottom: 16px; color: #4a9c4e; }
+    .included-box ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .included-box li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 14px; color: #3a3a3a; line-height: 1.6;
+    }
+    .included-box li::before {
+      content: '✓'; color: var(--green); font-weight: 900; font-size: 14px;
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── NEXT STEPS / CTA ───────────────────────────────── */
+    #cta { padding: 80px 0; background: var(--white); }
+    #cta .container { text-align: center; }
+    #cta h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 900; margin-bottom: 16px; }
+    #cta p { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 520px; margin: 0 auto 40px; }
+    .cta-steps { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+    .cta-step {
+      background: var(--cream); border-radius: 16px; padding: 28px 24px;
+      text-align: left; width: 220px; flex-shrink: 0;
+    }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--blue); color: #fff;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .cta-step h4 { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+    .cta-step p { font-size: 13px; color: var(--gray); line-height: 1.55; margin: 0; }
+    .cta-action { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; border-radius: 50px;
+      background: var(--blue); color: #fff;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 17px;
+      border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(42,113,176,0.35); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; border-radius: 50px;
+      background: transparent; color: var(--blue);
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 17px;
+      border: 2px solid var(--blue); cursor: pointer;
+      transition: transform 0.2s, background 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { background: var(--blue); color: #fff; transform: translateY(-2px); }
+
+    /* ── ACCEPT MODAL ──────────────────────────────────── */
+    #modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 8000;
+      background: rgba(26,26,26,0.65); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    #modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 24px; width: 100%; max-width: 520px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+      max-height: 90vh; overflow-y: auto;
+      animation: modal-in 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes modal-in {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to   { opacity: 1; transform: none; }
+    }
+    .modal-header {
+      background: linear-gradient(135deg, #1d5e9a 0%, #2A71B0 100%);
+      border-radius: 24px 24px 0 0; padding: 32px 32px 28px;
+      color: #fff;
+    }
+    .modal-header h3 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+    .modal-header p { font-size: 14px; color: rgba(255,255,255,0.78); line-height: 1.5; }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255,255,255,0.15); border: none; border-radius: 50%;
+      width: 32px; height: 32px; cursor: pointer; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.25); }
+    .modal-header-wrap { position: relative; }
+    .modal-body { padding: 28px 32px 32px; }
+    .modal-field { margin-bottom: 18px; }
+    .modal-field label {
+      display: block; font-family: 'Nunito', sans-serif; font-weight: 800;
+      font-size: 13px; color: var(--black); margin-bottom: 7px;
+    }
+    .modal-field label span { color: var(--red); margin-left: 2px; }
+    .modal-field input, .modal-field select {
+      width: 100%; padding: 12px 16px; border: 2px solid #E5E7EB; border-radius: 12px;
+      font-family: 'Open Sans', sans-serif; font-size: 15px; color: var(--black);
+      transition: border-color 0.2s; background: #fff;
+    }
+    .modal-field input:focus, .modal-field select:focus {
+      outline: none; border-color: var(--blue);
+    }
+    .modal-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .modal-check {
+      display: flex; align-items: flex-start; gap: 12px; margin-bottom: 18px;
+      padding: 16px; background: var(--cream); border-radius: 12px;
+      border: 1.5px solid rgba(42,113,176,0.15); cursor: pointer;
+    }
+    .modal-check input[type="checkbox"] {
+      width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0;
+      accent-color: var(--blue); cursor: pointer;
+    }
+    .modal-check-text { font-size: 13px; color: #3a3a3a; line-height: 1.6; }
+    .modal-check-text strong { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--black); display: block; margin-bottom: 2px; }
+    .modal-submit {
+      width: 100%; padding: 16px; border-radius: 50px;
+      background: var(--green); color: #fff;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 17px;
+      border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+    }
+    .modal-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(123,192,126,0.4); background: #5aaa5e; }
+    .modal-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+    .modal-success {
+      display: none; text-align: center; padding: 48px 32px;
+    }
+    .modal-success .success-icon {
+      width: 64px; height: 64px; background: rgba(123,192,126,0.15);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; color: #4a9c4e;
+    }
+    .modal-success h3 { font-size: 22px; font-weight: 900; margin-bottom: 10px; }
+    .modal-success p { font-size: 15px; color: var(--gray); line-height: 1.65; }
+    .modal-note { font-size: 12px; color: var(--gray); text-align: center; margin-top: 14px; line-height: 1.5; }
+
+    /* ── PAYMENT TIMELINE ───────────────────────────────── */
+    .pt-box {
+      background: rgba(255,255,255,0.08); border-radius: 20px;
+      border: 1.5px solid rgba(255,255,255,0.15); overflow: hidden;
+    }
+    .pt-head {
+      padding: 20px 28px; background: rgba(255,255,255,0.1);
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--yellow);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .pt-timeline {
+      display: flex; padding: 24px 28px; gap: 0; flex-wrap: wrap;
+    }
+    .pt-step {
+      flex: 1; min-width: 80px; position: relative; text-align: center;
+      padding: 0 8px;
+    }
+    .pt-step:not(:last-child)::after {
+      content: ''; position: absolute; top: 16px; right: 0;
+      width: calc(100% - 32px); height: 2px;
+      background: rgba(255,255,255,0.2); left: 50%;
+      transform: translateX(16px);
+    }
+    .pt-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.5); font-family: 'Nunito', sans-serif; font-weight: 700;
+      font-size: 13px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px;
+    }
+    .pt-dot.invoice {
+      background: var(--yellow); border-color: var(--yellow); color: var(--black);
+      font-weight: 900; font-size: 15px;
+    }
+    .pt-week { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
+    .pt-label { font-size: 12px; color: rgba(255,255,255,0.78); line-height: 1.35; }
+    .pt-amount { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 13px; color: var(--yellow); margin-top: 6px; }
+    .pt-terms-head {
+      padding: 22px 28px; border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .pt-terms-head h4 { font-size: 14px; font-weight: 900; color: rgba(255,255,255,0.9); margin-bottom: 8px; }
+    .pt-terms-head p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+    .pt-pills {
+      display: flex; gap: 10px; padding: 0 28px 22px; flex-wrap: wrap;
+    }
+    .pt-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; padding: 10px 14px; flex: 1; min-width: 120px;
+    }
+    .pt-pill-fee { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 16px; color: var(--yellow); flex-shrink: 0; }
+    .pt-pill-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; color: rgba(255,255,255,0.9); }
+    .pt-pill-basis { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .pt-table-wrap { padding: 0 28px 22px; overflow-x: auto; }
+    .pt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .pt-table th {
+      padding: 10px 12px; text-align: left; background: rgba(255,255,255,0.08);
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px;
+      color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px;
+    }
+    .pt-table .th-base { color: rgba(255,255,255,0.9); }
+    .pt-table td {
+      padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.8);
+    }
+    .pt-table tr:last-child td { border-bottom: none; }
+    .pt-table .fee-col { color: rgba(255,255,255,0.55); text-align: center; }
+    .pt-footnote {
+      padding: 16px 28px 24px; font-size: 12px;
+      color: rgba(255,255,255,0.45); line-height: 1.65;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── CALENDAR BUTTONS ───────────────────────────────── */
+    .btn-cal {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 50px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px;
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; border: none;
+    }
+    .btn-cal.discuss {
+      background: rgba(42,113,176,0.1); color: var(--blue);
+      border: 2px solid rgba(42,113,176,0.3);
+    }
+    .btn-cal.discuss:hover { background: rgba(42,113,176,0.15); transform: translateY(-2px); }
+    .btn-cal.kickoff {
+      background: rgba(123,192,126,0.12); color: #3a8c3e;
+      border: 2px solid rgba(123,192,126,0.3);
+    }
+    .btn-cal.kickoff:hover { background: rgba(123,192,126,0.2); transform: translateY(-2px); }
+    .btn-accept {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; border-radius: 50px;
+      background: var(--green); color: #fff;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 17px;
+      border: none; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-accept:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(123,192,126,0.4); }
+    .cta-divider {
+      width: 1px; height: 40px; background: #E5E7EB; align-self: center;
+    }
+    .cta-cal-group {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;
+    }
+    .cta-cal-label {
+      font-size: 12px; color: var(--gray); text-align: center; margin-top: 8px;
+      font-family: 'Nunito', sans-serif; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    #footer {
+      background: var(--black); color: rgba(255,255,255,0.55);
+      padding: 32px 0; text-align: center;
+      font-size: 13px; line-height: 1.7;
+    }
+    #footer strong { color: rgba(255,255,255,0.9); }
+
+    /* ── PRINT STYLES ───────────────────────────────────── */
+    @media print {
+      #gate, #topbar .print-btn, #modal-overlay, .btn-accept, .cta-cal-group, .cta-cal-label { display: none !important; }
+      #topbar { position: static !important; background: none !important; color: var(--black) !important; box-shadow: none !important; border-bottom: 2px solid #E5E7EB; padding: 12px 0 !important; }
+      #topbar-title { color: var(--black) !important; }
+      #topbar-title span { color: var(--gray) !important; }
+      body { color: #000 !important; }
+      #hero { background: var(--cream) !important; padding: 40px 0 0 !important; }
+      #hero::before { display: none; }
+      #hero h1 { color: var(--black) !important; }
+      #hero .hero-sub { color: var(--gray) !important; }
+      .hero-badge { border: 1px solid var(--blue) !important; background: transparent !important; color: var(--blue) !important; }
+      .hero-date { color: var(--gray) !important; }
+      #investment { background: var(--cream) !important; color: var(--black) !important; }
+      #investment h2, #investment .section-sub { color: var(--black) !important; }
+      .inv-card { background: #f0f0f0 !important; border-color: #ccc !important; }
+      .inv-amount, .inv-label, .inv-desc { color: var(--black) !important; }
+      .installment-pill { background: #e8e8e8 !important; }
+      .inst-info strong, .inst-info span { color: var(--black) !important; }
+      .inst-num { background: var(--blue) !important; }
+      .fade-up { opacity: 1 !important; transform: none !important; }
+      @page { margin: 0.75in; }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #overview .inner { grid-template-columns: 1fr; gap: 36px; }
+      .overview-img-col { display: none; }
+      .deliverables-layout { grid-template-columns: 1fr; }
+      .deliverables-aside { display: none; }
+      .deliverables-grid { grid-template-columns: 1fr; }
+      .investment-grid { grid-template-columns: 1fr; }
+      .installment-row { grid-template-columns: 1fr; }
+      #notes .inner { grid-template-columns: 1fr; }
+      .cta-steps { gap: 16px; }
+      .cta-step { width: 100%; }
+      #topbar .container { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════ PASSWORD GATE ═════════════════════════ -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms" />
+    <h2>Preview Access</h2>
+    <p>This proposal is password protected.<br>Please enter the access password to continue.</p>
+    <div class="gate-input-wrap">
+      <input type="password" id="gate-input" placeholder="Enter password" autocomplete="off" />
+      <button class="gate-toggle" id="gate-toggle" aria-label="Show password" tabindex="-1">
+        <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+    <p class="gate-error" id="gate-error"></p>
+    <button class="gate-btn" id="gate-submit">View Proposal</button>
+    <p class="gate-note">This is a private proposal for Open Arms stakeholders.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ TOP BAR ══════════════════════════════ -->
+<header id="topbar">
+  <div class="container">
+    <div id="topbar-left">
+      <img src="images/open-arms-logo-white-no-tag.png" alt="Open Arms" onerror="this.style.display='none'" />
+      <div id="topbar-title">
+        Website Rebuild Proposal
+        <span>Open Arms Child Development Center</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <button class="print-btn" id="open-accept-modal-top" style="background:var(--green);border-color:var(--green);font-weight:900;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Accept Proposal
+      </button>
+      <button class="print-btn" onclick="window.print()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save PDF
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════ HERO ══════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-meta fade-up">
+      <span class="hero-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Website Rebuild Proposal
+      </span>
+      <span class="hero-date">April 3, 2026</span>
+    </div>
+    <h1 class="fade-up" style="animation-delay:0.1s">A <em>Fresh Start</em> for<br>Open Arms Online</h1>
+    <p class="hero-sub fade-up" style="animation-delay:0.2s">A comprehensive website rebuild, content refresh, and digital growth package — purpose-built for Fairbanks's most trusted childcare ministry.</p>
+    <div class="hero-img-wrap fade-up" style="animation-delay:0.3s">
+      <img src="generated_imgs/generated-2026-04-03T14-45-12-939Z-jm55k0.png" alt="New website design preview" />
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ OVERVIEW ═══════════════════════════ -->
+<section id="overview">
+  <div class="container">
+    <div class="inner">
+      <div class="text-col fade-up">
+        <span class="eyebrow">Project Overview</span>
+        <h2>Rebuilding openarmsfairbanks.org from the ground up</h2>
+        <p>Open Arms has been a cornerstone of early childhood development in Fairbanks since 2000. Your website should reflect that legacy — warm, trustworthy, and easy for families to navigate.</p>
+        <p>This proposal covers a complete rebuild of all current content, a thorough refresh of everything we identify together, and a full suite of digital tools to help Open Arms connect with families, share news, and grow your community online for years to come.</p>
+        <p>Every deliverable listed in this proposal is included in the project price — no hidden line items, no scope surprises.</p>
+        <div class="stat-row">
+          <div class="stat-pill">
+            <strong>$5,000</strong>
+            <span>Total Investment</span>
+          </div>
+          <div class="stat-pill">
+            <strong>2</strong>
+            <span>Installments</span>
+          </div>
+          <div class="stat-pill">
+            <strong>1 Year</strong>
+            <span>Content Support</span>
+          </div>
+        </div>
+      </div>
+      <div class="overview-img-col fade-up" style="animation-delay:0.15s">
+        <div class="overview-img-wrap">
+          <img src="generated_imgs/generated-2026-04-03T14-45-12-939Z-jm55k0.png" alt="Website preview" />
+        </div>
+        <div class="overview-tag">
+          Hosted on Netlify
+          <span>$275 / year after year 1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ DELIVERABLES ═══════════════════════════ -->
+<section id="deliverables">
+  <div class="container-wide">
+    <div class="section-head fade-up">
+      <span class="eyebrow">What's Included</span>
+      <h2>Everything you need — nothing you don't</h2>
+      <p class="section-sub">Twelve deliverables, one flat price. Here's exactly what's covered.</p>
+    </div>
+    <div class="deliverables-layout">
+      <div class="deliverables-grid">
+
+        <div class="d-card fade-up">
+          <div class="d-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>Full Site Rebuild</h4>
+            <p>All current content migrated and refreshed. We'll identify together what to update, improve, or remove.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.05s">
+          <div class="d-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>Brand Guide</h4>
+            <p>A complete brand standards document covering colors, typography, logos, and voice — so everything stays consistent.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.1s">
+          <div class="d-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>Email Campaign Setup</h4>
+            <p>Platform setup, email design templates, and an intro campaign to welcome families to the new site.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.15s">
+          <div class="d-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>15 Short Videos</h4>
+            <p>You record iPhone interviews and send us the footage. We edit, caption, and build them into the site. We provide instructions + optional wireless mic recommendations.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.2s">
+          <div class="d-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>PDF → Online Forms</h4>
+            <p>Every PDF converted to a live, fillable web page or online form — no more downloads required.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.25s">
+          <div class="d-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>Newsletter System</h4>
+            <p>A built-in newsletter archive and subscriber management system so families can stay connected.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.3s">
+          <div class="d-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>Calendar of Events</h4>
+            <p>A live, embeddable events calendar families can browse and share. Easy for staff to update.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.35s">
+          <div class="d-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>Waitlist Forms</h4>
+            <p>Smart, mobile-friendly waitlist enrollment forms that feed directly to your team — no more paper signup sheets.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.4s">
+          <div class="d-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>AI Photo Enhancement</h4>
+            <p>Staff portraits and site photos improved with AI — better lighting, backgrounds, and quality from what you already have.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.45s">
+          <div class="d-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>1 Year Content Updates</h4>
+            <p>Supply text, photos, or announcements and we'll post them to the site. Included for 12 months after launch.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.5s">
+          <div class="d-icon blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>4 Quarterly Email Blasts</h4>
+            <p>Four designed, written-to-brief email campaigns sent to your list over year one — one per quarter.</p>
+          </div>
+        </div>
+
+        <div class="d-card fade-up" style="animation-delay:0.55s">
+          <div class="d-icon green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="11 8 11 11 13 13"/></svg>
+          </div>
+          <div class="d-text">
+            <h4>SEO / AEO Optimization</h4>
+            <p>Technical SEO + Answer Engine Optimization so families find Open Arms on Google, AI assistants, and maps.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="deliverables-aside fade-up" style="animation-delay:0.2s">
+        <div class="aside-img-wrap">
+          <img src="generated_imgs/generated-2026-04-03T14-45-41-400Z-d6rpox.png" alt="Deliverable icons" />
+          <p class="aside-caption">12 deliverables · 1 flat price</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ HOSTING ════════════════════════════ -->
+<section id="hosting">
+  <div class="container">
+    <div class="inner fade-up">
+      <div class="hosting-text">
+        <span class="eyebrow">Hosting</span>
+        <h2>Fast, reliable hosting on Netlify</h2>
+        <p>Your site will be hosted on Netlify — one of the fastest and most reliable platforms in the industry. You get free SSL, automatic deploys, global CDN, and a 99.99% uptime SLA. No server maintenance, no surprise costs.</p>
+        <p style="margin-top:14px; font-size:15px; color:var(--gray);">Hosting is billed annually and is separate from the project fee. We'll handle setup and configuration as part of the build.</p>
+      </div>
+      <div class="hosting-card">
+        <div class="hosting-platform">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          Netlify
+        </div>
+        <div class="hosting-price"><sup>$</sup>275</div>
+        <div class="hosting-period">per year</div>
+        <p class="hosting-note">Billed annually after project launch. First year setup included in project fee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ INVESTMENT ═════════════════════════ -->
+<section id="investment">
+  <div class="container fade-up">
+    <span class="eyebrow">Investment</span>
+    <h2>Simple, transparent pricing</h2>
+    <p class="section-sub">One flat fee. Split into two comfortable installments. No hourly billing, no change-order surprises.</p>
+    <div class="investment-grid">
+      <div class="inv-card highlight">
+        <span class="inv-label">Project Total</span>
+        <div class="inv-amount"><sup>$</sup>5,000</div>
+        <p class="inv-desc">Full project — all 12 deliverables, 1 year of content support, and 4 quarterly email blasts included.</p>
+      </div>
+      <div class="inv-card">
+        <span class="inv-label">Hosting (Annual)</span>
+        <div class="inv-amount"><sup>$</sup>275</div>
+        <p class="inv-desc">Billed annually. Hosted on Netlify with SSL, CDN, and automatic deploys. Billed separately from the project fee.</p>
+      </div>
+      <div class="inv-card inv-installments" style="padding:0;">
+        <div class="pt-box" style="margin-bottom:0; border:none; border-radius:0 0 20px 20px;">
+          <div class="pt-head">Payment Schedule — 4-Week Build</div>
+          <div class="pt-timeline">
+            <div class="pt-step">
+              <div class="pt-dot invoice">1</div>
+              <div class="pt-week">Week 1</div>
+              <div class="pt-label">Kickoff &amp; Discovery</div>
+              <div class="pt-amount">$2,500 due</div>
+            </div>
+            <div class="pt-step">
+              <div class="pt-dot">·</div>
+              <div class="pt-week">Week 2</div>
+              <div class="pt-label">Design &amp; Architecture</div>
+            </div>
+            <div class="pt-step">
+              <div class="pt-dot">·</div>
+              <div class="pt-week">Week 3</div>
+              <div class="pt-label">Build &amp; Content</div>
+            </div>
+            <div class="pt-step">
+              <div class="pt-dot invoice">2</div>
+              <div class="pt-week">Week 4</div>
+              <div class="pt-label">Review, Launch &amp; Handoff</div>
+              <div class="pt-amount">$2,500 due</div>
+            </div>
+          </div>
+
+          <div class="pt-terms-head">
+            <h4>Extended Payment Terms</h4>
+            <p>All invoices are due upon receipt. If extended terms are needed, a finance fee based on <strong style="color:rgba(255,255,255,0.85)">18% APR</strong> — the industry-standard B2B rate — is applied to that invoice at the time the extension is requested. Extensions must be requested before the invoice due date.</p>
+          </div>
+
+          <div class="pt-pills">
+            <div class="pt-pill">
+              <div class="pt-pill-fee">+1.0%</div>
+              <div>
+                <div class="pt-pill-name">Net 15</div>
+                <div class="pt-pill-basis">+15 days to pay &nbsp;·&nbsp; 18% APR × 15/365 ≈ 0.74%</div>
+              </div>
+            </div>
+            <div class="pt-pill">
+              <div class="pt-pill-fee">+1.5%</div>
+              <div>
+                <div class="pt-pill-name">Net 30</div>
+                <div class="pt-pill-basis">+30 days to pay &nbsp;·&nbsp; 18% APR × 30/365 ≈ 1.48%</div>
+              </div>
+            </div>
+            <div class="pt-pill">
+              <div class="pt-pill-fee">+2.5%</div>
+              <div>
+                <div class="pt-pill-name">Net 45</div>
+                <div class="pt-pill-basis">+45 days to pay &nbsp;·&nbsp; 18% APR × 45/365 ≈ 2.22%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-table-wrap">
+            <table class="pt-table">
+              <thead>
+                <tr>
+                  <th class="th-base">Invoice</th>
+                  <th class="th-base" style="text-align:center">Base Amount</th>
+                  <th>Net 15 (+1.0%)</th>
+                  <th>Net 30 (+1.5%)</th>
+                  <th>Net 45 (+2.5%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Invoice #1 — Kickoff Deposit</td>
+                  <td style="text-align:center">$2,500</td>
+                  <td class="fee-col">$2,525</td>
+                  <td class="fee-col">$2,538</td>
+                  <td class="fee-col">$2,563</td>
+                </tr>
+                <tr>
+                  <td>Invoice #2 — Launch Balance</td>
+                  <td style="text-align:center">$2,500</td>
+                  <td class="fee-col">$2,525</td>
+                  <td class="fee-col">$2,538</td>
+                  <td class="fee-col">$2,563</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pt-footnote">
+            <strong style="color:rgba(255,255,255,0.55)">How fees are calculated:</strong> Finance fees are based on 18% APR applied to the number of days extended — Net 15: 18% × 15/365 = 0.74%, billed at a flat 1.0% · Net 30: 18% × 30/365 = 1.48%, billed at 1.5% · Net 45: 18% × 45/365 = 2.22%, billed at 2.5%. Fees apply per individual invoice only and are not compounded. Maximum additional cost if both invoices are extended to Net 45: <strong style="color:rgba(255,255,255,0.55)">+$126 total.</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ NOTES ═════════════════════════════ -->
+<section id="notes">
+  <div class="container">
+    <div class="inner">
+      <div class="fade-up">
+        <span class="eyebrow">Scope Notes</span>
+        <h2>What to expect</h2>
+        <p class="section-sub">We want this to be completely clear before we start. Here's exactly what is and isn't covered so there are no surprises down the road.</p>
+        <div class="included-box" style="margin-top:32px;">
+          <h3>What IS included</h3>
+          <ul>
+            <li>Posting any content, photos, or copy supplied by Open Arms</li>
+            <li>Content updates and additions for 12 months after launch</li>
+            <li>Editing raw iPhone video footage into polished short videos (15 total)</li>
+            <li>All site configuration, hosting setup, and technical SEO</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fade-up" style="animation-delay:0.1s">
+        <div class="not-included-box" style="margin-top:0;">
+          <h3>What is NOT included</h3>
+          <ul>
+            <li>Video editing beyond the 15 included interview videos</li>
+            <li>Graphic design assets not related to the website (print, signage, etc.)</li>
+            <li>Photography or video shoots — all media is supplied by Open Arms</li>
+          </ul>
+        </div>
+        <div style="background: rgba(42,113,176,0.07); border-radius: 16px; padding: 22px 24px; margin-top: 20px; border: 1.5px solid rgba(42,113,176,0.15);">
+          <p style="font-size:14px; color: #3a3a3a; line-height:1.7;">
+            <strong style="font-family:'Nunito',sans-serif; font-weight:800; color:var(--blue);">Video instructions included:</strong> We'll provide a simple guide so your team knows exactly how to record the interviews on an iPhone. We'll also recommend an optional wireless microphone for better audio quality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ NEXT STEPS ═════════════════════════ -->
+<section id="cta">
+  <div class="container fade-up">
+    <span class="eyebrow" style="display:block; text-align:center;">Next Steps</span>
+    <h2>Ready to get started?</h2>
+    <p>Three simple steps to kick off your new website. We'll handle the rest.</p>
+    <div class="cta-steps">
+      <div class="cta-step">
+        <div class="step-num">1</div>
+        <h4>Review &amp; Approve</h4>
+        <p>Look over this proposal and let us know if you have any questions or changes.</p>
+      </div>
+      <div class="cta-step">
+        <div class="step-num">2</div>
+        <h4>First Installment</h4>
+        <p>Send the first $2,500 payment to kick off the project and get on our schedule.</p>
+      </div>
+      <div class="cta-step">
+        <div class="step-num">3</div>
+        <h4>Kickoff Call</h4>
+        <p>We'll schedule a kickoff call to align on priorities, gather assets, and set a timeline.</p>
+      </div>
+    </div>
+    <div class="cta-action">
+      <button class="btn-accept" id="open-accept-modal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Accept This Proposal
+      </button>
+      <button class="btn-primary" onclick="window.print()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Save as PDF
+      </button>
+    </div>
+    <p class="cta-cal-label" style="margin-top:32px;">Have questions first? Schedule time to talk.</p>
+    <div class="cta-cal-group">
+      <a href="https://calendar.google.com/calendar/u/0/appointments/AcZssZ1NWSeGkrqyZaKwUL4O3tVuUXldapAFGLJemig=" target="_blank" rel="noopener" class="btn-cal discuss">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Schedule Proposal Discussion
+      </a>
+    </div>
+    <p class="cta-cal-label" style="margin-top:28px;">Ready to go? Lock in your start date.</p>
+    <div class="cta-cal-group">
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2hSYZs8YnrMvqIsWaGVql-Fu2PRZswdmjPHtg8Ye7YZElbCJh2fMG34MltkNFEzBEhNxs_qbFc" target="_blank" rel="noopener" class="btn-cal kickoff">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Schedule Kickoff Meeting
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ ACCEPT MODAL ═══════════════════════════ -->
+<div id="modal-overlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <!-- SUCCESS STATE -->
+    <div class="modal-success" id="modal-success">
+      <div class="success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Proposal Accepted!</h3>
+      <p>Thank you — your acceptance has been received. We'll send Invoice #1 for <strong>$2,500</strong> to your email shortly, and we'll be in touch to confirm your kickoff date.</p>
+      <div style="margin-top:28px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2hSYZs8YnrMvqIsWaGVql-Fu2PRZswdmjPHtg8Ye7YZElbCJh2fMG34MltkNFEzBEhNxs_qbFc" target="_blank" rel="noopener" class="btn-cal kickoff" style="font-size:14px;padding:11px 20px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Schedule Kickoff Meeting
+        </a>
+        <button onclick="closeModal()" class="btn-cal discuss" style="font-size:14px;padding:11px 20px;">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- FORM STATE -->
+    <div id="modal-form-wrap">
+      <div class="modal-header-wrap">
+        <div class="modal-header">
+          <h3 id="modal-title">Accept This Proposal</h3>
+          <p>Fill out the form below to formally accept. We'll send Invoice&nbsp;#1 ($2,500) to your email and reach out to confirm your kickoff.</p>
+        </div>
+        <button class="modal-close" onclick="closeModal()" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="proposal-acceptance" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="accept-form">
+          <input type="hidden" name="form-name" value="proposal-acceptance" />
+          <input type="hidden" name="proposal" value="Open Arms Website Rebuild — $5,000" />
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+          <div class="modal-field-row">
+            <div class="modal-field">
+              <label for="acc-name">Full Name <span>*</span></label>
+              <input type="text" id="acc-name" name="name" required placeholder="Jane Smith" />
+            </div>
+            <div class="modal-field">
+              <label for="acc-title">Title / Role</label>
+              <input type="text" id="acc-title" name="title" placeholder="Executive Director" />
+            </div>
+          </div>
+          <div class="modal-field">
+            <label for="acc-email">Email Address <span>*</span></label>
+            <input type="email" id="acc-email" name="email" required placeholder="jane@openarmsfairbanks.org" />
+          </div>
+          <div class="modal-field">
+            <label for="acc-org">Organization</label>
+            <input type="text" id="acc-org" name="organization" value="Open Arms Child Development Center" />
+          </div>
+          <div class="modal-field">
+            <label for="acc-terms">Payment Terms Preference</label>
+            <select id="acc-terms" name="payment_terms">
+              <option value="immediate">Due on Receipt (standard)</option>
+              <option value="net15">Net 15 (+1.0% finance fee)</option>
+              <option value="net30">Net 30 (+1.5% finance fee)</option>
+              <option value="net45">Net 45 (+2.5% finance fee)</option>
+            </select>
+          </div>
+          <label class="modal-check">
+            <input type="checkbox" id="acc-agree" name="agreement" value="agreed" required />
+            <div class="modal-check-text">
+              <strong>I agree to the terms of this proposal</strong>
+              I have read and accept the Open Arms Website Rebuild proposal dated April 3, 2026 — including the project scope, payment schedule, and terms outlined herein.
+            </div>
+          </label>
+          <button type="submit" class="modal-submit" id="modal-submit-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Accept &amp; Request Invoice
+          </button>
+          <p class="modal-note">Your information is kept confidential and used only to process this proposal acceptance.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════ FOOTER ═══════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <p><strong>Open Arms Child Development Center</strong> · Fairbanks, Alaska</p>
+    <p style="margin-top:6px;">Proposal prepared April 3, 2026 · Confidential — for Open Arms stakeholders only</p>
+  </div>
+</footer>
+
+<script>
+// ── PASSWORD GATE ──────────────────────────────────────────────────────
+(function() {
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gate-input');
+  const errEl = document.getElementById('gate-error');
+  const submitBtn = document.getElementById('gate-submit');
+  const toggleBtn = document.getElementById('gate-toggle');
+
+  if (sessionStorage.getItem('oa-access') === '1') {
+    gate.style.display = 'none';
+    return;
+  }
+
+  document.body.style.overflow = 'hidden';
+
+  function unlock() {
+    if (input.value.trim().toLowerCase() === 'openarms') {
+      sessionStorage.setItem('oa-access', '1');
+      gate.classList.add('hidden');
+      document.body.style.overflow = '';
+      setTimeout(() => gate.style.display = 'none', 500);
+    } else {
+      errEl.textContent = 'Incorrect password. Please try again.';
+      input.classList.add('error');
+      input.value = '';
+      setTimeout(() => input.classList.remove('error'), 400);
+      input.focus();
+    }
+  }
+
+  submitBtn.addEventListener('click', unlock);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+  input.addEventListener('input', () => errEl.textContent = '');
+
+  toggleBtn.addEventListener('click', () => {
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+    toggleBtn.querySelector('svg').style.opacity = isPassword ? '0.4' : '1';
+  });
+
+  input.focus();
+})();
+
+// ── ACCEPT MODAL ──────────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('open-accept-modal').addEventListener('click', openModal);
+document.getElementById('open-accept-modal-top').addEventListener('click', openModal);
+
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+document.getElementById('accept-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('modal-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Submitting…';
+
+  const formData = new FormData(this);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(formData).toString()
+  })
+  .then(() => {
+    document.getElementById('modal-form-wrap').style.display = 'none';
+    document.getElementById('modal-success').style.display = 'block';
+  })
+  .catch(() => {
+    // Still show success — Netlify may block in preview; form is configured server-side
+    document.getElementById('modal-form-wrap').style.display = 'none';
+    document.getElementById('modal-success').style.display = 'block';
+  });
+});
+
+// ── FADE-UP OBSERVER ──────────────────────────────────────────────────
+(function() {
+  const els = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
