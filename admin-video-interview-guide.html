@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>How to Capture a Great Video Interview — Open Arms Staff Guide</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green:  #7BC07E;
+      --blue:   #2A71B0;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --black:  #1A1A1A;
+      --cream:  #F9F6F0;
+      --white:  #FFFFFF;
+      --gray:   #6B7280;
+      --border: #E5E7EB;
+      --muted:  #5a5a5a;
+      --sans:   'Open Sans', system-ui, sans-serif;
+      --head:   'Nunito', sans-serif;
+      --max:    880px;
+      --r:      8px;
+      --rl:     16px;
+      --shm:    0 6px 24px rgba(0,0,0,.10);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--black); background: var(--cream); line-height: 1.7; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Top bar */
+    #topbar { background: var(--blue); padding: .75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    #topbar img { height: 36px; }
+    #topbar span { font-family: var(--head); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); }
+
+    /* Hero */
+    .hero { position: relative; width: 100%; height: clamp(280px, 42vw, 460px); overflow: hidden; background: var(--black); }
+    .hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(42,113,176,.08) 0%, rgba(26,26,26,.60) 100%); }
+    .hero-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1rem 1.5rem; z-index: 2; color: rgba(255,255,255,.78); font-family: var(--head); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-align: center; }
+
+    /* Page layout */
+    .doc-wrap { max-width: var(--max); margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* Header */
+    .doc-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 2px solid var(--border); }
+    .doc-eyebrow { font-family: var(--head); font-size: .78rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: .75rem; display: block; }
+    .doc-title { font-family: var(--head); font-size: clamp(1.9rem, 3.6vw, 2.55rem); font-weight: 900; color: var(--black); line-height: 1.15; margin-bottom: 1.1rem; }
+    .doc-intro { font-size: 1.02rem; color: var(--muted); line-height: 1.85; max-width: 680px; }
+    .doc-intro + .doc-intro { margin-top: 1rem; }
+
+    /* Alert / pull boxes */
+    .doc-alert { background: var(--yellow); border-radius: var(--r); padding: 1.1rem 1.4rem; margin-bottom: 2.5rem; display: flex; gap: .75rem; align-items: flex-start; }
+    .doc-alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .doc-alert p { font-size: .93rem; color: var(--black); line-height: 1.65; }
+    .doc-alert strong { font-weight: 700; }
+
+    .doc-pull { background: var(--white); border-left: 4px solid var(--red); padding: 1rem 1.25rem; margin: 1.25rem 0; border-radius: 0 var(--r) var(--r) 0; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .doc-pull p { font-style: italic; color: var(--black); font-size: .95rem; line-height: 1.7; }
+    .doc-pull cite { display: block; font-style: normal; font-family: var(--head); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gray); margin-top: .5rem; }
+
+    /* Section */
+    .doc-section { background: var(--white); border-radius: var(--rl); border: 1px solid var(--border); overflow: hidden; margin-bottom: 1.75rem; box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+    .doc-section-head { background: var(--blue); padding: 1rem 1.5rem; display: flex; align-items: center; gap: .85rem; }
+    .doc-section-num { font-family: var(--head); font-size: .7rem; font-weight: 900; letter-spacing: .02em; background: var(--yellow); color: var(--black); min-width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0 .25rem; }
+    .doc-section-title { font-family: var(--head); font-size: 1.02rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #fff; }
+    .doc-section-body { padding: 1.75rem; }
+    .doc-section-body p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: .95rem; }
+    .doc-section-body p:last-child { margin-bottom: 0; }
+    .doc-section-body h3 { font-family: var(--head); font-size: 1.05rem; font-weight: 800; color: var(--black); margin: 1.5rem 0 .65rem; }
+    .doc-section-body h3:first-child { margin-top: 0; }
+    .doc-section-body strong { color: var(--black); font-weight: 700; }
+
+    /* Step label */
+    .doc-step { font-family: var(--head); font-size: .72rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--gray); margin-bottom: .5rem; margin-top: 1.5rem; display: block; }
+    .doc-step:first-child { margin-top: 0; }
+
+    /* List */
+    .doc-list { list-style: none; display: flex; flex-direction: column; gap: .65rem; margin: .75rem 0 1rem; padding-left: 0; }
+    .doc-list li { display: flex; gap: .65rem; font-size: .95rem; color: var(--muted); line-height: 1.7; }
+    .doc-list li::before { content: '→'; color: var(--red); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    /* Checklist */
+    .doc-check { list-style: none; display: flex; flex-direction: column; gap: .55rem; margin: .5rem 0 0; padding: 0; }
+    .doc-check li { display: flex; gap: .65rem; font-size: .93rem; color: var(--black); line-height: 1.6; background: var(--cream); padding: .7rem .9rem; border-radius: 6px; }
+    .doc-check li::before { content: '☐'; color: var(--black); font-weight: 700; flex-shrink: 0; font-size: 1.05rem; line-height: 1.4; }
+
+    /* Do/Don't grid */
+    .doc-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .doc-do, .doc-dont { border-radius: var(--r); padding: 1.1rem 1.2rem; }
+    .doc-do { background: #eaf3ec; border: 1px solid #c7dccd; }
+    .doc-dont { background: #fbeceb; border: 1px solid #f0c8c5; }
+    .doc-do h4, .doc-dont h4 { font-family: var(--head); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .6rem; }
+    .doc-do h4 { color: #2d6e3f; }
+    .doc-dont h4 { color: #a82a23; }
+    .doc-do ul, .doc-dont ul { list-style: none; display: flex; flex-direction: column; gap: .45rem; padding: 0; margin: 0; }
+    .doc-do li, .doc-dont li { font-size: .88rem; line-height: 1.55; color: var(--black); display: flex; gap: .5rem; }
+    .doc-do li::before { content: '✓'; color: #2d6e3f; font-weight: 700; flex-shrink: 0; }
+    .doc-dont li::before { content: '✕'; color: #a82a23; font-weight: 700; flex-shrink: 0; }
+
+    /* Gear card */
+    .gear-card { display: grid; grid-template-columns: 1fr; gap: 1rem; background: linear-gradient(135deg, var(--blue) 0%, #1d5a96 100%); border-radius: var(--rl); padding: 1.6rem 1.5rem; margin: 1.25rem 0; color: #fff; position: relative; overflow: hidden; }
+    .gear-card::before { content: ''; position: absolute; top: 0; right: 0; width: 160px; height: 160px; background: var(--green); opacity: .1; border-radius: 50%; transform: translate(50%,-50%); }
+    .gear-card .gear-eyebrow { font-family: var(--head); font-size: .7rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; color: var(--yellow); display: block; margin-bottom: .4rem; }
+    .gear-card h3 { font-family: var(--head); font-size: 1.2rem; font-weight: 900; color: #fff; margin-bottom: .5rem; line-height: 1.3; }
+    .gear-card p { color: rgba(255,255,255,.82); font-size: .9rem; line-height: 1.65; margin-bottom: 1rem; }
+    .gear-card .gear-price { font-family: var(--head); font-size: .85rem; color: rgba(255,255,255,.55); letter-spacing: .05em; margin-bottom: 1rem; display: block; }
+    .gear-btn { display: inline-flex; align-items: center; gap: .5rem; background: var(--green); color: var(--black); font-family: var(--head); font-weight: 800; font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; padding: .7rem 1.3rem; border-radius: 6px; transition: transform .15s; }
+    .gear-btn:hover { transform: translateY(-1px); text-decoration: none; }
+
+    /* CTA card */
+    .cta-card { background: rgba(123,192,126,.15); border: 1px solid rgba(123,192,126,.4); border-radius: var(--rl); padding: 1.6rem 1.5rem; margin: 1.25rem 0; text-align: center; }
+    .cta-card h3 { font-family: var(--head); font-size: 1.15rem; font-weight: 800; color: var(--black); margin-bottom: .5rem; }
+    .cta-card p { color: var(--muted); font-size: .92rem; margin-bottom: 1rem; line-height: 1.6; }
+    .cta-btn { display: inline-block; background: var(--blue); color: #fff; font-family: var(--head); font-weight: 800; font-size: .92rem; letter-spacing: .04em; text-transform: uppercase; padding: .7rem 1.5rem; border-radius: 6px; }
+    .cta-btn:hover { text-decoration: none; background: #1d5a96; }
+
+    /* Numbered steps */
+    .num-steps { counter-reset: s; list-style: none; padding: 0; margin: .75rem 0 .5rem; }
+    .num-steps > li { counter-increment: s; position: relative; padding: .85rem 1rem .85rem 3rem; margin-bottom: .6rem; background: var(--cream); border-radius: var(--r); font-size: .93rem; color: var(--black); line-height: 1.6; }
+    .num-steps > li::before { content: counter(s); position: absolute; left: .85rem; top: .9rem; width: 1.5rem; height: 1.5rem; background: var(--blue); color: var(--yellow); border-radius: 50%; font-family: var(--head); font-weight: 800; font-size: .78rem; display: flex; align-items: center; justify-content: center; }
+
+    /* Divider */
+    .doc-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    @media (max-width: 600px) {
+      .doc-dodont { grid-template-columns: 1fr; }
+      .doc-section-body { padding: 1.4rem; }
+      .doc-wrap { padding: 2rem 1.2rem 4rem; }
+    }
+  </style>
+  <script>
+  (function() {
+    if (sessionStorage.getItem('oa-access') === '1') return;
+    document.documentElement.style.visibility = 'hidden';
+
+    function showGate() {
+      document.documentElement.style.visibility = '';
+      var o = document.createElement('div');
+      o.id = 'auth-gate';
+      o.innerHTML = '<div style="background:#2A71B0;position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;font-family:\'Open Sans\',sans-serif">'
+        + '<img src="images/open-arms-logo-white-no-tag.png" alt="Open Arms Child Development Center" style="height:52px;margin-bottom:2rem">'
+        + '<h2 style="color:#fff;font-family:\'Nunito\',sans-serif;font-size:1.2rem;font-weight:900;margin:0 0 .5rem;text-align:center">Staff Training Guide</h2>'
+        + '<p style="color:rgba(255,255,255,.5);font-size:.85rem;margin:0 0 2rem;text-align:center">Restricted access — staff only</p>'
+        + '<div style="position:relative;width:100%;max-width:300px;margin-bottom:.5rem">'
+        + '<input id="ag-pw" type="password" placeholder="Enter password" style="width:100%;padding:.75rem 1rem;border:1.5px solid rgba(255,255,255,.25);border-radius:8px;background:rgba(255,255,255,.1);color:#fff;font-size:1rem;outline:none;box-sizing:border-box" autocomplete="current-password">'
+        + '</div>'
+        + '<div id="ag-err" style="color:#FFD43B;font-size:.85rem;min-height:1.2rem;margin-bottom:.75rem"></div>'
+        + '<button id="ag-btn" style="background:#FFD43B;color:#1A1A1A;border:none;padding:.75rem 2.5rem;font-family:\'Nunito\',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border-radius:50px;cursor:pointer;width:100%;max-width:300px">Enter Site</button>'
+        + '</div>';
+      document.body.appendChild(o);
+      var inp = document.getElementById('ag-pw'), btn = document.getElementById('ag-btn'), err = document.getElementById('ag-err');
+      function attempt() {
+        if (!inp.value) { err.textContent = 'Please enter the password.'; return; }
+        if (inp.value.trim().toLowerCase() === 'openarms') {
+          sessionStorage.setItem('oa-access', '1');
+          o.remove();
+        } else {
+          err.textContent = 'Incorrect password. Please try again.';
+          inp.value = '';
+          inp.focus();
+        }
+      }
+      btn.addEventListener('click', attempt);
+      inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') attempt(); });
+      inp.addEventListener('input', function() { err.textContent = ''; });
+      setTimeout(function() { inp.focus(); }, 100);
+    }
+
+    if (document.body) { showGate(); } else { document.addEventListener('DOMContentLoaded', showGate); }
+  })();
+  </script>
+</head>
+<body>
+
+<div id="topbar">
+  <a href="index.html"><img src="images/open-arms-logo-white-no-tag.png" alt="Open Arms Child Development Center — Home"></a>
+  <span>Staff Guide</span>
+</div>
+
+<div class="hero">
+  <img src="generated_imgs/generated-2026-03-19T21-33-44-074Z-v852bp.png" alt="Children enjoying a meal together at Open Arms — the kind of real, joyful moment worth capturing on video">
+  <div class="hero-cap">In the classroom · Just an iPhone, a clip-on mic, and a real story</div>
+</div>
+
+<div class="doc-wrap">
+
+  <div class="doc-header">
+    <span class="doc-eyebrow">Staff Training Guide</span>
+    <h1 class="doc-title">How to Capture a Great Video Interview</h1>
+    <p class="doc-intro">Almost every powerful video on the Open Arms site started the same way: a phone, a small mic, and someone who knew how to make the person in front of them feel safe enough to speak from the heart.</p>
+    <p class="doc-intro">This guide walks you through every step — gear, setup, asking questions, capturing release permission, and getting the footage to Gary. Follow it and you'll cut editing time dramatically and end up with stories that actually move people.</p>
+  </div>
+
+  <div class="doc-alert">
+    <span class="doc-alert-icon">★</span>
+    <p><strong>The single biggest factor</strong> in whether a video makes it onto the site is <strong>sound quality</strong>. If viewers struggle to hear, they stop listening — no matter how powerful the story. Get the mic on the person, get close, and the rest gets easier.</p>
+  </div>
+
+  <!-- 1. Why this matters -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">1</div>
+      <span class="doc-section-title">Why This Matters</span>
+    </div>
+    <div class="doc-section-body">
+      <p>People are moved by what feels real. A polished interview that sounds rehearsed will not change anyone's heart. An unscripted, honest moment captured with care — even on a phone — can move an enrolling family off the fence, bring a donor to give, or show a prospective staff member exactly why Open Arms is where they want to work.</p>
+      <p>The good news: you don't need a film crew. You need a phone, a $40–$160 wireless mic, and the patience to listen. When the front-end capture is done right, the editing time on the back end drops by as much as <strong>90%</strong>. When it's done poorly, no amount of post-production can save it.</p>
+      <div class="doc-pull">
+        <p>"AI is really great, but it has to be grounded in authenticity and reality. It can only optimize what's there — the base has to be good."</p>
+        <cite>— Gary Ricke, on the Open Arms video process</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. What you need -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">2</div>
+      <span class="doc-section-title">What You Need</span>
+    </div>
+    <div class="doc-section-body">
+      <p>That's it. Two things. No tripods, no lighting kits, no professional cameras. The setup that consistently produces our best videos is just:</p>
+      <ul class="doc-list">
+        <li><strong>An iPhone</strong> (any model from the last few years works). Newer iPhones with <strong>cinematic mode</strong> are a bonus — they soften the background and put the focus on the person.</li>
+        <li><strong>A wireless lavalier mic</strong> that clips to the speaker's collar. This is the upgrade that changes everything.</li>
+      </ul>
+
+      <div class="gear-card">
+        <span class="gear-eyebrow">Recommended Upgrade — Buy This</span>
+        <h3>Wireless Lavalier Microphone for iPhone</h3>
+        <span class="gear-price">~$40 · plugs straight into Lightning or USB-C</span>
+        <p>Two clip-on mics, plug-and-play with the iPhone, and the small fuzzy windscreen (the "wet cat") that keeps wind noise out when you're outside. <strong>Get this on every phone used for interviews.</strong> It is the single most important piece of equipment for capturing usable audio.</p>
+        <a class="gear-btn" href="https://www.amazon.com/dp/B0DNQ5D1H4" target="_blank" rel="noopener">View on Amazon →</a>
+      </div>
+
+      <p>You can spend more — there are excellent $160 sets too — but the goal is simple: <strong>get the mic onto the person speaking</strong>. A phone trying to capture audio from across the room, even a few feet away, is the #1 reason a beautiful interview becomes unusable.</p>
+    </div>
+  </div>
+
+  <!-- 3. Before you press record -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">3</div>
+      <span class="doc-section-title">Before You Press Record</span>
+    </div>
+    <div class="doc-section-body">
+      <h3>Choose your background intentionally</h3>
+      <p>Take 20 seconds to look at what's behind your subject. The background tells part of the story. A blank wall says nothing. Outside on the playground, near the garden beds, in a classroom doorway, or at a table during an enrollment meeting — these all set a tone that helps the viewer feel where they are.</p>
+      <p><strong>If your iPhone has cinematic mode</strong>, turn it on. It blurs the background just enough that the person becomes the total focus, but you still get a sense of place.</p>
+
+      <h3>Don't share the questions ahead of time</h3>
+      <p>This one feels counter-intuitive, but trust it: when people see the questions in advance, they obsess. They write out answers. They rehearse. And then on camera they sound stiff and the magic is gone.</p>
+      <p>Your <em>own</em> question list is for <em>you</em>. Have it ready (we can use AI to generate strong, open-ended questions tied to the Open Arms mission), but keep it on your side of the conversation.</p>
+
+      <h3>Get the mic on them — even in a group</h3>
+      <p>If you're filming one person, clip the lav mic to their collar and you're done. If you're capturing a group moment — a parent orientation, a pickup-time conversation, a staff share — <strong>rotate the mic</strong> and clip it onto each person right before they speak. It takes 30 seconds. It's worth it every single time. The mic feeds straight into your phone and won't interfere with anything else going on in the room.</p>
+    </div>
+  </div>
+
+  <!-- 4. Get them comfortable -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">4</div>
+      <span class="doc-section-title">Get Them Comfortable</span>
+    </div>
+    <div class="doc-section-body">
+      <p>Almost everyone hates being interviewed. They hate how they look on camera. The most important skill you can develop is helping them forget the camera is there.</p>
+
+      <h3>The "set the levels" trick</h3>
+      <p>Before the real interview begins, say casually: <em>"I just need to set my sound levels — tell me about your kids,"</em> or <em>"what's the funniest thing that happened at pickup this week?"</em> Pick something they'll <strong>light up</strong> talking about. You're not actually setting levels — you're warming them up. By the time you "start" the interview, they're already loose.</p>
+
+      <h3>Get up close — neck-up framing</h3>
+      <p>Most beginners stand too far away. Get close — closer than feels natural at first, like a personal conversation. When you're framed from the neck up, the viewer connects with the person's eyes and expressions, and the subject feels far less self-conscious about how their body looks.</p>
+
+      <h3>Smile with your eyes</h3>
+      <p>Tell them: <em>"Just talk to me. Don't worry about the phone."</em> Then mean it. Lock in. Be genuinely interested. Smile with your eyes. Active listening is contagious — when they feel heard, they open up.</p>
+
+      <div class="doc-pull">
+        <p>"You can't ask someone to speak naturally when they're trying to remember what they rehearsed. The whole goal is to make them forget there's a camera."</p>
+        <cite>— On getting real moments</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Asking great questions -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">5</div>
+      <span class="doc-section-title">Asking Great Questions</span>
+    </div>
+    <div class="doc-section-body">
+      <p>The biggest mistake most interviewers make is <strong>leading the witness</strong> — asking questions that telegraph the answer they want. People can feel that, and they freeze, or they try to please you instead of being honest.</p>
+
+      <div class="doc-dodont">
+        <div class="doc-do">
+          <h4>Do ask</h4>
+          <ul>
+            <li>"What was it like when you first dropped off?"</li>
+            <li>"How has your child changed this year?"</li>
+            <li>"Tell me about a moment that surprised you."</li>
+            <li>"What do you wish other families knew?"</li>
+            <li>"How did you feel right after that happened?"</li>
+          </ul>
+        </div>
+        <div class="doc-dont">
+          <h4>Don't ask</h4>
+          <ul>
+            <li>"Isn't Open Arms just amazing?"</li>
+            <li>"Don't you feel totally at peace here?"</li>
+            <li>"How important is the Christian environment to you?"</li>
+            <li>Anything where the "right" answer is obvious.</li>
+            <li>Yes/no questions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Listen, then follow up</h3>
+      <p>This is the hardest part. While you're listening to their answer, you're also trying to come up with your next question. It's a real skill. The shortcut is <strong>genuine curiosity</strong> — when something they say catches your attention, ask about <em>that</em>. "Wait, say more about that part." "How did that feel?" "What happened next?"</p>
+
+      <h3>No fake compliments</h3>
+      <p>If you're moved, say so. If you're impressed, say so. People can tell the difference between a real reaction and a polite one — and a real reaction is what makes them keep going.</p>
+
+      <h3>Trust the edit</h3>
+      <p>You will hear the interview differently when you watch it back than when you were in it. Often what felt like a so-so interview turns out to be full of gold. So even if it doesn't feel amazing in the moment — keep going. Don't bail early.</p>
+    </div>
+  </div>
+
+  <!-- 6. Length -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">6</div>
+      <span class="doc-section-title">Aim for 5–7 Minutes</span>
+    </div>
+    <div class="doc-section-body">
+      <p>Five to seven minutes of recorded conversation is the sweet spot. From a single 5–7 minute interview, we can usually pull <strong>three or four short clips</strong> for the website and social, plus a longer cut if it's exceptional.</p>
+      <p>Tell the person up front: <em>"We're just going to talk for about five minutes. We're really good at editing, so don't worry if you stumble — we'll smooth it out. Just relax."</em> That promise alone will help them.</p>
+      <p>Resist the urge to keep going past 7–8 minutes unless something extraordinary is happening. Long interviews are exhausting for the speaker and produce diminishing returns.</p>
+    </div>
+  </div>
+
+  <!-- 7. Capture metadata -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">7</div>
+      <span class="doc-section-title">Capture the Details Right Then</span>
+    </div>
+    <div class="doc-section-body">
+      <p>Before you part ways, write down (or voice-memo to yourself):</p>
+      <ul class="doc-list">
+        <li><strong>Their full name</strong> — and the <strong>exact spelling</strong>. Ask them to spell it.</li>
+        <li><strong>Their role</strong> — parent, family member, staff, community partner, board member.</li>
+        <li><strong>Their child's age group or program</strong>, if they're a family (Infants, Toddlers, Preschool, School Age…).</li>
+        <li><strong>How long they've been part of Open Arms</strong> — "two years," "since 2021," etc.</li>
+        <li><strong>The date</strong> and what event or context this was captured at.</li>
+      </ul>
+      <p>Tracking someone down later for a name spelling is painful and slow. Two minutes of notes now saves hours of back-and-forth later.</p>
+    </div>
+  </div>
+
+  <!-- 8. Release form -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">8</div>
+      <span class="doc-section-title">Get the Release Signed</span>
+    </div>
+    <div class="doc-section-body">
+      <p>Before Open Arms can publish or share their video — even for internal use — we need their signed permission. We have an online release form that takes the person about 90 seconds to fill out from their phone.</p>
+      <p>The form lets them choose how their video may be used:</p>
+      <ul class="doc-list">
+        <li><strong>Public use</strong> — website, social media, enrollment materials, donor communications.</li>
+        <li><strong>Internal use only</strong> — staff training, board meetings, parent previews. Not published publicly.</li>
+        <li><strong>No use</strong> — they can withdraw permission at any time.</li>
+      </ul>
+      <p>This distinction matters. Some families are happy to share their story with the Open Arms community but not with the wider public, and that's a perfectly valid choice we want to honor.</p>
+
+      <div class="cta-card">
+        <h3>Send the Release Form</h3>
+        <p>Text or email this link to the person you interviewed. They can sign it from their phone in under 2 minutes.</p>
+        <a class="cta-btn" href="release-form.html" target="_blank">Open the Release Form →</a>
+      </div>
+
+      <p style="font-size:.88rem;margin-top:1rem"><em>Signed releases are stored in Netlify's form dashboard. Tina or Gary can pull a record at any time.</em></p>
+    </div>
+  </div>
+
+  <!-- 9. Sharing the footage -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">9</div>
+      <span class="doc-section-title">Send the Footage to Gary</span>
+    </div>
+    <div class="doc-section-body">
+      <p>The fastest, most reliable way to get a video from your iPhone to Gary is <strong>iCloud Link sharing</strong>. It's free, it doesn't require an Apple subscription, and it doesn't ask the recipient to log in to anything. Skip Google Drive — people consistently struggle with the upload step.</p>
+
+      <ol class="num-steps">
+        <li>Open the <strong>Photos</strong> app on the iPhone and tap the video you want to send.</li>
+        <li>Tap the <strong>Share</strong> button (square with the up arrow), bottom-left.</li>
+        <li>Scroll down and tap <strong>Copy iCloud Link</strong>. The phone will spend a moment processing and uploading the video.</li>
+        <li>When you see the confirmation, paste the link into a text or email to Gary at <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a>.</li>
+        <li>Include the <strong>name, program, and context</strong> in the same message so Gary doesn't have to ask.</li>
+      </ol>
+
+      <div class="doc-alert" style="background:rgba(123,192,126,.2);margin-top:1.5rem">
+        <span class="doc-alert-icon">⏱</span>
+        <p><strong>iCloud links expire after 30 days.</strong> Send the link as soon as the interview is done — don't let it sit on your phone for weeks.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. The dignity rule -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">10</div>
+      <span class="doc-section-title">The Dignity Rule</span>
+    </div>
+    <div class="doc-section-body">
+      <p>Above all else, <strong>respect the dignity of the person you interviewed</strong>. This is the rule that overrides every other rule in this guide.</p>
+      <p>If they look uncomfortable, embarrassed, or unflattering on camera — even if what they said is brilliant — we cut it, or we re-frame it, or we re-shoot it. A great quote isn't worth making someone feel bad about how they appeared.</p>
+      <p>Every person who gives us their story deserves to <strong>see the final cut before it goes public</strong>. Tell them this up front: <em>"Nobody will see this until you see it and sign off on it."</em> That promise alone will help them relax during the interview.</p>
+      <div class="doc-pull">
+        <p>"You have to respect the person's dignity above all else. If they're not looking great, then you might have to ask the question again, or you might have to do another interview."</p>
+        <cite>— Gary Ricke</cite>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. Quick checklist -->
+  <div class="doc-section">
+    <div class="doc-section-head">
+      <div class="doc-section-num">✓</div>
+      <span class="doc-section-title">Quick Reference Checklist</span>
+    </div>
+    <div class="doc-section-body">
+      <p>Before you press record, run this list. It takes 2 minutes and prevents 90% of the problems we see.</p>
+      <ul class="doc-check">
+        <li>Wireless lav mic clipped to the speaker's collar</li>
+        <li>Mic plugged into the iPhone, levels checked</li>
+        <li>Background looks intentional — classroom, garden, hallway, not a blank wall</li>
+        <li>Cinematic mode on (if available)</li>
+        <li>Standing close — neck-up framing</li>
+        <li>Subject knows: "We'll edit this, you'll see it before anyone else"</li>
+        <li>Warm-up question ready ("tell me about your kids / what made you choose Open Arms…")</li>
+        <li>Your own question list nearby — not shared with them</li>
+        <li>Plan to capture: name, exact spelling, program, how long they've been with us</li>
+        <li>Plan to send the release form right after</li>
+        <li>Plan to share via iCloud Link the same day</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="font-size:.82rem;color:var(--gray);text-align:center;margin-top:3rem;line-height:1.7">
+    <a href="index.html" style="color:var(--gray)">← Back to Site</a>
+    &nbsp;·&nbsp; <a href="release-form.html" style="color:var(--gray)">Release Form</a>
+    &nbsp;·&nbsp; Open Arms Staff Guide &nbsp;·&nbsp; Restricted Access<br>
+    Questions? Email <a href="mailto:gary.ricke@orbisdesign.com" style="color:var(--gray)">gary.ricke@orbisdesign.com</a>
+  </p>
+
+</div>
+</body>
+</html>
