@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Apply to Open Arms · Join Our Team</title>
+  <meta name="description" content="Apply to join the Open Arms Child Development Center team in Fairbanks, Alaska. A NAEYC-accredited Christ-centered child development ministry." />
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green:  #7BC07E;
+      --blue:   #2A71B0;
+      --blue-d: #1E5A8E;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --black:  #1A1A1A;
+      --gray:   #6B7280;
+      --cream:  #FFFBF2;
+      --line:   #E5E7EB;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--black); background: #F8FAFC; line-height: 1.6; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; border: 0; cursor: pointer; background: none; }
+
+    /* ── Password gate ────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; background: linear-gradient(135deg, var(--blue) 0%, var(--blue-d) 100%);
+      display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 24px;
+    }
+    .gate-box { background: #fff; border-radius: 24px; padding: 40px 36px; max-width: 420px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.25); text-align: center; }
+    .gate-box img { width: 130px; margin-bottom: 20px; }
+    .gate-box h1 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+    .gate-box p { color: var(--gray); margin-bottom: 20px; font-size: 14px; }
+    .gate-input-wrap { position: relative; margin-bottom: 12px; }
+    .gate-box input { width: 100%; padding: 14px 48px 14px 16px; border: 2px solid var(--line); border-radius: 12px; font-size: 15px; font-family: inherit; }
+    .gate-box input:focus { outline: none; border-color: var(--blue); }
+    .gate-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); padding: 6px; border-radius: 6px; }
+    .gate-toggle:hover { color: var(--blue); }
+    .gate-box .gate-error { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 18px; }
+    .gate-box button[type=submit] { width: 100%; padding: 14px; border-radius: 12px; background: var(--red); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; }
+    .gate-box button[type=submit]:hover { background: #d63d31; }
+
+    /* ── Topbar ────────────────────────────────────────────── */
+    .topbar { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 100; }
+    .topbar-inner { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topbar-logo { display: flex; align-items: center; gap: 10px; }
+    .topbar-logo img { height: 38px; }
+    .topbar-back { display: inline-flex; align-items: center; gap: 6px; color: var(--gray); font-size: 14px; font-weight: 600; }
+    .topbar-back:hover { color: var(--blue); text-decoration: none; }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+    .hero { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-d) 100%); color: #fff; padding: 64px 0 80px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; border-radius: 50%; background: rgba(255,212,59,0.12); }
+    .hero::after { content: ''; position: absolute; bottom: -120px; left: -120px; width: 320px; height: 320px; border-radius: 50%; background: rgba(123,192,126,0.13); }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 50px; background: var(--red); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 18px; box-shadow: 0 6px 20px rgba(233,78,65,0.35); }
+    .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero h1 { font-family: 'Nunito', sans-serif; font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1.1; margin-bottom: 14px; }
+    .hero h1 em { font-style: normal; color: var(--yellow); }
+    .hero p { font-size: 17px; opacity: 0.92; max-width: 640px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 28px; font-size: 14px; opacity: 0.88; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+
+    /* ── Form card ─────────────────────────────────────────── */
+    .form-card { background: #fff; border-radius: 24px; box-shadow: 0 16px 40px rgba(0,0,0,0.08); margin: -40px auto 64px; padding: 0; overflow: hidden; }
+
+    /* Progress bar */
+    .progress-wrap { padding: 20px 32px 0; }
+    .progress-meta { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--gray); margin-bottom: 10px; }
+    .progress-meta strong { color: var(--blue); font-weight: 800; }
+    .progress-bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green) 0%, var(--blue) 100%); border-radius: 3px; transition: width 0.4s ease; }
+
+    /* Steps */
+    .step { padding: 32px 32px 16px; display: none; animation: fadeIn 0.4s ease; }
+    .step.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .step-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 16px; }
+    .step h2 { font-family: 'Nunito', sans-serif; font-size: 26px; font-weight: 900; line-height: 1.2; margin-bottom: 8px; }
+    .step .step-sub { color: var(--gray); font-size: 15px; margin-bottom: 28px; max-width: 600px; }
+
+    /* Form fields */
+    .field { margin-bottom: 20px; }
+    .field-row { display: grid; gap: 16px; margin-bottom: 20px; }
+    .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+    .field-row.cols-3 { grid-template-columns: 2fr 2fr 1fr; }
+    .field-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .field-row.cols-yn { grid-template-columns: 1fr auto; align-items: end; }
+    label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--black); }
+    label .req { color: var(--red); margin-left: 2px; }
+    label .hint { font-weight: 400; color: var(--gray); margin-left: 6px; font-size: 13px; }
+    input[type=text], input[type=email], input[type=tel], input[type=date], input[type=number], select, textarea {
+      width: 100%; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 10px; font-family: inherit; font-size: 14.5px; background: #fff; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    textarea { resize: vertical; min-height: 100px; line-height: 1.55; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42,113,176,0.12); }
+    input::placeholder, textarea::placeholder { color: #9CA3AF; }
+
+    /* Yes/No pill toggles */
+    .yn-toggle { display: inline-flex; gap: 6px; padding: 4px; background: #F3F4F6; border-radius: 12px; }
+    .yn-toggle label { display: inline-flex; align-items: center; justify-content: center; padding: 8px 18px; border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: pointer; color: var(--gray); margin: 0; min-width: 60px; transition: all 0.2s; }
+    .yn-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+    .yn-toggle input:checked + span { background: var(--blue); color: #fff; box-shadow: 0 4px 10px rgba(42,113,176,0.25); }
+    .yn-toggle label span { display: inline-block; padding: 8px 18px; border-radius: 8px; transition: all 0.2s; }
+
+    /* Sub-cards */
+    .subcard { background: #F8FAFC; border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+    .subcard-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .subcard-header h4 { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; color: var(--blue); }
+    .subcard-remove { color: var(--gray); font-size: 13px; padding: 4px 10px; border-radius: 6px; }
+    .subcard-remove:hover { color: var(--red); background: #FEF2F2; }
+    .add-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1.5px dashed var(--line); border-radius: 10px; color: var(--blue); font-weight: 700; font-size: 13.5px; transition: border-color 0.2s, background 0.2s; }
+    .add-more-btn:hover { border-color: var(--blue); background: #F0F7FC; }
+
+    /* Conditional reveal */
+    .reveal { display: none; margin-top: 12px; padding: 14px; background: #FFFBEB; border-left: 3px solid var(--yellow); border-radius: 8px; }
+    .reveal.show { display: block; }
+    .reveal label { font-size: 13px; }
+
+    /* Acknowledgment checkboxes */
+    .ack-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .ack-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: #F8FAFC; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .ack-item:has(input:checked) { border-color: var(--green); background: #F0FAF1; }
+    .ack-item input { margin-top: 3px; flex-shrink: 0; width: 18px; height: 18px; cursor: pointer; accent-color: var(--green); }
+    .ack-item label { margin: 0; font-weight: 500; font-size: 13.5px; line-height: 1.55; cursor: pointer; flex: 1; }
+    .ack-item label strong { display: block; font-weight: 800; font-size: 14px; margin-bottom: 2px; color: var(--black); }
+
+    /* Step navigation */
+    .step-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 32px 32px; gap: 12px; border-top: 1px solid var(--line); margin-top: 16px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 50px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+    .btn-primary { background: var(--red); color: #fff; box-shadow: 0 6px 18px rgba(233,78,65,0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(233,78,65,0.45); color: #fff; text-decoration: none; }
+    .btn-secondary { background: #F3F4F6; color: var(--black); }
+    .btn-secondary:hover { background: #E5E7EB; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .save-note { font-size: 12.5px; color: var(--gray); display: inline-flex; align-items: center; gap: 6px; }
+
+    /* Success */
+    .success-state { padding: 56px 40px; text-align: center; display: none; }
+    .success-state.show { display: block; }
+    .success-icon { width: 84px; height: 84px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; color: #fff; margin: 0 auto 24px; box-shadow: 0 14px 30px rgba(123,192,126,0.4); }
+    .success-state h2 { font-family: 'Nunito', sans-serif; font-size: 32px; font-weight: 900; margin-bottom: 12px; }
+    .success-state p { color: var(--gray); margin-bottom: 8px; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .success-actions { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* Side info card */
+    .side-tip { display: flex; gap: 12px; padding: 16px 18px; background: #EFF6FF; border-radius: 12px; margin-bottom: 24px; font-size: 13.5px; color: #1E3A5F; line-height: 1.55; }
+    .side-tip svg { flex-shrink: 0; color: var(--blue); margin-top: 2px; }
+
+    /* Footer */
+    .page-footer { text-align: center; padding: 32px 24px 56px; color: var(--gray); font-size: 13px; }
+    .page-footer a { color: var(--blue); }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .field-row.cols-2, .field-row.cols-3, .field-row.cols-4 { grid-template-columns: 1fr; }
+      .step { padding: 24px 22px 8px; }
+      .step h2 { font-size: 22px; }
+      .progress-wrap { padding: 16px 22px 0; }
+      .step-nav { padding: 18px 22px 24px; }
+      .form-card { margin: -32px 16px 40px; border-radius: 18px; }
+      .topbar-inner { padding: 12px 16px; }
+      .container { padding: 0 16px; }
+      .hero { padding: 48px 0 64px; }
+    }
+    @media (max-width: 480px) {
+      .step-nav { flex-direction: column-reverse; }
+      .step-nav .btn { width: 100%; justify-content: center; }
+      .save-note { display: none; }
+    }
+
+    /* Hidden Netlify form-detector */
+    form[netlify] { display: block; }
+    .hp-field { position: absolute; left: -9999px; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ PASSWORD GATE ════════════════════ -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="images/open-arms-logo.png" alt="Open Arms" />
+    <h1>Preview Access</h1>
+    <p>This site is currently password-protected for client review.</p>
+    <form id="gate-form" autocomplete="off">
+      <div class="gate-input-wrap">
+        <input id="gate-input" type="password" placeholder="Enter password" autofocus />
+        <button type="button" class="gate-toggle" id="gate-toggle" aria-label="Show password">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="gate-error" id="gate-error"></div>
+      <button type="submit" id="gate-submit">Continue</button>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════ TOPBAR ════════════════════ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-logo" href="index.html">
+      <img src="images/open-arms-logo.png" alt="Open Arms Child Development Center" />
+    </a>
+    <a class="topbar-back" href="index.html#employment">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to site
+    </a>
+  </div>
+</header>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-badge">Now Hiring</span>
+    <h1>Apply to <em>Open Arms.</em></h1>
+    <p>We're so glad you're here. Take a few minutes to tell us about yourself — we read every application, and we'll be in touch.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Takes about 10–15 minutes
+      </span>
+      <span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Your info is private
+      </span>
+      <span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Prefer paper? <a href="assets/oa-application.pdf" download style="color:var(--yellow);font-weight:700;">Download the PDF</a>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ FORM CARD ════════════════════ -->
+<div class="container">
+  <div class="form-card">
+
+    <!-- ───── PROGRESS BAR ───── -->
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-meta">
+        <span>Step <strong id="step-num">1</strong> of <strong id="step-total">7</strong></span>
+        <span id="step-name">About You</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:14.3%"></div></div>
+    </div>
+
+    <!-- ───── APPLICATION FORM (Netlify-handled) ───── -->
+    <form id="application-form" name="employment-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" autocomplete="on">
+      <input type="hidden" name="form-name" value="employment-application" />
+      <p class="hp-field"><label>Don't fill: <input name="bot-field" /></label></p>
+
+      <!-- ═══════════════ STEP 1: ABOUT YOU ═══════════════ -->
+      <div class="step active" data-step="1" data-name="About You">
+        <div class="step-icon" style="background:var(--blue)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h2>First — let's get to know you.</h2>
+        <p class="step-sub">The basics. Required fields are marked with a red asterisk.</p>
+
+        <div class="field-row cols-3">
+          <div class="field">
+            <label for="first_name">First Name <span class="req">*</span></label>
+            <input type="text" id="first_name" name="first_name" required placeholder="e.g., Sarah" />
+          </div>
+          <div class="field">
+            <label for="last_name">Last Name <span class="req">*</span></label>
+            <input type="text" id="last_name" name="last_name" required placeholder="e.g., Johnson" />
+          </div>
+          <div class="field">
+            <label for="middle_name">Middle <span class="hint">(optional)</span></label>
+            <input type="text" id="middle_name" name="middle_name" placeholder="M." />
+          </div>
+        </div>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label for="birth_date">Date of Birth <span class="req">*</span></label>
+            <input type="date" id="birth_date" name="birth_date" required />
+          </div>
+          <div class="field">
+            <label for="cell">Cell Phone <span class="req">*</span></label>
+            <input type="tel" id="cell" name="cell" required placeholder="(907) 555-0100" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="you@email.com" />
+        </div>
+
+        <div class="field">
+          <label for="mailing_address">Mailing Address <span class="req">*</span></label>
+          <input type="text" id="mailing_address" name="mailing_address" required placeholder="123 Main St, Fairbanks, AK 99709" />
+        </div>
+      </div>
+
+      <!-- ═══════════════ STEP 2: ROLE & SCHEDULE ═══════════════ -->
+      <div class="step" data-step="2" data-name="The Role">
+        <div class="step-icon" style="background:var(--green)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </div>
+        <h2>Tell us about the role.</h2>
+        <p class="step-sub">Which position you're interested in and when you can start.</p>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label for="position">Position(s) Applied For <span class="req">*</span></label>
+            <select id="position" name="position" required>
+              <option value="">Select a position…</option>
+              <option>FT Classroom Teacher Assistant (Opener)</option>
+              <option>FT Classroom Teacher Assistant (Closer)</option>
+              <option>PT Front Desk (Opener)</option>
+              <option>PT Classroom Support (Openers)</option>
+              <option>PT Classroom Support (Breakers)</option>
+              <option>PT Classroom Support (Closers)</option>
+              <option>PT Bus Driver</option>
+              <option>Other / Multiple</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="start_date">Date Available to Start <span class="req">*</span></label>
+            <input type="date" id="start_date" name="start_date" required />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="hours_available">Days &amp; Hours Available to Work <span class="req">*</span></label>
+          <input type="text" id="hours_available" name="hours_available" required placeholder="e.g., Monday–Friday, 7 AM–4 PM" />
+        </div>
+
+        <div class="field-row cols-2" style="margin-top:8px;">
+          <div class="field">
+            <label>Can you work overtime or hours outside the assigned schedule? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="overtime" value="Yes" required /><span>Yes</span></label>
+              <label><input type="radio" name="overtime" value="No" /><span>No</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Are you 18 or older? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="age_18" value="Yes" required /><span>Yes</span></label>
+              <label><input type="radio" name="age_18" value="No" /><span>No</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label>Are you 21 or older? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="age_21" value="Yes" required /><span>Yes</span></label>
+              <label><input type="radio" name="age_21" value="No" /><span>No</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label>Have you worked at Open Arms before? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="prior_oa" value="Yes" required data-reveal="prior-oa-when" /><span>Yes</span></label>
+              <label><input type="radio" name="prior_oa" value="No" data-reveal-hide="prior-oa-when" /><span>No</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="reveal" id="prior-oa-when">
+          <label for="prior_oa_when">If yes, when?</label>
+          <input type="text" id="prior_oa_when" name="prior_oa_when" placeholder="e.g., 2022–2023" />
+        </div>
+      </div>
+
+      <!-- ═══════════════ STEP 3: BACKGROUND & ELIGIBILITY ═══════════════ -->
+      <div class="step" data-step="3" data-name="Background &amp; Eligibility">
+        <div class="step-icon" style="background:var(--red)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2>A few legal questions.</h2>
+        <p class="step-sub">Required by Alaska state law for licensed childcare facilities. Be honest — we're more interested in your full story than any one answer.</p>
+
+        <div class="field">
+          <label>Have you been convicted of a criminal offense (felony or misdemeanor)? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="criminal_conviction" value="Yes" required /><span>Yes</span></label>
+            <label><input type="radio" name="criminal_conviction" value="No" /><span>No</span></label>
+          </div>
+          <p style="font-size:12.5px;color:var(--gray);margin-top:6px;">If yes, state law may prohibit you from working in a licensed childcare facility.</p>
+        </div>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label>Have you obtained a current State of Alaska Criminal History Report? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="criminal_report" value="Yes" required data-reveal="criminal-report-date" /><span>Yes</span></label>
+              <label><input type="radio" name="criminal_report" value="No" data-reveal-hide="criminal-report-date" /><span>No</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="other_languages">Other languages you speak <span class="hint">(optional)</span></label>
+            <input type="text" id="other_languages" name="other_languages" placeholder="e.g., Spanish, Tagalog" />
+          </div>
+        </div>
+        <div class="reveal" id="criminal-report-date">
+          <label for="criminal_report_date">Date of report</label>
+          <input type="date" id="criminal_report_date" name="criminal_report_date" />
+        </div>
+
+        <div class="field">
+          <label>Do you have a valid State of Alaska Driver's License? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="drivers_license" value="Yes" required data-reveal="license-details" /><span>Yes</span></label>
+            <label><input type="radio" name="drivers_license" value="No" data-reveal-hide="license-details" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="license-details">
+          <div class="field-row cols-2" style="margin-bottom:0;">
+            <div class="field" style="margin-bottom:0;">
+              <label for="license_expiration">Date of Expiration</label>
+              <input type="date" id="license_expiration" name="license_expiration" />
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label for="license_restrictions">Restrictions</label>
+              <input type="text" id="license_restrictions" name="license_restrictions" placeholder="e.g., None, Corrective lenses" />
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--gray);margin-top:8px;">A DMV report will periodically be obtained during employment if driving is required.</p>
+        </div>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label>Are you eligible to work in the United States? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="work_eligible" value="Yes" required /><span>Yes</span></label>
+              <label><input type="radio" name="work_eligible" value="No" /><span>No</span></label>
+            </div>
+            <p style="font-size:12px;color:var(--gray);margin-top:6px;">Proof of citizenship or immigration status will be required upon employment.</p>
+          </div>
+          <div class="field">
+            <label>Willing to participate in continuing education &amp; training? <span class="req">*</span></label>
+            <div class="yn-toggle">
+              <label><input type="radio" name="continuing_ed" value="Yes" required /><span>Yes</span></label>
+              <label><input type="radio" name="continuing_ed" value="No" /><span>No</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="professional_licenses">Current professional licenses, certificates, or memberships <span class="hint">(optional)</span></label>
+          <textarea id="professional_licenses" name="professional_licenses" placeholder="e.g., CDA Credential (2024), CPR/First Aid certified, AAEYC member"></textarea>
+        </div>
+      </div>
+
+      <!-- ═══════════════ STEP 4: EDUCATION & EXPERIENCE ═══════════════ -->
+      <div class="step" data-step="4" data-name="Education &amp; Experience">
+        <div class="step-icon" style="background:#B8960A">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <h2>Your education &amp; experience.</h2>
+        <p class="step-sub">Walk us through where you've studied and worked. Resume-style is fine — we read it all.</p>
+
+        <h3 style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin-bottom:14px;color:var(--blue);">Education</h3>
+
+        <div class="subcard">
+          <div class="subcard-header"><h4>High School</h4></div>
+          <div class="field-row cols-4">
+            <div class="field" style="margin:0;"><label>Name &amp; Location</label><input type="text" name="hs_name" placeholder="School name, city" /></div>
+            <div class="field" style="margin:0;"><label>Years</label><input type="text" name="hs_years" placeholder="e.g., 2018–2022" /></div>
+            <div class="field" style="margin:0;"><label>Diploma Year</label><input type="text" name="hs_diploma" placeholder="2022" /></div>
+            <div class="field" style="margin:0;"><label>Major / Focus</label><input type="text" name="hs_major" placeholder="General studies" /></div>
+          </div>
+        </div>
+
+        <div class="subcard">
+          <div class="subcard-header"><h4>College or University</h4></div>
+          <div class="field-row cols-4">
+            <div class="field" style="margin:0;"><label>Name &amp; Location</label><input type="text" name="college_name" /></div>
+            <div class="field" style="margin:0;"><label>Years</label><input type="text" name="college_years" /></div>
+            <div class="field" style="margin:0;"><label>Degree Year</label><input type="text" name="college_degree" /></div>
+            <div class="field" style="margin:0;"><label>Major / Credits</label><input type="text" name="college_major" /></div>
+          </div>
+        </div>
+
+        <div class="subcard">
+          <div class="subcard-header"><h4>Vocational / Technical School</h4></div>
+          <div class="field-row cols-4">
+            <div class="field" style="margin:0;"><label>Name &amp; Location</label><input type="text" name="voc_name" /></div>
+            <div class="field" style="margin:0;"><label>Years</label><input type="text" name="voc_years" /></div>
+            <div class="field" style="margin:0;"><label>Year Completed</label><input type="text" name="voc_year" /></div>
+            <div class="field" style="margin:0;"><label>Field of Study</label><input type="text" name="voc_field" /></div>
+          </div>
+        </div>
+
+        <div class="subcard">
+          <div class="subcard-header"><h4>Other Relevant Training</h4></div>
+          <div class="field-row cols-4">
+            <div class="field" style="margin:0;"><label>Organization</label><input type="text" name="other_training_name" /></div>
+            <div class="field" style="margin:0;"><label>Years</label><input type="text" name="other_training_years" /></div>
+            <div class="field" style="margin:0;"><label>Year</label><input type="text" name="other_training_year" /></div>
+            <div class="field" style="margin:0;"><label>Subject</label><input type="text" name="other_training_subject" /></div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin:28px 0 14px;color:var(--blue);">Recent Employment <span style="font-weight:400;color:var(--gray);font-size:13px;">— last 10 years, most recent first</span></h3>
+
+        <div id="jobs-container">
+          <div class="subcard" data-job-index="0">
+            <div class="subcard-header">
+              <h4>Most Recent Position</h4>
+            </div>
+            <div class="field-row cols-2">
+              <div class="field" style="margin:0;"><label>Dates</label><input type="text" name="job_0_dates" placeholder="2023–present" /></div>
+              <div class="field" style="margin:0;"><label>Position / Title</label><input type="text" name="job_0_title" /></div>
+            </div>
+            <div class="field-row cols-2" style="margin-top:14px;">
+              <div class="field" style="margin:0;"><label>PT / FT</label>
+                <select name="job_0_type">
+                  <option value="">—</option><option>Full-Time</option><option>Part-Time</option><option>Temp</option>
+                </select>
+              </div>
+              <div class="field" style="margin:0;"><label>Supervisor's Name</label><input type="text" name="job_0_supervisor" /></div>
+            </div>
+            <div class="field" style="margin-top:14px;margin-bottom:0;"><label>Employer (Name, Address, Phone)</label><textarea name="job_0_employer" rows="2" placeholder="Employer Name • Address • Phone"></textarea></div>
+            <div class="field" style="margin-top:14px;margin-bottom:0;"><label>Job Duties</label><textarea name="job_0_duties" rows="2" placeholder="Brief description of your responsibilities"></textarea></div>
+          </div>
+        </div>
+        <button type="button" class="add-more-btn" id="add-job-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Add another position
+        </button>
+
+        <div class="field" style="margin-top:24px;">
+          <label for="childcare_relevant_duties">Duties from your above positions that are relevant to childcare or adult care</label>
+          <textarea id="childcare_relevant_duties" name="childcare_relevant_duties" placeholder="Describe any experience caring for children, teaching, mentoring, or working with families…"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="other_experience">Other Relevant Work or Volunteer Experience</label>
+          <textarea id="other_experience" name="other_experience" placeholder="Volunteer roles, ministry, community work — anything that shaped your readiness for this role"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="special_skills">Special Skills &amp; Qualifications</label>
+          <textarea id="special_skills" name="special_skills" placeholder="Any special skills, languages, certifications, or experiences that qualify you for this position — and how you acquired them"></textarea>
+        </div>
+      </div>
+
+      <!-- ═══════════════ STEP 5: REFERENCES & PERSONAL HISTORY ═══════════════ -->
+      <div class="step" data-step="5" data-name="References &amp; History">
+        <div class="step-icon" style="background:var(--blue-d)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h2>References &amp; personal history.</h2>
+        <p class="step-sub">Three references who can speak to your character — not relatives, not previous employers.</p>
+
+        <div class="subcard">
+          <div class="subcard-header"><h4>Reference 1</h4></div>
+          <div class="field-row cols-3">
+            <div class="field" style="margin:0;"><label>Name &amp; Title</label><input type="text" name="ref_1_name" /></div>
+            <div class="field" style="margin:0;"><label>Address</label><input type="text" name="ref_1_address" /></div>
+            <div class="field" style="margin:0;"><label>Phone</label><input type="tel" name="ref_1_phone" /></div>
+          </div>
+        </div>
+        <div class="subcard">
+          <div class="subcard-header"><h4>Reference 2</h4></div>
+          <div class="field-row cols-3">
+            <div class="field" style="margin:0;"><label>Name &amp; Title</label><input type="text" name="ref_2_name" /></div>
+            <div class="field" style="margin:0;"><label>Address</label><input type="text" name="ref_2_address" /></div>
+            <div class="field" style="margin:0;"><label>Phone</label><input type="tel" name="ref_2_phone" /></div>
+          </div>
+        </div>
+        <div class="subcard">
+          <div class="subcard-header"><h4>Reference 3</h4></div>
+          <div class="field-row cols-3">
+            <div class="field" style="margin:0;"><label>Name &amp; Title</label><input type="text" name="ref_3_name" /></div>
+            <div class="field" style="margin:0;"><label>Address</label><input type="text" name="ref_3_address" /></div>
+            <div class="field" style="margin:0;"><label>Phone</label><input type="tel" name="ref_3_phone" /></div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin:24px 0 8px;color:var(--blue);">Personal History</h3>
+        <div class="side-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <span>These questions are required by Alaska childcare licensing. Your honesty matters more than any individual answer.</span>
+        </div>
+
+        <div class="field">
+          <label>Have you been previously licensed to care for children or adults? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="prev_licensed" value="Yes" required data-reveal="prev-licensed-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="prev_licensed" value="No" data-reveal-hide="prev-licensed-detail" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="prev-licensed-detail">
+          <label for="prev_licensed_detail">If yes, please indicate city, state, type of care, and dates of licensure.</label>
+          <textarea id="prev_licensed_detail" name="prev_licensed_detail" rows="2"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Have you ever had a license to care for children or adults revoked or denied? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="license_revoked" value="Yes" required data-reveal="license-revoked-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="license_revoked" value="No" data-reveal-hide="license-revoked-detail" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="license-revoked-detail">
+          <label for="license_revoked_detail">Please explain.</label>
+          <textarea id="license_revoked_detail" name="license_revoked_detail" rows="2"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Have you ever been investigated for child or elder abuse or neglect? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="abuse_investigation" value="Yes" required data-reveal="abuse-investigation-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="abuse_investigation" value="No" data-reveal-hide="abuse-investigation-detail" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="abuse-investigation-detail">
+          <label for="abuse_investigation_detail">Please explain.</label>
+          <textarea id="abuse_investigation_detail" name="abuse_investigation_detail" rows="2"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Do you have any physical, mental, or behavioral health conditions that might pose a risk to the health or safety of children or adults? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="health_concern" value="Yes" required data-reveal="health-concern-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="health_concern" value="No" data-reveal-hide="health-concern-detail" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="health-concern-detail">
+          <label for="health_concern_detail">Please explain.</label>
+          <textarea id="health_concern_detail" name="health_concern_detail" rows="2"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Have you been convicted or charged with any crime in the last 10 years? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="crime_10yr" value="Yes" required data-reveal="crime-10yr-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="crime_10yr" value="No" data-reveal-hide="crime-10yr-detail" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="crime-10yr-detail">
+          <label for="crime_10yr_detail">Please explain.</label>
+          <textarea id="crime_10yr_detail" name="crime_10yr_detail" rows="2"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Have you ever been convicted or charged with a felony, domestic violence offense, or sex crime? <span class="req">*</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="serious_crime" value="Yes" required data-reveal="serious-crime-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="serious_crime" value="No" data-reveal-hide="serious-crime-detail" /><span>No</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="serious-crime-detail">
+          <label for="serious_crime_detail">Please explain.</label>
+          <textarea id="serious_crime_detail" name="serious_crime_detail" rows="2"></textarea>
+        </div>
+      </div>
+
+      <!-- ═══════════════ STEP 6: YOUR STORY ═══════════════ -->
+      <div class="step" data-step="6" data-name="Your Story">
+        <div class="step-icon" style="background:var(--green)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h2>Tell us your story.</h2>
+        <p class="step-sub">This is the heart of the application. Take your time — write as much or as little as feels right.</p>
+
+        <div class="field">
+          <label for="story_experience">Describe your experience for the position you're applying for.</label>
+          <textarea id="story_experience" name="story_experience" rows="4" placeholder="What's prepared you for this role?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="story_environment">What do you envision as a safe, healthy, Christian learning environment for young children?</label>
+          <textarea id="story_environment" name="story_environment" rows="4" placeholder="What does that look like, in practice?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="story_faith">How would you describe your relationship with Jesus Christ?</label>
+          <textarea id="story_faith" name="story_faith" rows="4" placeholder="There's no right or wrong answer — we'd love to hear your heart."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="story_asset">Why would you be an asset to the families and staff of Open Arms?</label>
+          <textarea id="story_asset" name="story_asset" rows="4" placeholder="What would you bring to our team?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="story_records">Describe your experience maintaining timely and accurate records.</label>
+          <textarea id="story_records" name="story_records" rows="3" placeholder="In childcare, daily records matter — how have you handled this in past roles?"></textarea>
+        </div>
+      </div>
+
+      <!-- ═══════════════ STEP 7: SIGN & SUBMIT ═══════════════ -->
+      <div class="step" data-step="7" data-name="Sign &amp; Submit">
+        <div class="step-icon" style="background:var(--red)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Almost done — sign &amp; submit.</h2>
+        <p class="step-sub">A few quick acknowledgments and your signature, then you're free.</p>
+
+        <h3 style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin-bottom:12px;color:var(--blue);">Optional: Your Church Community</h3>
+        <div class="field">
+          <label>Are you a member of a local church congregation? <span class="hint">(optional)</span></label>
+          <div class="yn-toggle">
+            <label><input type="radio" name="church_member" value="Yes" data-reveal="church-detail" /><span>Yes</span></label>
+            <label><input type="radio" name="church_member" value="No" data-reveal-hide="church-detail" /><span>No</span></label>
+            <label><input type="radio" name="church_member" value="Prefer not to say" data-reveal-hide="church-detail" /><span>Skip</span></label>
+          </div>
+        </div>
+        <div class="reveal" id="church-detail">
+          <div class="field-row cols-2" style="margin-bottom:0;">
+            <div class="field" style="margin:0;"><label for="congregation">Name of congregation</label><input type="text" id="congregation" name="congregation" /></div>
+            <div class="field" style="margin:0;">
+              <label>May we contact your pastor for a reference?</label>
+              <div class="yn-toggle">
+                <label><input type="radio" name="contact_pastor" value="Yes" /><span>Yes</span></label>
+                <label><input type="radio" name="contact_pastor" value="No" /><span>No</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="field-row cols-2" style="margin-top:14px;margin-bottom:0;">
+            <div class="field" style="margin:0;"><label for="pastor_name">Pastor's Name</label><input type="text" id="pastor_name" name="pastor_name" /></div>
+            <div class="field" style="margin:0;"><label for="pastor_phone">Pastor's Phone</label><input type="tel" id="pastor_phone" name="pastor_phone" /></div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin:28px 0 12px;color:var(--blue);">Acknowledgments <span class="req">*</span></h3>
+        <p style="font-size:13px;color:var(--gray);margin-bottom:14px;">Please read carefully and check each box.</p>
+
+        <div class="ack-list">
+          <label class="ack-item">
+            <input type="checkbox" name="ack_investigate" value="agreed" required />
+            <span>
+              <strong>Reference investigation</strong>
+              I give the director of Open Arms Child Development Center the right to investigate all references and to verify any educational references. I release the employer and all corporations, institutions, and organizations furnishing such information from liability.
+            </span>
+          </label>
+          <label class="ack-item">
+            <input type="checkbox" name="ack_misrepresentation" value="agreed" required />
+            <span>
+              <strong>Truthful information</strong>
+              I understand that any misrepresentation in this application will be sufficient cause for cancellation of this application and/or separation from employment.
+            </span>
+          </label>
+          <label class="ack-item">
+            <input type="checkbox" name="ack_rules" value="agreed" required />
+            <span>
+              <strong>Open Arms rules</strong>
+              In the event of my employment, I agree to abide by all present and subsequently issued rules of Open Arms.
+            </span>
+          </label>
+          <label class="ack-item">
+            <input type="checkbox" name="ack_i9" value="agreed" required />
+            <span>
+              <strong>I-9 verification</strong>
+              If employed, I will be required to complete an Employment Verification Form (I-9) and within three days show satisfactory evidence of identity and eligibility for employment.
+            </span>
+          </label>
+          <label class="ack-item">
+            <input type="checkbox" name="ack_at_will" value="agreed" required />
+            <span>
+              <strong>At-will employment</strong>
+              I acknowledge Open Arms is an at-will employer. There is no specific length of employment, and either party can terminate the relationship at any time, with or without cause or notice, so long as the termination does not violate law or public policy.
+            </span>
+          </label>
+          <label class="ack-item">
+            <input type="checkbox" name="ack_certify" value="agreed" required />
+            <span>
+              <strong>Certification</strong>
+              I certify that the contents of this application are true, accurate, and complete. I authorize Open Arms to contact others to verify the information contained here.
+            </span>
+          </label>
+        </div>
+
+        <div class="field-row cols-2">
+          <div class="field">
+            <label for="signature">Your Full Legal Name <span class="req">*</span> <span class="hint">(serves as your signature)</span></label>
+            <input type="text" id="signature" name="signature" required placeholder="Type your full name" />
+          </div>
+          <div class="field">
+            <label for="signature_date">Date <span class="req">*</span></label>
+            <input type="date" id="signature_date" name="signature_date" required />
+          </div>
+        </div>
+
+        <div class="side-tip" style="background:#F0FAF1;color:#1F4D24;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>When you click submit, your application is sent directly to the Open Arms team. We'll review it and follow up as soon as we can. Open Arms is an equal opportunity provider.</span>
+        </div>
+      </div>
+
+      <!-- ───── NAVIGATION ───── -->
+      <div class="step-nav">
+        <button type="button" class="btn btn-secondary" id="prev-btn" style="visibility:hidden;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back
+        </button>
+        <span class="save-note" id="save-indicator">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Auto-saved in this browser
+        </span>
+        <button type="button" class="btn btn-primary" id="next-btn">
+          Continue
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button type="submit" class="btn btn-primary" id="submit-btn" style="display:none;">
+          Submit Application
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+    </form>
+
+    <!-- ───── SUCCESS STATE ───── -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2>Thank you for applying!</h2>
+      <p>Your application has been submitted to the Open Arms team.</p>
+      <p>We read every application personally. You'll hear from <strong>Lori Andrews</strong> or <strong>Tina</strong> within a few business days — by phone or email at the contact info you provided.</p>
+      <div class="success-actions">
+        <a href="index.html" class="btn btn-primary">Back to Open Arms</a>
+        <a href="mailto:landrews@openarmsfairbanks.org" class="btn btn-secondary">Email us a question</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  Open Arms Child Development Center · 2980 Davis Road, Fairbanks, AK 99709 · <a href="tel:+19074559466">(907) 455-9466</a>
+</div>
+
+<script>
+// ── PASSWORD GATE ──────────────────────────────────────────
+(function() {
+  const gate = document.getElementById('gate');
+  const input = document.getElementById('gate-input');
+  const errEl = document.getElementById('gate-error');
+  const form = document.getElementById('gate-form');
+  const toggleBtn = document.getElementById('gate-toggle');
+
+  if (sessionStorage.getItem('oa-access') === 'granted') {
+    gate.style.display = 'none';
+    return;
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (input.value.trim().toLowerCase() === 'openarms') {
+      sessionStorage.setItem('oa-access', 'granted');
+      gate.style.display = 'none';
+    } else {
+      errEl.textContent = 'Incorrect password. Please try again.';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  input.focus();
+})();
+
+// ── MULTI-STEP FORM ────────────────────────────────────────
+(function() {
+  const form = document.getElementById('application-form');
+  const steps = Array.from(form.querySelectorAll('.step'));
+  const totalSteps = steps.length;
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const submitBtn = document.getElementById('submit-btn');
+  const progressFill = document.getElementById('progress-fill');
+  const stepNum = document.getElementById('step-num');
+  const stepName = document.getElementById('step-name');
+  const stepTotalEl = document.getElementById('step-total');
+  const successState = document.getElementById('success-state');
+  const formCard = document.querySelector('.form-card');
+  const progressWrap = document.getElementById('progress-wrap');
+
+  stepTotalEl.textContent = totalSteps;
+  let current = 0;
+
+  // Restore from sessionStorage (only the data, not the step)
+  const STORAGE_KEY = 'oa-application-draft';
+  function saveDraft() {
+    const data = {};
+    new FormData(form).forEach((v, k) => { data[k] = v; });
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+  }
+  function loadDraft() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      Object.keys(data).forEach(k => {
+        const els = form.elements[k];
+        if (!els) return;
+        if (els.length && els[0].type === 'radio') {
+          Array.from(els).forEach(el => { if (el.value === data[k]) el.checked = true; });
+        } else if (els.type === 'checkbox') {
+          els.checked = data[k] === 'agreed';
+        } else if (els.length === undefined) {
+          els.value = data[k];
+        }
+      });
+      // Trigger reveals based on radio state
+      form.querySelectorAll('[data-reveal]').forEach(el => { if (el.checked) toggleReveal(el); });
+    } catch(e) {}
+  }
+
+  form.addEventListener('input', saveDraft);
+  form.addEventListener('change', saveDraft);
+
+  function show(idx) {
+    steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+    current = idx;
+    const pct = ((idx + 1) / totalSteps) * 100;
+    progressFill.style.width = pct + '%';
+    stepNum.textContent = idx + 1;
+    stepName.textContent = steps[idx].dataset.name.replace(/&amp;/g, '&');
+    prevBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+    if (idx === totalSteps - 1) {
+      nextBtn.style.display = 'none';
+      submitBtn.style.display = 'inline-flex';
+    } else {
+      nextBtn.style.display = 'inline-flex';
+      submitBtn.style.display = 'none';
+    }
+    formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function validateStep(idx) {
+    const step = steps[idx];
+    const fields = step.querySelectorAll('[required]');
+    let firstInvalid = null;
+    let valid = true;
+    fields.forEach(f => {
+      // For radio groups, check if any in the group is checked
+      if (f.type === 'radio') {
+        const groupChecked = form.querySelectorAll(`input[name="${f.name}"]:checked`).length > 0;
+        if (!groupChecked) {
+          valid = false;
+          if (!firstInvalid) firstInvalid = f;
+        }
+      } else if (!f.checkValidity()) {
+        valid = false;
+        if (!firstInvalid) firstInvalid = f;
+      }
+    });
+    if (!valid && firstInvalid) {
+      firstInvalid.reportValidity();
+      firstInvalid.focus();
+    }
+    return valid;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (validateStep(current)) {
+      if (current < totalSteps - 1) show(current + 1);
+    }
+  });
+  prevBtn.addEventListener('click', () => {
+    if (current > 0) show(current - 1);
+  });
+
+  // ── Conditional reveal logic ───────────────────────
+  function toggleReveal(input) {
+    const revealId = input.dataset.reveal;
+    if (revealId) {
+      const target = document.getElementById(revealId);
+      if (target) target.classList.add('show');
+    }
+    const hideId = input.dataset.revealHide;
+    if (hideId) {
+      const target = document.getElementById(hideId);
+      if (target) target.classList.remove('show');
+    }
+  }
+  form.querySelectorAll('input[data-reveal], input[data-reveal-hide]').forEach(input => {
+    input.addEventListener('change', () => toggleReveal(input));
+  });
+
+  // ── Add another job position ────────────────────────
+  const jobsContainer = document.getElementById('jobs-container');
+  const addJobBtn = document.getElementById('add-job-btn');
+  let jobCount = 1;
+  addJobBtn.addEventListener('click', () => {
+    const card = document.createElement('div');
+    card.className = 'subcard';
+    card.dataset.jobIndex = jobCount;
+    card.innerHTML = `
+      <div class="subcard-header">
+        <h4>Position ${jobCount + 1}</h4>
+        <button type="button" class="subcard-remove" data-remove>Remove</button>
+      </div>
+      <div class="field-row cols-2">
+        <div class="field" style="margin:0;"><label>Dates</label><input type="text" name="job_${jobCount}_dates" /></div>
+        <div class="field" style="margin:0;"><label>Position / Title</label><input type="text" name="job_${jobCount}_title" /></div>
+      </div>
+      <div class="field-row cols-2" style="margin-top:14px;">
+        <div class="field" style="margin:0;"><label>PT / FT</label>
+          <select name="job_${jobCount}_type"><option value="">—</option><option>Full-Time</option><option>Part-Time</option><option>Temp</option></select>
+        </div>
+        <div class="field" style="margin:0;"><label>Supervisor's Name</label><input type="text" name="job_${jobCount}_supervisor" /></div>
+      </div>
+      <div class="field" style="margin-top:14px;margin-bottom:0;"><label>Employer (Name, Address, Phone)</label><textarea name="job_${jobCount}_employer" rows="2"></textarea></div>
+      <div class="field" style="margin-top:14px;margin-bottom:0;"><label>Job Duties</label><textarea name="job_${jobCount}_duties" rows="2"></textarea></div>`;
+    jobsContainer.appendChild(card);
+    card.querySelector('[data-remove]').addEventListener('click', () => card.remove());
+    jobCount++;
+  });
+
+  // ── Form submit (Netlify) ───────────────────────────
+  form.addEventListener('submit', async (e) => {
+    if (!validateStep(current)) {
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Submitting…';
+
+    const formData = new FormData(form);
+    const body = new URLSearchParams();
+    formData.forEach((v, k) => body.append(k, v));
+
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+      if (res.ok) {
+        sessionStorage.removeItem(STORAGE_KEY);
+        form.style.display = 'none';
+        progressWrap.style.display = 'none';
+        successState.classList.add('show');
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        throw new Error('submission failed');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Submit Application <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+      alert('There was a problem submitting your application. Please try again, or email a copy to landrews@openarmsfairbanks.org.');
+    }
+  });
+
+  // Default today's date for signature_date
+  const today = new Date().toISOString().split('T')[0];
+  const sigDate = document.getElementById('signature_date');
+  if (sigDate && !sigDate.value) sigDate.value = today;
+
+  loadDraft();
+  show(0);
+})();
+</script>
+</body>
+</html>

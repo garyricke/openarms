@@ -18,7 +18,7 @@
 
 ### NAVIGATION BAR
 
-Links: Programs · Our Philosophy · Our Staff · FAQ · Contact
+Links: Programs · Our Philosophy · Our Staff · Employment · FAQ · Contact
 
 CTA Button: **Secure Your Spot**
 
@@ -44,11 +44,8 @@ Badge text: ★ NAEYC Accredited · Est. 2000 · Fairbanks, Alaska
 |---|---|
 | 25 | Years Serving Families |
 | 236 | Licensed Capacity |
-| 8:1 | Student-Teacher Ratio |
+| Varies | Student-Teacher Ratio |
 | NAEYC | Nationally Accredited |
-
-✅ VERIFY: Is 8:1 the accurate overall ratio, or does it vary by classroom?
-✅ VERIFY: Is the licensed capacity currently 236?
 
 ---
 
@@ -91,7 +88,7 @@ Art, music, and imaginative play are not extras — they are essential. We celeb
 
 **Program 1: Infant Care**
 Ages: 6 Weeks to 1 Year
-Ratio: 4:1 · Schedule: Full-day, Mon–Fri
+Ratio: 5:1 · Schedule: Full-day, Mon–Fri
 
 Description: Our infant room is a warm, nurturing haven designed around bonding, sensory exploration, and developmental milestones. Caregivers build secure, consistent relationships with every baby.
 
@@ -146,8 +143,8 @@ Highlights:
 ---
 
 **Program 5: Before & After School**
-Ages: 5 to 12 Years
-Ratio: 10:1 · Schedule: Before & after school hours
+Ages: 6 to 12 Years
+Ratio: 14:1 · Schedule: Before & after school hours
 
 Description: Our Before & After School program provides a safe, structured bridge between school and home. Children receive homework support, nutritious meals, and enrichment activities.
 
@@ -161,7 +158,7 @@ Highlights:
 
 **Program 6: Summer Program**
 Ages: School-Age through 6th Grade
-Ratio: 10:1 · Schedule: Full-day during school breaks
+Ratio: 14:1 · Schedule: Full-day during school breaks
 
 Description: A full-day summer adventure for school-age children! Packed with field trips, hands-on science, art, outdoor play, and community exploration that makes every Alaska summer unforgettable.
 
@@ -183,65 +180,34 @@ Highlights:
 
 ---
 
-⚠️ ALL STAFF BIOS ARE PLACEHOLDER — client should review and replace with real/approved bios.
-✅ VERIFY: Staff names and roles are based on the current/former website. Please confirm all are current and correct.
+**Note:** Per client direction, individual staff bios are not displayed at this time and will be added in a future update.
 
 | Name | Role | Department |
 |---|---|---|
-| Tina | Interim Director | Administration |
-| Jovani | Kitchen Manager | Administration |
-| Sherry | Lead Teacher | Infants |
-| Brandon | Assistant | Infants |
-| Wobblers Teacher | Lead Teacher | Wobblers |
-| Carol | Teacher | Toddlers |
-| Jacob | Assistant | Toddlers |
-| Princess | Assistant | Toddlers |
-| Ms. Chandeth | Lead Teacher | Toddler 2 |
-| Miss Kiann | Teacher | Preschool 3 & 4 |
-| *(Name needed)* | Teacher | Preschool 3 & 4 |
-| Wesley | Floater | All Classrooms |
-| Miss Sunshine | Lead Teacher | School Age |
+| Lori | Director | Administration |
+| Tina | Assistant Director | Administration |
+| Dana | Administrative Assistant | Administration |
+| Linda | Food Program Liaison | Administration |
+| Jacki | Benefit Coordinator | Administration |
+| Charles | Kitchen Manager | Administration |
+| Sherry | Teacher | Infants |
+| Brandon | Assistant Teacher & Driver | Infants |
+| Ella | Teacher | Wobblers |
+| Macey | Teacher | Wobblers |
+| Carol | Teacher | Toddlers 1 |
+| Edelyn | Assistant Teacher | Toddlers 1 |
+| Chandeth | Teacher | Toddlers 2 |
+| Lauren | Assistant Teacher | Toddlers 2 |
+| Beth | Teacher | Preschool 3 |
+| Shonti | Assistant Teacher | Preschool 3 |
+| Margarita | Teacher | Preschool 4 |
+| Erika | Assistant Teacher | Preschool 4 |
+| Mrudula | Teacher | School Age |
+| Sunshine | Teacher & Driver | School Age |
+| Wesley | Assistant Teacher | All Classrooms |
+| Paetynn | Assistant Teacher | All Classrooms |
 
-**Staff Bios (placeholder — all 13 need client review):**
-
-**Tina – Interim Director**
-Tina brings years of experience in early childhood education leadership to Open Arms. As Interim Director, she is dedicated to ensuring every family and staff member feels supported, valued, and heard. Her calm presence and deep commitment to the center's mission make her an anchor for the whole community.
-
-**Jovani – Kitchen Manager**
-Jovani keeps our community nourished and cared for, one meal at a time. As Kitchen Manager, he ensures every child receives nutritious, balanced meals through our USDA Food Program each day. His reliability and warmth are felt by staff and families from the first morning bell.
-
-**Sherry – Lead Teacher, Infants**
-Sherry has a remarkable gift for nurturing the youngest members of our community. As Lead Teacher in the Infant room, she creates a calm, bonding-centered environment where babies and their families feel completely at ease. Parents consistently remark on her patience, attentiveness, and genuine love for every child in her care.
-
-**Brandon – Assistant, Infants**
-Brandon's gentle energy is a perfect match for our Infant room. He works alongside Sherry to ensure every baby is safe, stimulated, and loved throughout the day. Families frequently comment on how quickly their little ones settle in and how comfortable they are in his care.
-
-**Wobblers Teacher – Lead Teacher, Wobblers**
-Our Wobblers Lead Teacher celebrates every first step — literally. She brings enthusiasm, creativity, and a whole lot of patience to the Wobbler room, supporting children through one of the most exciting developmental stages with songs, movement, and endless encouragement.
-
-**Carol – Teacher, Toddlers**
-Carol is a beloved cornerstone of our Toddler program. Her classroom is a place of discovery, laughter, and genuine warmth. She has a remarkable ability to meet each child exactly where they are and help them blossom at their own pace, building confidence one small victory at a time.
-
-**Jacob – Assistant, Toddlers**
-Jacob brings a calm, playful presence to the Toddler room that children and families adore. He is endlessly patient and creative, always finding new ways to engage little learners and turn an ordinary Tuesday into a memorable adventure.
-
-**Princess – Assistant, Toddlers**
-Princess has a natural ability to connect with toddlers and create a sense of safety and fun that is truly special. She is a vital support in the classroom and brings a joyful, steady energy that both children and co-teachers lean on every day.
-
-**Ms. Chandeth – Lead Teacher, Toddler 2**
-Ms. Chandeth leads her Toddler classroom with warmth, structure, and clear intentionality. Her developmentally-appropriate curriculum keeps children engaged while building the foundational social and language skills they need to thrive in preschool and beyond.
-
-**Miss Kiann – Teacher, Preschool 3 & 4**
-Miss Kiann's preschool classroom is alive with curiosity and creativity. She weaves academic readiness into every activity — from storytelling circles to hands-on science experiments — while ensuring each child feels genuinely seen, celebrated, and ready for what comes next.
-
-**Preschool Teacher – Teacher, Preschool 3 & 4**
-⚠️ NAME NEEDED. A dedicated member of our Preschool 3 & 4 team, she brings enthusiasm and care to every lesson. Her classroom is a place where children build confidence, form lasting friendships, and develop a genuine love of learning that will carry them through kindergarten and beyond.
-
-**Wesley – Floater, All Classrooms**
-Wesley is the glue that holds our classrooms together. As our Floater, he brings flexibility, positivity, and skill to whatever room needs him most. His familiar face reassures children across all age groups, and his steady presence keeps the daily rhythm flowing smoothly for every team.
-
-**Miss Sunshine – Lead Teacher, School Age**
-Miss Sunshine — the name truly says it all. As Lead Teacher in our School Age program, she creates an after-school environment that is safe, stimulating, and genuinely fun. From homework support to creative projects and outdoor exploration, she brings out the very best in every student who walks through her door.
+⚠️ Staff photos exist for: Tina, Sherry, Brandon, Ella, Carol, Chandeth, Sunshine, Wesley. The other 14 staff members are shown with initials placeholder avatars until photos are provided.
 
 ---
 
@@ -274,7 +240,7 @@ Miss Sunshine — the name truly says it all. As Lead Teacher in our School Age 
 ---
 
 **Testimonial 4:**
-*"Tina and the administration team have been so communicative throughout our enrollment process. The NAEYC accreditation really shows in the quality of the curriculum. Our daughter is thriving in Miss Kiann's preschool room — her vocabulary has exploded this year!"*
+*"Tina and the administration team have been so communicative throughout our enrollment process. The NAEYC accreditation really shows in the quality of the curriculum. Our daughter is thriving in our preschool room — her vocabulary has exploded this year!"*
 — Linda P., Preschool Parent · Fairbanks, AK
 
 ---
@@ -289,7 +255,7 @@ Miss Sunshine — the name truly says it all. As Lead Teacher in our School Age 
 
 **Form Title:** Enrollment Inquiry
 
-**Fee note:** Non-refundable registration: $70/child · $130/family
+**Fee note:** Non-refundable annual registration fee: $70/child · $130/family
 
 **Form Fields:**
 - Parent First Name (required)
@@ -303,9 +269,6 @@ Miss Sunshine — the name truly says it all. As Lead Teacher in our School Age 
 **Submit Button:** Submit Enrollment Inquiry →
 
 **Privacy note:** Your information is private and never shared. We'll respond within 1 business day.
-
-✅ VERIFY: Registration fees — $70/child, $130/family — are these current?
-✅ VERIFY: Is "respond within 1 business day" accurate for your team?
 
 ---
 
@@ -329,10 +292,10 @@ Absolutely not. Open Arms welcomes families of every background, faith tradition
 NAEYC (National Association for the Education of Young Children) accreditation is the gold standard in early childhood education. It means our curriculum, teacher qualifications, classroom ratios, health and safety practices, and family engagement all meet rigorous, research-based national standards — well beyond Alaska's basic state licensing requirements.
 
 **Q4: What meals and snacks are provided?**
-Open Arms participates in the USDA Food Program, which ensures all children receive nutritious, balanced meals throughout the day. The Before & After School program includes breakfast and afternoon snacks. Jovani, our Kitchen Manager, oversees daily meal preparation with care and consistency.
+Open Arms participates in the USDA Food Program, which ensures all children receive nutritious, balanced meals throughout the day. The Before & After School program includes breakfast and afternoon snacks. Charles, our Cook, oversees daily meal preparation with care and consistency.
 
 **Q5: How is the facility secured?**
-Our facility features a secure keypad entry system at all entrances. Only authorized staff and pre-approved family members can access the building. This system, combined with our low student-teacher ratio of 8:1, ensures every child is accounted for and supervised at all times.
+Our facility features a secure keypad entry system at all entrances. Only authorized staff and pre-approved family members can access the building. This system, combined with our low student-teacher ratios, ensures every child is accounted for and supervised at all times.
 
 **Q6: What are the registration fees?**
 The annual registration fee is $70 per child or $130 per family. This fee is non-refundable and is required at the time of enrollment to secure your placement. Monthly tuition rates vary by program — please contact our office for the current tuition schedule and to discuss subsidy eligibility.
@@ -350,19 +313,16 @@ The annual registration fee is $70 per child or $130 per family. This fee is non
 | | |
 |---|---|
 | **Address** | 2980 Davis Road, Fairbanks, AK 99709 |
-| **Phone** | (907) 456-6020 |
+| **Phone** | (907) 455-9466 |
 | **Website** | openarmsfairbanks.org |
 
 **Hours of Operation:**
 
 | Day | Hours |
 |---|---|
-| Monday – Friday | 6:00 AM – 6:00 PM |
+| Monday – Friday | 7:00 AM – 5:30 PM |
 | Saturday – Sunday | Closed |
 | Major Holidays | Closed |
-
-✅ VERIFY: Phone number (907) 456-6020 — please confirm this is accurate.
-✅ VERIFY: Hours — are 6 AM–6 PM correct for all programs?
 
 ---
 
@@ -370,9 +330,9 @@ The annual registration fee is $70 per child or $130 per family. This fee is non
 
 **Tagline:** A Child Development Ministry of Zion Lutheran Church. Developing body, mind and spirit in children since 2000.
 
-**Accreditation badge:** NAEYC Accredited · License #11975
+**Accreditation badge:** NAEYC Accredited · License #723080
 
-**Quick Links:** Programs · Our Philosophy · Our Staff · Enrollment · FAQ · Contact
+**Quick Links:** Programs · Our Philosophy · Our Staff · Enrollment · Employment · FAQ · Contact
 
 **Programs Links:** Infant Care · Wobblers · Toddlers · Preschool · Before & After School · Summer Program
 
@@ -380,7 +340,58 @@ The annual registration fee is $70 per child or $130 per family. This fee is non
 
 **Address line:** 2980 Davis Road · Fairbanks, AK 99709
 
-✅ VERIFY: License #11975 — is this your current NAEYC license number?
+---
+
+### EMPLOYMENT
+
+**Section Label:** Join Our Team
+
+**Headline:** Build a career that matters.
+
+**Subheadline:** Join a caring team that makes a difference every day in the lives of children and families across interior Alaska.
+
+**Hero badge:** Now Hiring
+
+**Pitch (left card):**
+Headline — *Be part of something meaningful.*
+Body — Open Arms is a Christ-centered ministry where educators support, nurture, and inspire children every day. We invest in our staff because they are the heart of what we do.
+- NAEYC-accredited learning environment
+- Continuing education & training support
+- Tight-knit, mission-driven community
+- Faith-rooted, family-friendly culture
+
+CTA: **Apply Now** → links to `employment.html`
+Secondary: Or download the printable PDF application
+
+**Open Positions:**
+
+| Position | Schedule |
+|---|---|
+| FT Classroom Teacher Assistant (Opener) | 7:00 AM – 4:00 PM · Mon–Fri |
+| FT Classroom Teacher Assistant (Closer) | 8:30 AM – 5:30 PM · Mon–Fri |
+| PT Front Desk (Opener) | 6:45 AM – 9:00 AM · Mon–Fri |
+| PT Classroom Support (Openers) | 7:00 AM – 9:00 AM · Mon–Fri |
+| PT Classroom Support (Breakers) | 11:00 AM – 3:00 PM · Mon–Fri |
+| PT Classroom Support (Closers) | 3:00 PM – 5:00 PM · Mon–Fri |
+| PT Bus Driver | 8:15 AM – 9:30 AM & 3:00 PM – 4:15 PM · Mon–Fri |
+
+**Other ways to apply:** Email a completed application to landrews@openarmsfairbanks.org or cingram@openarmsfairbanks.org, or drop one off at our Front Desk during normal office hours.
+
+---
+
+### EMPLOYMENT APPLICATION (employment.html)
+
+A separate page (`employment.html`) hosts the full multi-step application as a Netlify form, with the printable PDF available for download. The form is broken into 7 friendly steps with progress indicator and conditional reveals:
+
+1. **About You** — Name, DOB, contact, mailing address
+2. **The Role** — Position, start date, hours, age verification, prior Open Arms employment
+3. **Background & Eligibility** — Criminal history, AK criminal report, languages, driver's license, work eligibility, training willingness, professional licenses
+4. **Education & Experience** — High School / College / Vocational / Other Training tables, recent positions (add-more), childcare-relevant duties, other experience, special skills
+5. **References & Personal History** — 3 references; Yes/No personal-history questions (previously licensed, license revoked, abuse investigation, health concerns, criminal charges in last 10 years, felony/DV/sex crime) — each with conditional explanation field
+6. **Your Story** — Five long-form questions (experience, learning environment, faith, asset to Open Arms, records management)
+7. **Sign & Submit** — Optional church/pastor questions; six required acknowledgment checkboxes (reference investigation, truthful information, agreement to Open Arms rules, I-9, at-will, certification); typed-name signature + date
+
+Form draft auto-saves to sessionStorage so applicants don't lose progress on accidental refresh.
 
 ---
 
@@ -388,13 +399,7 @@ The annual registration fee is $70 per child or $130 per family. This fee is non
 
 | # | Item | Priority |
 |---|---|---|
-| 1 | Real name for the unnamed Preschool 3 & 4 teacher | High |
-| 2 | Confirm/replace all 13 staff bios with approved text | High |
-| 3 | Replace all 4 testimonials with real family quotes | High |
-| 4 | Confirm phone number: (907) 456-6020 | High |
-| 5 | Confirm NAEYC license number: #11975 | Medium |
-| 6 | Confirm registration fees: $70/child, $130/family | Medium |
-| 7 | Confirm hours: Mon–Fri 6 AM–6 PM | Medium |
-| 8 | Confirm licensed capacity: 236 | Medium |
-| 9 | Confirm overall student-teacher ratio stated as 8:1 | Medium |
-| 10 | Add FAQ questions the team frequently receives | Low |
+| 1 | Photos for 14 new staff members (Lori, Dana, Linda, Jacki, Charles, Erika, Paetynn, Lauren, Edelyn, Macey, Beth, Shonti, Margarita, Mrudula) | High |
+| 2 | Replace all 4 testimonials with real family quotes | High |
+| 3 | Real bios — currently displayed as cards only, no bios | Medium |
+| 4 | Add FAQ questions the team frequently receives | Low |
