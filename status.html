@@ -83,6 +83,18 @@
     .entry-day { font-family: 'Nunito', sans-serif; font-size: 12px; color: var(--gray); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
     .entry-tag { font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; background: var(--blue); color: #fff; }
     .entry-summary { font-size: 14px; color: var(--gray); margin-bottom: 14px; line-height: 1.55; }
+    /* "Decisions made" callout */
+    .decisions { background: #FFFBEB; border: 1px solid rgba(255,212,59,0.55); border-left: 4px solid var(--yellow); border-radius: 12px; padding: 18px 20px 16px; margin-bottom: 18px; }
+    .decisions-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .decisions-head svg { color: #8A6D00; flex-shrink: 0; }
+    .decisions-head h4 { font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; color: #6E5A06; }
+    .decisions-sub { font-size: 13px; color: #6E5A06; margin-bottom: 14px; line-height: 1.5; }
+    .decisions ol { padding-left: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .decisions ol li { font-size: 13.5px; line-height: 1.55; color: var(--black); }
+    .decisions ol li b { font-weight: 700; color: var(--black); }
+    .decisions ol li .answer { display: block; margin-top: 4px; color: var(--gray); }
+    .decisions ol li .answer b { color: #2F8033; font-weight: 800; }
+
     .entry-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
     .entry-list li { position: relative; padding-left: 20px; font-size: 14.5px; line-height: 1.55; }
     .entry-list li::before {
@@ -194,6 +206,37 @@
           <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">Round-2 client feedback from Lori: uniform staff cards, three new sections from old-site content, and a new role posting.</p>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h4>Decisions made on this round</h4>
+          </div>
+          <p class="decisions-sub">Before building, I asked a few clarifying questions. Here's what we landed on — please flag any that should change and I'll adjust.</p>
+          <ol>
+            <li>
+              <b>Should tuition dollar amounts be shown publicly on the live site?</b>
+              <span class="answer">Decision: <b>Yes</b> — rate cards display as listed on the 2025-26 rate sheet. The site is still password-gated for review, so prices only become public when we deploy.</span>
+            </li>
+            <li>
+              <b>Calendar title — "2026 Calendar" or "2025-26 Calendar"?</b>
+              <span class="answer">Decision: <b>2026 Calendar</b> — matches the source PDF; all events fall between Jan and Dec 2026.</span>
+            </li>
+            <li>
+              <b>Keep both the existing Enrollment form and the new Waitlist form?</b>
+              <span class="answer">Decision: <b>Keep both</b> — Enrollment Inquiry stays on the landing page for families ready to enroll; the new Waitlist page is for families who want a spot when one opens. An inline "Join the waitlist →" link sits under the Enrollment form so families can self-select.</span>
+            </li>
+            <li>
+              <b>Is the new Kitchen Manager opening a backfill for Charles, or an additional hire?</b>
+              <span class="answer">Decision: <b>Posted as a general opening</b> — Charles remains listed on the Staff page as Kitchen Manager. If he's leaving the role, no change is needed; if you're hiring an additional person alongside him, we may want to rename the posting (e.g., "Assistant Kitchen Manager" or "Cook"). Let me know.</span>
+            </li>
+            <li>
+              <b>OK to move Philosophy and FAQ off the desktop nav (still reachable from mobile menu and footer)?</b>
+              <span class="answer">Decision: <b>Yes</b> — desktop nav is now Programs · Tuition · Calendar · Staff · Waitlist · Employment · Contact. Philosophy and FAQ remain in the mobile menu and the footer Quick Links so nothing is lost.</span>
+            </li>
+          </ol>
+        </div>
+
         <ul class="entry-list">
           <li class="t-update"><span class="pill p-update">Update</span><b>All staff photos set to placeholders.</b> Every one of the 22 cards now shows the colorful initials placeholder for a uniform look until the full set of new headshots is collected.</li>
           <li class="t-new"><span class="pill p-new">New</span><b>Tuition Rates section</b> on the landing page — monthly rate cards (Infant $1,500 · Wobbler $1,350 · Toddler $1,260 · Preschool $1,035), school-program before/after table with and without transportation, summer block, and a meals-included strip.</li>
