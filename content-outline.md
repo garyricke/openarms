@@ -18,7 +18,9 @@
 
 ### NAVIGATION BAR
 
-Links: Programs · Our Philosophy · Our Staff · Employment · FAQ · Contact
+**Desktop nav links:** Programs · Tuition · Calendar · Staff · Waitlist · Employment · Contact
+
+**Mobile menu (full):** Programs · Tuition · Calendar · Our Philosophy · Our Staff · Waitlist · Employment · FAQ · Contact
 
 CTA Button: **Secure Your Spot**
 
@@ -46,6 +48,76 @@ Badge text: ★ NAEYC Accredited · Est. 2000 · Fairbanks, Alaska
 | 236 | Licensed Capacity |
 | Varies | Student-Teacher Ratio |
 | NAEYC | Nationally Accredited |
+
+---
+
+### TUITION RATES (new section)
+
+**Section Label:** Investment
+
+**Headline:** Tuition Rates
+
+**Subheadline:** Monthly rates for September 1, 2025 – June 30, 2026. Hours of operation: Monday – Friday, 7:00 AM – 5:30 PM.
+
+**Rate cards (4):**
+
+| Program | Ages | Monthly Rate |
+|---|---|---|
+| Infant | 6 weeks – 12 mo | $1,500 |
+| Wobbler / Mobile Infant | 12 – 18 mo | $1,350 |
+| Toddler | 18 mo – 3 yrs | $1,260 |
+| Preschool | 3 – 5 yrs | $1,035 |
+
+**School Program (school-age before/after care):**
+
+| Program | With Transportation | No Transportation |
+|---|---|---|
+| Before School Only (7:00 – 9:15 AM) | $295.00 | $235.00 |
+| After School Only (2:30 – 5:30 PM) | $375.00 | $300.00 |
+| Before & After School | $675.00 | $575.00 |
+| Drop-in fee, full non-school day (currently enrolled) | $35.00 / day | — |
+
+**Summer Program:**
+- Summer Program: $848 / month
+- Summer Activity Fee: $100
+- Summer Program Registration: $25
+
+**Meals included with tuition:**
+- Breakfast — 7:30 AM to 8:30 AM
+- Morning snack — 10:00 AM to 10:30 AM
+- Lunch — 11:00 AM to 12:30 PM (varies by age group)
+- Afternoon snack — 3:00 PM to 4:30 PM (varies by age group)
+
+Footnote: *Rates corrected 8/29/2025. A non-refundable annual registration fee applies at enrollment.*
+
+---
+
+### 2026 CALENDAR (new section)
+
+**Section Label:** Plan Ahead
+
+**Headline:** 2026 Calendar
+
+**Subheadline:** Important dates, closures, and program transitions for the year ahead.
+
+**Color legend:** Closed/Holiday (red) · Program Start/End (green) · Registration Opens (blue) · Early Close (gold)
+
+**Key dates by month:**
+
+| Month | Dates |
+|---|---|
+| January | 1 — New Year's Day (closed) |
+| February | (no scheduled closures) |
+| March | 9 — Summer School Age Program registration opens · 13 — Professional Development Day, center closed |
+| April | (no scheduled closures) |
+| May | 21 — Last Day of School Care · 25 — Memorial Day (observed) · 26 — Summer Program starts (school age) |
+| June | (no scheduled closures) |
+| July | 3 — Fourth of July closed · 4 — Independence Day · 6 — Fourth of July closed · 13 — School Age (Before/After) registration opens · 17 — Professional Development Day closed |
+| August | 14 — Last day of Summer Program · 18 — First day of Before & After School Care |
+| September | 7 — Labor Day |
+| October | (no scheduled closures) |
+| November | 13 — Professional Development Day closed · 26 — Thanksgiving · 27 — Day after Thanksgiving |
+| December | 24 — Close Early 3 PM · 25 — Christmas · 28-31 — Closed for Christmas & New Year's |
 
 ---
 
@@ -332,7 +404,7 @@ The annual registration fee is $70 per child or $130 per family. This fee is non
 
 **Accreditation badge:** NAEYC Accredited · License #723080
 
-**Quick Links:** Programs · Our Philosophy · Our Staff · Enrollment · Employment · FAQ · Contact
+**Quick Links:** Programs · Tuition · Calendar · Our Philosophy · Our Staff · Enrollment · Waitlist · Employment · FAQ · Contact
 
 **Programs Links:** Infant Care · Wobblers · Toddlers · Preschool · Before & After School · Summer Program
 
@@ -374,6 +446,7 @@ Secondary: Or download the printable PDF application
 | PT Classroom Support (Breakers) | 11:00 AM – 3:00 PM · Mon–Fri |
 | PT Classroom Support (Closers) | 3:00 PM – 5:00 PM · Mon–Fri |
 | PT Bus Driver | 8:15 AM – 9:30 AM & 3:00 PM – 4:15 PM · Mon–Fri |
+| Kitchen Manager | 6:00 AM – 1:00 PM · Mon–Fri |
 
 **Other ways to apply:** Email a completed application to landrews@openarmsfairbanks.org or cingram@openarmsfairbanks.org, or drop one off at our Front Desk during normal office hours.
 
@@ -395,11 +468,33 @@ Form draft auto-saves to sessionStorage so applicants don't lose progress on acc
 
 ---
 
+### WAITLIST APPLICATION (waitlist.html)
+
+A separate page (`waitlist.html`) hosts the waitlist intake form as a Netlify form (`waitlist`). Single-page form with sectioned cards and friendly copy:
+
+**Hero:** "Reserve a spot for your child." Badge: *Waitlist Application*. Meta: ~5 minutes · No fee · Up to 3 children per application.
+
+**Sections:**
+1. **Mother / Guardian** — legal name, application date, address, home/work/cell phone, cell carrier
+2. **Father / Guardian** (optional) — legal name, address, home/work/cell phone, cell carrier
+3. **Email Address** — one parent email required; reminds applicants to add `frontdesk@openarmsfairbanks.org` to trusted senders
+4. **Children to Enroll** — 1 to 3 children (Add another child button); per child: full name, birth date, sex, target date of care, IEP yes/no
+5. **Subsidy disclosure** — text reminding applicants they're responsible for the entire enrollment cost until the subsidy agency authorization is received
+
+**Submit confirmation:** "You're on the list!" with spam-folder reminder and a return-to-site button.
+
+Form draft auto-saves to sessionStorage so applicants don't lose progress.
+
+A "Join the waitlist →" link is also placed inline beneath the Enrollment Inquiry form on the main page for families who don't yet see availability.
+
+---
+
 ## ITEMS THAT NEED CLIENT INPUT
 
 | # | Item | Priority |
 |---|---|---|
-| 1 | Photos for 14 new staff members (Lori, Dana, Linda, Jacki, Charles, Erika, Paetynn, Lauren, Edelyn, Macey, Beth, Shonti, Margarita, Mrudula) | High |
+| 1 | Photos for **all 22** staff members — currently every card shows the colorful initials placeholder for a uniform look until the full set arrives | High |
 | 2 | Replace all 4 testimonials with real family quotes | High |
 | 3 | Real bios — currently displayed as cards only, no bios | Medium |
 | 4 | Add FAQ questions the team frequently receives | Low |
+| 5 | Confirm Tuition Rates section can show dollar amounts publicly when site goes live | Low |

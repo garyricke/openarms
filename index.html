@@ -295,6 +295,62 @@
     .t-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; border: none; }
     .t-dot.active { background: #fff; width: 28px; border-radius: 4px; }
 
+    /* ── TUITION ────────────────────────────────────────── */
+    #tuition { padding: 96px 0; background: var(--white); }
+    #tuition .header { text-align: center; margin-bottom: 48px; }
+    #tuition .header .section-sub { margin: 0 auto; }
+    .tuition-rate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 32px; }
+    .rate-card { background: #fff; border-radius: 18px; padding: 24px 20px; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.04); position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+    .rate-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
+    .rate-card-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
+    .rate-card .age-tag { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; margin-top: 6px; margin-bottom: 8px; }
+    .rate-card h3 { font-size: 18px; font-weight: 900; margin-bottom: 12px; line-height: 1.2; }
+    .rate-card .price { font-size: 28px; font-weight: 900; color: var(--black); font-family: 'Nunito', sans-serif; line-height: 1; }
+    .rate-card .price small { font-size: 13px; font-weight: 600; color: var(--gray); margin-left: 4px; }
+    .tuition-block { background: #F8FAFC; border-radius: 22px; padding: 32px; margin-bottom: 24px; border: 1px solid #E5E7EB; }
+    .tuition-block h3 { font-size: 20px; font-weight: 900; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+    .tuition-block h3 .badge-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .tuition-block .meta { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
+    .school-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #E5E7EB; }
+    .school-table th, .school-table td { padding: 14px 18px; text-align: left; font-size: 14px; }
+    .school-table thead { background: var(--black); color: #fff; }
+    .school-table th { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+    .school-table th.num, .school-table td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+    .school-table tbody tr { border-top: 1px solid #F1F5F9; }
+    .school-table tbody tr:nth-child(even) { background: #FAFBFC; }
+    .school-table tbody tr td { color: var(--black); }
+    .summer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
+    .summer-cell { background: #fff; border-radius: 14px; padding: 18px 20px; border: 1px solid #E5E7EB; }
+    .summer-cell .lbl { font-size: 12px; color: var(--gray); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+    .summer-cell .val { font-size: 22px; font-weight: 900; font-family: 'Nunito', sans-serif; }
+    .meals-strip { display: flex; align-items: flex-start; gap: 14px; padding: 18px 22px; background: rgba(255,212,59,0.12); border-radius: 14px; border-left: 4px solid var(--yellow); margin-top: 8px; }
+    .meals-strip .meals-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--yellow); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .meals-strip h4 { font-size: 14px; font-weight: 900; margin-bottom: 6px; }
+    .meals-strip ul { font-size: 13px; color: var(--black); line-height: 1.7; list-style: none; padding: 0; }
+    .meals-strip ul li { padding-left: 18px; position: relative; }
+    .meals-strip ul li::before { content: '•'; position: absolute; left: 6px; color: var(--yellow); font-weight: 900; }
+    .tuition-footnote { font-size: 12px; color: var(--gray); text-align: center; margin-top: 16px; }
+
+    /* ── CALENDAR ───────────────────────────────────────── */
+    #calendar { padding: 96px 0; background: var(--cream); }
+    #calendar .header { text-align: center; margin-bottom: 48px; }
+    #calendar .header .section-sub { margin: 0 auto; }
+    .legend-strip { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 40px; padding: 18px 24px; background: #fff; border-radius: 16px; border: 1px solid #E5E7EB; }
+    .legend-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .month-tile { background: #fff; border-radius: 18px; padding: 22px 20px; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; min-height: 140px; }
+    .month-tile:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+    .month-tile.empty { background: #FAFBFC; box-shadow: none; }
+    .month-tile.empty .month-empty { color: var(--gray); font-size: 13px; font-style: italic; padding-top: 8px; }
+    .month-name { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px dashed #E5E7EB; }
+    .month-events { display: flex; flex-direction: column; gap: 10px; }
+    .month-event { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.4; }
+    .event-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .event-day { font-family: 'Nunito', sans-serif; font-weight: 900; min-width: 26px; color: var(--black); }
+    .event-name { color: var(--black); }
+    .event-name.muted { color: var(--gray); }
+
     /* ── ENROLLMENT ─────────────────────────────────────── */
     #enrollment { padding: 96px 0; background: var(--cream); }
     #enrollment .container { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
@@ -457,6 +513,9 @@
       #trust .container { grid-template-columns: repeat(2,1fr); }
       .trust-card:nth-child(2) { border-right: none; }
       .employment-grid { grid-template-columns: 1fr; }
+      .tuition-rate-grid { grid-template-columns: repeat(2, 1fr); }
+      .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+      .summer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       #nav-links, #nav-cta { display: none; }
@@ -473,6 +532,11 @@
       .employment-pitch h3 { font-size: 26px; }
       .positions-panel { padding: 24px 20px; }
       .apply-other { grid-template-columns: 1fr; padding: 20px; gap: 12px; text-align: left; }
+      .tuition-rate-grid { grid-template-columns: 1fr 1fr; }
+      .calendar-grid { grid-template-columns: 1fr; }
+      .summer-grid { grid-template-columns: 1fr; }
+      .school-table th, .school-table td { padding: 10px 12px; font-size: 13px; }
+      .tuition-block { padding: 24px 18px; }
     }
     @media (max-width: 480px) {
       .staff-grid { grid-template-columns: repeat(2,1fr); }
@@ -508,10 +572,11 @@
     </a>
     <div id="nav-links">
       <a href="#programs">Programs</a>
-      <a href="#philosophy">Our Philosophy</a>
-      <a href="#staff">Our Staff</a>
+      <a href="#tuition">Tuition</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#staff">Staff</a>
+      <a href="waitlist.html">Waitlist</a>
       <a href="#employment">Employment</a>
-      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </div>
     <a id="nav-cta" href="#enrollment">Secure Your Spot</a>
@@ -522,8 +587,11 @@
 </nav>
 <div id="mobile-menu">
   <a href="#programs" onclick="closeMobile()">Programs</a>
+  <a href="#tuition" onclick="closeMobile()">Tuition</a>
+  <a href="#calendar" onclick="closeMobile()">Calendar</a>
   <a href="#philosophy" onclick="closeMobile()">Our Philosophy</a>
   <a href="#staff" onclick="closeMobile()">Our Staff</a>
+  <a href="waitlist.html">Waitlist</a>
   <a href="#employment" onclick="closeMobile()">Employment</a>
   <a href="#faq" onclick="closeMobile()">FAQ</a>
   <a href="#contact" onclick="closeMobile()">Contact</a>
@@ -678,6 +746,135 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════ TUITION ══════════════════════════════ -->
+<section id="tuition">
+  <div class="container">
+    <div class="header fade-up">
+      <p class="section-label">Investment</p>
+      <h2 class="section-title">Tuition Rates</h2>
+      <p class="section-sub">Monthly rates for September 1, 2025 – June 30, 2026. Hours of operation: Monday – Friday, 7:00 AM – 5:30 PM.</p>
+    </div>
+
+    <div class="tuition-rate-grid fade-up">
+      <div class="rate-card">
+        <div class="rate-card-top" style="background:var(--red)"></div>
+        <div class="age-tag" style="color:var(--red)">6 weeks – 12 mo</div>
+        <h3>Infant</h3>
+        <div class="price">$1,500<small>/mo</small></div>
+      </div>
+      <div class="rate-card">
+        <div class="rate-card-top" style="background:#B8960A"></div>
+        <div class="age-tag" style="color:#B8960A">12 – 18 mo</div>
+        <h3>Wobbler / Mobile Infant</h3>
+        <div class="price">$1,350<small>/mo</small></div>
+      </div>
+      <div class="rate-card">
+        <div class="rate-card-top" style="background:var(--green)"></div>
+        <div class="age-tag" style="color:var(--green)">18 mo – 3 yrs</div>
+        <h3>Toddler</h3>
+        <div class="price">$1,260<small>/mo</small></div>
+      </div>
+      <div class="rate-card">
+        <div class="rate-card-top" style="background:var(--blue)"></div>
+        <div class="age-tag" style="color:var(--blue)">3 – 5 yrs</div>
+        <h3>Preschool</h3>
+        <div class="price">$1,035<small>/mo</small></div>
+      </div>
+    </div>
+
+    <div class="tuition-block fade-up">
+      <h3><span class="badge-dot" style="background:var(--red)"></span>School Program</h3>
+      <p class="meta">Before- and after-school care for school-age children, with optional transportation.</p>
+      <table class="school-table">
+        <thead>
+          <tr>
+            <th>Program</th>
+            <th class="num">With Transportation</th>
+            <th class="num">No Transportation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Before School Only <span style="color:var(--gray);font-size:12px;">(7:00 AM – 9:15 AM)</span></td>
+            <td class="num">$295.00</td>
+            <td class="num">$235.00</td>
+          </tr>
+          <tr>
+            <td>After School Only <span style="color:var(--gray);font-size:12px;">(2:30 PM – 5:30 PM)</span></td>
+            <td class="num">$375.00</td>
+            <td class="num">$300.00</td>
+          </tr>
+          <tr>
+            <td>Before &amp; After School</td>
+            <td class="num">$675.00</td>
+            <td class="num">$575.00</td>
+          </tr>
+          <tr>
+            <td>Drop-in fee, full non-school day <span style="color:var(--gray);font-size:12px;">(currently enrolled)</span></td>
+            <td class="num" colspan="2" style="text-align:left;">$35.00 per day</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tuition-block fade-up">
+      <h3><span class="badge-dot" style="background:var(--yellow)"></span>Summer Program</h3>
+      <p class="meta">Summer school-age program with full days of activities, field trips, and meals.</p>
+      <div class="summer-grid">
+        <div class="summer-cell">
+          <div class="lbl">Summer Program</div>
+          <div class="val">$848<span style="font-size:14px;color:var(--gray);font-weight:600">/mo</span></div>
+        </div>
+        <div class="summer-cell">
+          <div class="lbl">Activity Fee</div>
+          <div class="val">$100</div>
+        </div>
+        <div class="summer-cell">
+          <div class="lbl">Registration</div>
+          <div class="val">$25</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="meals-strip fade-up">
+      <div class="meals-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5"><path d="M3 11h18M5 11V8a7 7 0 0 1 14 0v3"/><path d="M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg>
+      </div>
+      <div>
+        <h4>Meals included with tuition</h4>
+        <ul>
+          <li>Breakfast — 7:30 AM to 8:30 AM</li>
+          <li>Morning snack — 10:00 AM to 10:30 AM</li>
+          <li>Lunch — 11:00 AM to 12:30 PM (depending on age group)</li>
+          <li>Afternoon snack — 3:00 PM to 4:30 PM (depending on age group)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="tuition-footnote">Rates corrected 8/29/2025. A non-refundable annual registration fee applies at enrollment. <a href="#enrollment" style="color:var(--blue);font-weight:700;">Inquire about enrollment →</a></p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CALENDAR ═════════════════════════════ -->
+<section id="calendar">
+  <div class="container">
+    <div class="header fade-up">
+      <p class="section-label">Plan Ahead</p>
+      <h2 class="section-title">2026 Calendar</h2>
+      <p class="section-sub">Important dates, closures, and program transitions for the year ahead.</p>
+    </div>
+
+    <div class="legend-strip fade-up">
+      <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span>Closed / Holiday</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Program Start / End</div>
+      <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Registration Opens</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#B8960A"></span>Early Close</div>
+    </div>
+
+    <div class="calendar-grid fade-up" id="calendar-grid"></div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════ STAFF ════════════════════════════ -->
 <section id="staff">
   <div class="container">
@@ -804,6 +1001,7 @@
           <p class="form-note">🔒 Your information is private and never shared. We'll respond within 1 business day.</p>
         </form>
       </div>
+      <p style="margin-top:18px;font-size:14px;color:var(--gray);text-align:center;">No spot available right now? <a href="waitlist.html" style="color:var(--blue);font-weight:700;">Join the waitlist →</a></p>
     </div>
   </div>
 </section>
@@ -969,13 +1167,22 @@
               <div class="pos-meta">3:00 PM – 5:00 PM · Mon–Fri</div>
             </div>
           </div>
-          <div class="position-card" style="grid-column: 1 / -1;">
+          <div class="position-card">
             <div class="position-icon" style="background:var(--red)">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 6v6M16 6v6M2 18h20"/><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
             </div>
             <div>
               <h5>PT Bus Driver</h5>
               <div class="pos-meta">8:15 AM – 9:30 AM &amp; 3:00 PM – 4:15 PM · Mon–Fri</div>
+            </div>
+          </div>
+          <div class="position-card">
+            <div class="position-icon" style="background:#B8960A">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><line x1="6" y1="17" x2="18" y2="17"/></svg>
+            </div>
+            <div>
+              <h5>Kitchen Manager</h5>
+              <div class="pos-meta">6:00 AM – 1:00 PM · Mon–Fri</div>
             </div>
           </div>
         </div>
@@ -1067,9 +1274,12 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="#programs">Programs</a></li>
+          <li><a href="#tuition">Tuition</a></li>
+          <li><a href="#calendar">Calendar</a></li>
           <li><a href="#philosophy">Our Philosophy</a></li>
           <li><a href="#staff">Our Staff</a></li>
           <li><a href="#enrollment">Enrollment</a></li>
+          <li><a href="waitlist.html">Waitlist</a></li>
           <li><a href="#employment">Employment</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1211,26 +1421,26 @@ const programs = [
 
 const staff = [
   { name:'Lori', role:'Director', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Tina', role:'Assistant Director', dept:'Administration', deptColor:'#2A71B0', img:'staff_photos/web/Tina%20-%20Interim%20Director.jpg' },
+  { name:'Tina', role:'Assistant Director', dept:'Administration', deptColor:'#2A71B0', img:null },
   { name:'Dana', role:'Administrative Assistant', dept:'Administration', deptColor:'#2A71B0', img:null },
   { name:'Linda', role:'Food Program Liaison', dept:'Administration', deptColor:'#2A71B0', img:null },
   { name:'Jacki', role:'Benefit Coordinator', dept:'Administration', deptColor:'#2A71B0', img:null },
   { name:'Charles', role:'Kitchen Manager', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Sherry', role:'Teacher', dept:'Infants', deptColor:'#E94E41', img:'staff_photos/web/Sherry%20-%20Lead%20Teacher%20(Infants).jpg' },
-  { name:'Brandon', role:'Assistant Teacher & Driver', dept:'Infants', deptColor:'#E94E41', img:'staff_photos/web/Brandon%20-%20Assistant%20(Infants).jpg' },
-  { name:'Ella', role:'Teacher', dept:'Wobblers', deptColor:'#B8960A', img:'staff_photos/web/Wobblers%20Lead%20Teacher.jpg' },
+  { name:'Sherry', role:'Teacher', dept:'Infants', deptColor:'#E94E41', img:null },
+  { name:'Brandon', role:'Assistant Teacher & Driver', dept:'Infants', deptColor:'#E94E41', img:null },
+  { name:'Ella', role:'Teacher', dept:'Wobblers', deptColor:'#B8960A', img:null },
   { name:'Macey', role:'Teacher', dept:'Wobblers', deptColor:'#B8960A', img:null },
-  { name:'Carol', role:'Teacher', dept:'Toddlers 1', deptColor:'#4A9B4E', img:'staff_photos/web/Carol%20-%20Teacher%20(Toddlers).jpg' },
+  { name:'Carol', role:'Teacher', dept:'Toddlers 1', deptColor:'#4A9B4E', img:null },
   { name:'Edelyn', role:'Assistant Teacher', dept:'Toddlers 1', deptColor:'#4A9B4E', img:null },
-  { name:'Chandeth', role:'Teacher', dept:'Toddlers 2', deptColor:'#4A9B4E', img:'staff_photos/web/Ms%20Chandeth%20-%20Lead%20Teacher%20(Toddler%202).jpg' },
+  { name:'Chandeth', role:'Teacher', dept:'Toddlers 2', deptColor:'#4A9B4E', img:null },
   { name:'Lauren', role:'Assistant Teacher', dept:'Toddlers 2', deptColor:'#4A9B4E', img:null },
   { name:'Beth', role:'Teacher', dept:'Preschool 3', deptColor:'#2A71B0', img:null },
   { name:'Shonti', role:'Assistant Teacher', dept:'Preschool 3', deptColor:'#2A71B0', img:null },
   { name:'Margarita', role:'Teacher', dept:'Preschool 4', deptColor:'#2A71B0', img:null },
   { name:'Erika', role:'Assistant Teacher', dept:'Preschool 4', deptColor:'#2A71B0', img:null },
   { name:'Mrudula', role:'Teacher', dept:'School Age', deptColor:'#E94E41', img:null },
-  { name:'Sunshine', role:'Teacher & Driver', dept:'School Age', deptColor:'#E94E41', img:'staff_photos/web/Miss%20Sunshine%20-%20Lead%20Teacher%20(School%20Age).jpg' },
-  { name:'Wesley', role:'Assistant Teacher', dept:'All Classrooms', deptColor:'#4A9B4E', img:'staff_photos/web/Wesley%20-%20Floater.jpg' },
+  { name:'Sunshine', role:'Teacher & Driver', dept:'School Age', deptColor:'#E94E41', img:null },
+  { name:'Wesley', role:'Assistant Teacher', dept:'All Classrooms', deptColor:'#4A9B4E', img:null },
   { name:'Paetynn', role:'Assistant Teacher', dept:'All Classrooms', deptColor:'#4A9B4E', img:null },
 ];
 
@@ -1253,6 +1463,77 @@ programs.forEach(p => {
     </div>`;
   card.addEventListener('click', () => openProgramModal(p));
   pgrid.appendChild(card);
+});
+
+// ── RENDER CALENDAR ────────────────────────────────────────────────────
+const calendar2026 = [
+  { month:'January',   events:[
+    { day:1,  name:"New Year's Day", type:'closed' },
+  ]},
+  { month:'February',  events:[] },
+  { month:'March',     events:[
+    { day:9,  name:'Summer School Age Program — Registration Opens', type:'reg' },
+    { day:13, name:'Professional Development Day — Center Closed',    type:'closed' },
+  ]},
+  { month:'April',     events:[] },
+  { month:'May',       events:[
+    { day:21, name:'Last Day of School Care',         type:'transition' },
+    { day:25, name:'Memorial Day (Observed)',          type:'closed' },
+    { day:26, name:'Summer Program Starts (School Age)', type:'transition' },
+  ]},
+  { month:'June',      events:[] },
+  { month:'July',      events:[
+    { day:3,  name:'Fourth of July — Closed',          type:'closed' },
+    { day:4,  name:'Independence Day',                  type:'closed' },
+    { day:6,  name:'Fourth of July — Closed',          type:'closed' },
+    { day:13, name:'School Age (Before/After) — Registration Opens', type:'reg' },
+    { day:17, name:'Professional Development Day — Closed', type:'closed' },
+  ]},
+  { month:'August',    events:[
+    { day:14, name:'Last Day of Summer Program',        type:'transition' },
+    { day:18, name:'First Day of Before & After School Care', type:'transition' },
+  ]},
+  { month:'September', events:[
+    { day:7,  name:'Labor Day',                         type:'closed' },
+  ]},
+  { month:'October',   events:[] },
+  { month:'November',  events:[
+    { day:13, name:'Professional Development Day — Closed', type:'closed' },
+    { day:26, name:'Thanksgiving',                       type:'closed' },
+    { day:27, name:'Day after Thanksgiving',             type:'closed' },
+  ]},
+  { month:'December',  events:[
+    { day:24, name:'Close Early — 3:00 PM',              type:'early' },
+    { day:25, name:'Christmas',                          type:'closed' },
+    { day:28, name:"Closed for Christmas & New Year's",  type:'closed' },
+    { day:29, name:"Closed for Christmas & New Year's",  type:'closed' },
+    { day:30, name:"Closed for Christmas & New Year's",  type:'closed' },
+    { day:31, name:"Closed for Christmas & New Year's",  type:'closed' },
+  ]},
+];
+const eventColor = {
+  closed:     'var(--red)',
+  transition: 'var(--green)',
+  reg:        'var(--blue)',
+  early:      '#B8960A',
+};
+const cgrid = document.getElementById('calendar-grid');
+calendar2026.forEach(m => {
+  const tile = document.createElement('div');
+  tile.className = m.events.length ? 'month-tile fade-up' : 'month-tile empty fade-up';
+  let body;
+  if (m.events.length === 0) {
+    body = `<div class="month-empty">No scheduled closures.</div>`;
+  } else {
+    body = `<div class="month-events">` + m.events.map(e => `
+      <div class="month-event">
+        <span class="event-dot" style="background:${eventColor[e.type]}"></span>
+        <span class="event-day">${e.day}</span>
+        <span class="event-name">${e.name}</span>
+      </div>`).join('') + `</div>`;
+  }
+  tile.innerHTML = `<div class="month-name">${m.month}</div>${body}`;
+  cgrid.appendChild(tile);
 });
 
 // ── RENDER STAFF ───────────────────────────────────────────────────────
