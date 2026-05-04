@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Site Status · Open Arms Child Development Center</title>
+  <meta name="description" content="Changelog of updates to the Open Arms preview site." />
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green:  #7BC07E;
+      --blue:   #2A71B0;
+      --blue-d: #1E5A8E;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --black:  #1A1A1A;
+      --gray:   #6B7280;
+      --line:   #E5E7EB;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--black); background: #F8FAFC; line-height: 1.6; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; border: 0; cursor: pointer; background: none; }
+
+    /* ── Password gate ────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; background: linear-gradient(135deg, var(--black) 0%, var(--blue-d) 100%);
+      display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 24px;
+    }
+    .gate-box { background: #fff; border-radius: 24px; padding: 40px 36px; max-width: 420px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.25); text-align: center; }
+    .gate-box img { width: 130px; margin-bottom: 20px; }
+    .gate-box h1 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+    .gate-box p { color: var(--gray); margin-bottom: 20px; font-size: 14px; }
+    .gate-input-wrap { position: relative; margin-bottom: 12px; }
+    .gate-box input { width: 100%; padding: 14px 48px 14px 16px; border: 2px solid var(--line); border-radius: 12px; font-size: 15px; font-family: inherit; }
+    .gate-box input:focus { outline: none; border-color: var(--blue); }
+    .gate-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); padding: 6px; border-radius: 6px; }
+    .gate-toggle:hover { color: var(--blue); }
+    .gate-box .gate-error { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 18px; }
+    .gate-box button[type=submit] { width: 100%; padding: 14px; border-radius: 12px; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; }
+    .gate-box button[type=submit]:hover { background: var(--blue-d); }
+
+    /* ── Topbar ────────────────────────────────────────────── */
+    .topbar { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 100; }
+    .topbar-inner { max-width: 960px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topbar-logo img { height: 38px; }
+    .topbar-back { display: inline-flex; align-items: center; gap: 6px; color: var(--gray); font-size: 14px; font-weight: 600; }
+    .topbar-back:hover { color: var(--blue); text-decoration: none; }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+    .page-head { padding: 56px 0 28px; }
+    .eyebrow { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .page-head h1 { font-family: 'Nunito', sans-serif; font-size: clamp(32px, 4.5vw, 42px); font-weight: 900; line-height: 1.1; margin-bottom: 14px; }
+    .page-head p { font-size: 16px; color: var(--gray); max-width: 620px; line-height: 1.65; }
+    .page-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; font-size: 13px; color: var(--gray); }
+    .page-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .page-meta strong { color: var(--black); font-weight: 700; }
+
+    /* ── Timeline ──────────────────────────────────────────── */
+    .timeline { padding: 12px 0 56px; position: relative; }
+    .timeline::before { content: ''; position: absolute; left: 19px; top: 36px; bottom: 36px; width: 2px; background: linear-gradient(180deg, var(--blue) 0%, var(--green) 50%, transparent 100%); opacity: 0.25; }
+    .entry { display: grid; grid-template-columns: 40px 1fr; gap: 18px; margin-bottom: 28px; position: relative; }
+    .entry-marker { width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 3px solid var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; }
+    .entry-marker svg { width: 16px; height: 16px; color: var(--blue); }
+    .entry.is-latest .entry-marker { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 6px rgba(42,113,176,0.12); }
+    .entry.is-latest .entry-marker svg { color: #fff; }
+    .entry-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .entry.is-latest .entry-card { border-color: var(--blue); box-shadow: 0 8px 24px rgba(42,113,176,0.08); }
+    .entry-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+    .entry-date { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900; color: var(--black); }
+    .entry-day { font-family: 'Nunito', sans-serif; font-size: 12px; color: var(--gray); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+    .entry-tag { font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; background: var(--blue); color: #fff; }
+    .entry-summary { font-size: 14px; color: var(--gray); margin-bottom: 14px; line-height: 1.55; }
+    .entry-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .entry-list li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: flex-start; font-size: 14.5px; line-height: 1.55; }
+    .entry-list li::before {
+      content: '';
+      width: 8px; height: 8px; margin-top: 8px;
+      border-radius: 50%; background: var(--blue); justify-self: center;
+    }
+    .entry-list li.t-new::before    { background: var(--green); }
+    .entry-list li.t-update::before { background: var(--blue); }
+    .entry-list li.t-fix::before    { background: var(--red); }
+    .entry-list li.t-content::before { background: #B8960A; }
+    .entry-list li b { font-weight: 700; color: var(--black); }
+    .entry-list li .pill {
+      display: inline-block; font-family: 'Nunito', sans-serif; font-size: 9.5px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 50px; margin-right: 6px; vertical-align: 1px;
+    }
+    .pill.p-new    { background: rgba(123,192,126,0.18); color: #2F8033; }
+    .pill.p-update { background: rgba(42,113,176,0.14); color: var(--blue-d); }
+    .pill.p-fix    { background: rgba(233,78,65,0.14); color: #B5392E; }
+    .pill.p-content { background: rgba(184,150,10,0.14); color: #6E5A06; }
+
+    /* ── Legend ────────────────────────────────────────────── */
+    .legend-row { display: flex; flex-wrap: wrap; gap: 16px; padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 14px; margin: 8px 0 28px; font-size: 13px; }
+    .legend-row .l-item { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--black); }
+    .legend-row .l-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    .page-footer { text-align: center; padding: 24px 24px 56px; color: var(--gray); font-size: 13px; }
+    .page-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .page-head { padding: 36px 0 20px; }
+      .timeline::before { left: 15px; }
+      .entry { grid-template-columns: 32px 1fr; gap: 14px; }
+      .entry-marker { width: 32px; height: 32px; }
+      .entry-marker svg { width: 14px; height: 14px; }
+      .entry-card { padding: 18px 18px; }
+      .topbar-inner { padding: 12px 16px; }
+      .container { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ PASSWORD GATE ════════════════════ -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms" />
+    <h1>Preview Access</h1>
+    <p>This site is currently password-protected for client review.</p>
+    <form id="gate-form" autocomplete="off">
+      <div class="gate-input-wrap">
+        <input id="gate-input" type="password" placeholder="Enter password" autofocus />
+        <button type="button" class="gate-toggle" id="gate-toggle" aria-label="Show password">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="gate-error" id="gate-error"></div>
+      <button type="submit" id="gate-submit">Continue</button>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════ TOPBAR ════════════════════ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-logo" href="index.html">
+      <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms Child Development Center" />
+    </a>
+    <a class="topbar-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to site
+    </a>
+  </div>
+</header>
+
+<!-- ════════════════════ HEAD ════════════════════ -->
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Site Status</div>
+    <h1>What's New on the Site</h1>
+    <p>A running log of every update made to the Open Arms preview site, from the initial build to this week's changes. Most recent at the top.</p>
+    <div class="page-meta">
+      <span><strong>Last update:</strong> May 4, 2026</span>
+      <span><strong>Repo:</strong> <a href="https://github.com/garyricke/openarms" target="_blank" rel="noopener">github.com/garyricke/openarms</a></span>
+    </div>
+  </div>
+
+  <div class="legend-row">
+    <span class="l-item"><span class="l-dot" style="background:var(--green)"></span>New</span>
+    <span class="l-item"><span class="l-dot" style="background:var(--blue)"></span>Update</span>
+    <span class="l-item"><span class="l-dot" style="background:var(--red)"></span>Fix</span>
+    <span class="l-item"><span class="l-dot" style="background:#B8960A"></span>Content</span>
+  </div>
+
+  <!-- ════════════════════ TIMELINE ════════════════════ -->
+  <div class="timeline">
+
+    <!-- ── 2026-05-04 ── -->
+    <div class="entry is-latest">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 4, 2026</span>
+          <span class="entry-day">Monday</span>
+          <span class="entry-tag">Latest</span>
+        </div>
+        <p class="entry-summary">Round-2 client feedback from Lori: uniform staff cards, three new sections from old-site content, and a new role posting.</p>
+        <ul class="entry-list">
+          <li class="t-update"><span class="pill p-update">Update</span><b>All staff photos set to placeholders.</b> Every one of the 22 cards now shows the colorful initials placeholder for a uniform look until the full set of new headshots is collected.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Tuition Rates section</b> on the landing page — monthly rate cards (Infant $1,500 · Wobbler $1,350 · Toddler $1,260 · Preschool $1,035), school-program before/after table with and without transportation, summer block, and a meals-included strip.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>2026 Calendar section</b> with color-coded legend (Closed/Holiday, Program Start/End, Registration Opens, Early Close) and 12 month tiles. <b>Past months automatically gray out</b> and the current month gets a "Now" badge.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Waitlist page</b> (<code>waitlist.html</code>) with a friendly Netlify form: both guardians, up to 3 children with "Add another," subsidy disclosure, draft auto-save, and a spam-folder reminder on the success screen.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Kitchen Manager position</b> (Mon–Fri 6:00 AM – 1:00 PM) added to the open-positions grid and to the employment application dropdown.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Reworked desktop navigation</b> to surface the new sections: Programs · Tuition · Calendar · Staff · Waitlist · Employment · Contact. Philosophy + FAQ remain accessible from the mobile menu and footer.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>"Join the waitlist →" link</b> added inline below the Enrollment Inquiry form for families who don't see availability today.</li>
+          <li class="t-fix"><span class="pill p-fix">Fix</span><b>Form card stacking on Waitlist + Employment pages.</b> The first section was getting clipped behind the hero — added <code>position: relative</code> + <code>z-index: 2</code> to lift the card cleanly on top.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Status page</b> (this one) added to the footer Quick Links as a muted link beneath Staff Guide.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-05-01 ── -->
+    <div class="entry">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 1, 2026</span>
+          <span class="entry-day">Friday</span>
+        </div>
+        <p class="entry-summary">First round of client feedback — a wide-ranging update including a brand-new Employment page and a full staff rebuild.</p>
+        <ul class="entry-list">
+          <li class="t-content"><span class="pill p-content">Content</span><b>Trust-strip ratio</b> changed from "8:1" to "Varies" to reflect the range across age groups.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Staff roster rebuilt to 22 people</b> — added 9 staff, removed 5 who are no longer with Open Arms, renamed several. Bio modals removed; cards now show name, role, and department only.</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>Phone number</b> updated to <a href="tel:+19074559466">(907) 455-9466</a>.</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>Hours of operation</b> updated to Monday – Friday, 7:00 AM – 5:30 PM.</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>License number</b> updated to <code>#723080</code>.</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>Program ratios</b> revised: Infants 5:1, Wobblers 5:1, Toddlers 6:1, Preschool 10:1, Before & After (6–12 yrs) 14:1, Summer 14:1.</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>FAQ updates</b>: Q4 now references "Charles, our Cook"; Q5 simplified to "low student-teacher ratios."</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>Registration-fee note</b> updated to "Non-refundable annual registration fee."</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>Testimonial 4 rephrased</b> to remove a specific teacher reference.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Employment section</b> on the landing page + new <b>employment.html</b> page with a multi-step Netlify application form (7 friendly steps, progress bar, conditional reveals, draft auto-save, signature block).</li>
+          <li class="t-fix"><span class="pill p-fix">Fix</span><b>Broken logo references</b> on the new employment page corrected to <code>open-arms-logo-black-letters-with-tag.png</code>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-04-28 ── -->
+    <div class="entry">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">April 28, 2026</span>
+          <span class="entry-day">Tuesday</span>
+        </div>
+        <p class="entry-summary">Tooling for capturing real testimonial videos in-house, plus a comprehensive content review doc.</p>
+        <ul class="entry-list">
+          <li class="t-new"><span class="pill p-new">New</span><b>Staff Video Interview Guide</b> (<code>admin-video-interview-guide.html</code>) — password-gated, 11-section guide for capturing high-quality testimonial videos with phones already on hand.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Content Outline</b> (<code>content-outline.md</code>) — full text of every section on the site for client review and copy edits.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Footer Staff Guide link</b> added (muted) so internal team can find the video guide without it being in the public-facing nav.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-04-03 ── -->
+    <div class="entry">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">April 3, 2026</span>
+          <span class="entry-day">Friday</span>
+        </div>
+        <p class="entry-summary">Project proposal page so clients can review and accept the website rebuild engagement online.</p>
+        <ul class="entry-list">
+          <li class="t-new"><span class="pill p-new">New</span><b>Estimate / Proposal page</b> (<code>estimate.html</code>) with project overview, deliverables, hosting plan, payment schedule (2 × $2,500 with extended Net terms), accept-and-sign modal, and calendar links for scheduling kickoff.</li>
+          <li class="t-fix"><span class="pill p-fix">Fix</span><b>Favicon</b> wasn't showing on the estimate page — corrected.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-03-19 ── -->
+    <div class="entry">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">March 19, 2026</span>
+          <span class="entry-day">Thursday</span>
+        </div>
+        <p class="entry-summary">Initial preview build delivered — landing page, password gate, hero video, and AI-rebuilt staff photos.</p>
+        <ul class="entry-list">
+          <li class="t-new"><span class="pill p-new">New</span><b>Initial commit</b>: complete landing page with password gate, hero video, philosophy accordion, programs grid, staff cards, testimonials, enrollment Netlify form, FAQ, contact section, and footer.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Favicons</b> added in all standard sizes (16, 32, 180, plus <code>.ico</code>).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="page-footer">
+    Open Arms Child Development Center · 2980 Davis Road, Fairbanks AK 99709 ·
+    <a href="tel:+19074559466">(907) 455-9466</a>
+    <br><br>
+    Spotted something missing? Email <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a>.
+  </p>
+</div>
+
+<script>
+// ──────────────── Password gate ────────────────
+(function () {
+  const PW = 'openarms';
+  const KEY = 'oa-access';
+  const gate = document.getElementById('gate');
+  if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
+  const form = document.getElementById('gate-form');
+  const input = document.getElementById('gate-input');
+  const err = document.getElementById('gate-error');
+  const toggle = document.getElementById('gate-toggle');
+  toggle.addEventListener('click', () => {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (input.value.trim().toLowerCase() === PW) {
+      sessionStorage.setItem(KEY, '1');
+      gate.style.display = 'none';
+    } else {
+      err.textContent = 'Sorry, that password is not correct.';
+      input.value = '';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
