@@ -339,10 +339,18 @@
     .legend-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 700; }
     .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
     .calendar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .month-tile { background: #fff; border-radius: 18px; padding: 22px 20px; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; min-height: 140px; }
+    .month-tile { background: #fff; border-radius: 18px; padding: 22px 20px; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; min-height: 140px; position: relative; }
     .month-tile:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
     .month-tile.empty { background: #FAFBFC; box-shadow: none; }
     .month-tile.empty .month-empty { color: var(--gray); font-size: 13px; font-style: italic; padding-top: 8px; }
+    .month-tile.past { opacity: 0.55; background: #F8FAFC; box-shadow: none; }
+    .month-tile.past .month-name { color: var(--gray); }
+    .month-tile.past .event-day, .month-tile.past .event-name { color: var(--gray); }
+    .month-tile.past .event-dot { filter: grayscale(0.7); opacity: 0.6; }
+    .month-tile.past:hover { transform: none; box-shadow: none; }
+    .month-tile.current { border-color: var(--blue); border-width: 2px; box-shadow: 0 6px 18px rgba(42,113,176,0.12); }
+    .month-tile.current .month-name { color: var(--blue); }
+    .month-now-badge { position: absolute; top: 14px; right: 14px; font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: #fff; background: var(--blue); padding: 3px 8px; border-radius: 50px; }
     .month-name { font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px dashed #E5E7EB; }
     .month-events { display: flex; flex-direction: column; gap: 10px; }
     .month-event { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; line-height: 1.4; }
@@ -1518,9 +1526,19 @@ const eventColor = {
   early:      '#B8960A',
 };
 const cgrid = document.getElementById('calendar-grid');
-calendar2026.forEach(m => {
+const calendarYear = 2026;
+const now = new Date();
+const nowYear = now.getFullYear();
+const nowMonth = now.getMonth(); // 0–11
+calendar2026.forEach((m, idx) => {
   const tile = document.createElement('div');
-  tile.className = m.events.length ? 'month-tile fade-up' : 'month-tile empty fade-up';
+  const isPast = nowYear > calendarYear || (nowYear === calendarYear && idx < nowMonth);
+  const isCurrent = nowYear === calendarYear && idx === nowMonth;
+  const classes = ['month-tile', 'fade-up'];
+  if (!m.events.length) classes.push('empty');
+  if (isPast) classes.push('past');
+  if (isCurrent) classes.push('current');
+  tile.className = classes.join(' ');
   let body;
   if (m.events.length === 0) {
     body = `<div class="month-empty">No scheduled closures.</div>`;
@@ -1532,7 +1550,8 @@ calendar2026.forEach(m => {
         <span class="event-name">${e.name}</span>
       </div>`).join('') + `</div>`;
   }
-  tile.innerHTML = `<div class="month-name">${m.month}</div>${body}`;
+  const badge = isCurrent ? `<span class="month-now-badge">Now</span>` : '';
+  tile.innerHTML = `<div class="month-name">${m.month}</div>${badge}${body}`;
   cgrid.appendChild(tile);
 });
 
