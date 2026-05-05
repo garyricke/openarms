@@ -179,7 +179,7 @@
     <h1>What's New on the Site</h1>
     <p>A running log of every update made to the Open Arms preview site, from the initial build to this week's changes. Most recent at the top.</p>
     <div class="page-meta">
-      <span><strong>Last update:</strong> May 4, 2026</span>
+      <span><strong>Last update:</strong> May 5, 2026</span>
       <span><strong>Repo:</strong> <a href="https://github.com/garyricke/openarms" target="_blank" rel="noopener">github.com/garyricke/openarms</a></span>
     </div>
   </div>
@@ -194,8 +194,52 @@
   <!-- ════════════════════ TIMELINE ════════════════════ -->
   <div class="timeline">
 
-    <!-- ── 2026-05-04 ── -->
+    <!-- ── 2026-05-05 ── -->
     <div class="entry is-latest">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 5, 2026</span>
+          <span class="entry-day">Tuesday</span>
+          <span class="entry-tag">Latest</span>
+        </div>
+        <p class="entry-summary">Quick round of polish from Lori: tighter tuition label, smoother hero video, USDA non-discrimination statement, and a calendar correction.</p>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h4>Decisions made on this round</h4>
+          </div>
+          <p class="decisions-sub">Small choices I made while applying these edits — please flag any that should change and I'll adjust.</p>
+          <ol>
+            <li>
+              <b>Hero video "no cut" — how should the loop play back?</b>
+              <span class="answer">Decision: <b>Ping-pong (forward → reverse → forward)</b> driven by a small JS loop that nudges <code>currentTime</code> backward when the clip nears its end, then resumes forward play at the start. No re-encoded reversed copy of the file is needed; the existing Cloudinary clip is reused.</span>
+            </li>
+            <li>
+              <b>Where should the USDA Nondiscrimination Statement live?</b>
+              <span class="answer">Decision: <b>In the site footer on the landing page</b>, in a dedicated band above the © line so it's present site-wide without crowding the main content. Linked the "How to File a Program Discrimination Complaint" reference to the USDA OASCR page; the 866 phone and program.intake email are also linkable. If you want it on every page (employment.html, waitlist.html, estimate.html, status.html), say the word and I'll mirror it.</span>
+            </li>
+            <li>
+              <b>Summer Program start date — confirm June 1, 2026?</b>
+              <span class="answer">Decision: <b>Moved to June 1</b> on the 2026 Calendar (was May 26). Memorial Day (May 25) and the Last Day of School Care (May 21) are unchanged. The Summer Program registration date in March is unchanged.</span>
+            </li>
+          </ol>
+        </div>
+
+        <ul class="entry-list">
+          <li class="t-content"><span class="pill p-content">Content</span><b>Tuition section subtitle</b> shortened from "Monthly rates for September 1, 2025 – June 30, 2026." to <b>"Monthly rates for 2025-26."</b></li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Hero video now ping-pongs</b> — plays forward to the end, then smoothly reverses back to the start, then forward again. Removes the visible cut at the loop point.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>USDA Nondiscrimination Statement</b> added to the landing-page footer (full statement, with linked complaint-form page, phone, and email; "This institution is an equal opportunity provider." line included).</li>
+          <li class="t-fix"><span class="pill p-fix">Fix</span><b>Summer Program start date</b> on the 2026 Calendar moved from <b>May 26 → June 1</b>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-05-04 ── -->
+    <div class="entry">
       <div class="entry-marker">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
@@ -203,7 +247,6 @@
         <div class="entry-header">
           <span class="entry-date">May 4, 2026</span>
           <span class="entry-day">Monday</span>
-          <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">Round-2 client feedback from Lori: uniform staff cards, three new sections from old-site content, and a new role posting.</p>
 
