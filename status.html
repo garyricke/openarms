@@ -244,6 +244,86 @@
         <div class="decisions">
           <div class="decisions-head">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h4>Why a contact form + service instead of just an email link?</h4>
+          </div>
+          <p class="decisions-sub">The simplest approach would be a plain <code>mailto:</code> link on each staff card — click it, your email app opens, you compose and send. We chose the contact-form route instead. Here's the reasoning, roughly in order of importance:</p>
+          <ol>
+            <li>
+              <b>Many parents don't have a desktop email client configured</b>
+              <span class="answer">Most people now use Gmail or Outlook in a browser tab, not a dedicated app like Apple Mail or Thunderbird. When those users click a <code>mailto:</code> link, the browser either does nothing, opens an empty Outlook setup wizard they don't want, or asks them to "choose a default app." Many give up at that point. The in-page form works for everyone regardless of how they handle email.</span>
+            </li>
+            <li>
+              <b>Lower drop-off — fewer steps to send</b>
+              <span class="answer">Every context switch (page → email app → compose → send) is a place a parent loses momentum. Filling four fields without leaving the website keeps them in the flow they started.</span>
+            </li>
+            <li>
+              <b>Staff email addresses don't appear in the page source</b>
+              <span class="answer">A <code>mailto:</code> link puts the address right in the HTML (<code>&lt;a href="mailto:Infant@openarmsfairbanks.org"&gt;</code>), where automated bots scrape it for spam lists. Within weeks the classroom inboxes would start receiving spam. With the form, addresses live only in the JavaScript data and aren't easily harvestable.</span>
+            </li>
+            <li>
+              <b>Required fields and basic validation</b>
+              <span class="answer">A <code>mailto:</code> link can't enforce that the parent fills in a subject or includes their name. The form requires Name, Email, Subject, and Message before the Send button works — so staff get consistently useful messages instead of a one-line note from "no-subject" with no return address.</span>
+            </li>
+            <li>
+              <b>Auditability — you can prove a message was sent</b>
+              <span class="answer">If a parent later says "I emailed Sherry on Tuesday and never heard back," the EmailJS dashboard's History tab logs every send attempt with timestamp, recipient, and success/failure. With <code>mailto:</code>, the message lived only on the parent's machine — there's no way to confirm it ever left.</span>
+            </li>
+            <li>
+              <b>Reply-To trick keeps replies one click away</b>
+              <span class="answer">The form sends from a single address (Gary's connected Gmail) but sets the parent's email as the <b>Reply-To</b>. So when Sherry hits Reply, her response goes straight back to the parent — not to Gary. Staff don't have to copy/paste the address out of the message body.</span>
+            </li>
+            <li>
+              <b>Consistent inbox formatting for staff</b>
+              <span class="answer">Every message arrives with the same structure (Subject prefixed <code>[Open Arms]</code>, body labeled From / Email / Message). Staff can scan their inbox and immediately recognize a website-originated parent message vs. internal email or spam.</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <h4>Best practices baked into this setup</h4>
+          </div>
+          <p class="decisions-sub">A short list of small protections that are easy to overlook but matter when a contact form sits on the public internet.</p>
+          <ol>
+            <li>
+              <b>Honeypot field traps bots</b>
+              <span class="answer">The form includes a hidden field that real users never see (it's set to <code>display:none</code>). Most spam bots fill in every field they find — including invisible ones. If anything lands in the honeypot, the submission is silently dropped before it ever reaches EmailJS. Free, invisible, and effective against ~95% of low-effort bots.</span>
+            </li>
+            <li>
+              <b>Allowed-origin lock at the service level</b>
+              <span class="answer">Even though the EmailJS public key is technically visible to anyone who views the page source, the EmailJS server rejects any request that doesn't originate from <code>openarmsak.netlify.app</code>. So even if someone copied the key, they couldn't use it from their own site or a script.</span>
+            </li>
+            <li>
+              <b>Public key only — no secrets in the codebase</b>
+              <span class="answer">The three values in <code>index.html</code> are all <i>public</i> identifiers (public key, service ID, template ID). They're safe to commit to git and serve to browsers. The actual sending credentials (Gmail OAuth tokens) live inside Gary's EmailJS account and never touch the website code.</span>
+            </li>
+            <li>
+              <b>Built-in volume ceiling</b>
+              <span class="answer">The free-tier 200-sends-per-month limit acts as a hard cap on abuse. Even if a determined attacker tried to spam staff via the form, EmailJS would stop accepting sends partway through the month, with a clear notice in the dashboard. The dashboard also makes any sudden volume spike obvious.</span>
+            </li>
+            <li>
+              <b>Clear success and error states</b>
+              <span class="answer">After a successful send, the modal swaps to a green confirmation panel ("Message sent! Expect a reply within 1–2 business days"). On failure, the user sees a red message with the daycare's phone number as a fallback so they're never stranded — no silent failures.</span>
+            </li>
+            <li>
+              <b>Reply-To set to the parent's email, not the sender</b>
+              <span class="answer">A subtle but important detail: EmailJS sends technically come from Gary's connected Gmail, but the message's Reply-To header is the parent's address. Without this, staff hitting Reply would email Gary by accident.</span>
+            </li>
+            <li>
+              <b>Staff addresses obfuscated, not just hidden</b>
+              <span class="answer">The 8 routing addresses live in the JavaScript data array, not as <code>&lt;a href="mailto:..."&gt;</code> tags. While a determined scraper can still parse the JS, the vast majority of email-harvesting bots only look at HTML anchor tags — so this drops harvest risk by an order of magnitude with no usability cost.</span>
+            </li>
+            <li>
+              <b>Account ownership is portable</b>
+              <span class="answer">The three credentials are tied to the EmailJS account, not the domain. If the EmailJS account ever needs to be transferred from Gary to Open Arms (or to a future developer), it's a settings change in EmailJS — no code rewrite required.</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             <h4>Future TODO — when the site moves to a custom domain</h4>
           </div>
           <p class="decisions-sub">One thing to remember the day Open Arms migrates the site away from <code>openarmsak.netlify.app</code> to a real domain (e.g., <code>openarmsfairbanks.org</code> or a subdomain).</p>
