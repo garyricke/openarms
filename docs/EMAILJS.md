@@ -120,11 +120,28 @@ contact form — not a realistic threat profile.
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
+| **Form succeeds but message lands in the wrong inbox** (specifically the connected sender account, not the intended recipient) | EmailJS template's **To Email** field is set to its default (the connected service account) rather than the variable `{{to_email}}`. This is the #1 EmailJS template misconfiguration — it bit us during initial testing on May 7, 2026. | Open the template → set **To Email** to exactly `{{to_email}}` (with the double braces) → Save. Use the template's "Test It" button to verify before going back to the live site. |
 | Form shows red error toast on submit | Origin mismatch (browsing a preview URL or local dev server) | Test on the live `openarmsak.netlify.app` URL |
 | Form shows error, dashboard shows auth failure | Gmail OAuth revoked | Reconnect the Gmail service in EmailJS dashboard |
-| Form succeeds but staff don't get the email | Spam folder, or template variables don't match the JS payload | Check Gmail/M365 spam, then verify template uses `{{to_email}}` not `{{recipient}}` etc. |
+| Form succeeds but staff don't get the email at all | Spam folder, or template variables don't match the JS payload | Check Gmail/M365 spam, then verify template uses `{{to_email}}` not `{{recipient}}` etc. |
 | Form button stays disabled forever | JS error before `emailjs.send` resolves | Check browser console |
 | Sends silently dropped | Honeypot filled (legit user with autofill?) | Check the `cm_trap` field — should always be empty for real submits |
+| Replies from staff go to Gary instead of the parent | Template's **Reply-To** field is empty or wrong | Set **Reply-To** to exactly `{{from_email}}` |
+
+### How to verify the template is wired correctly
+
+The fastest sanity check, copy-pasteable into the EmailJS template editor:
+
+| Template field | Required value |
+|---|---|
+| **To Email** | `{{to_email}}` |
+| **From Name** | `{{from_name}}` *(or a fixed string like "Open Arms Website")* |
+| **Reply To** | `{{from_email}}` |
+| **Subject** | `[Open Arms] {{subject}}` *(or similar — must reference `{{subject}}`)* |
+| **Bcc / Cc** | empty |
+| **Body** | references `{{to_name}}`, `{{from_name}}`, `{{from_email}}`, `{{message}}` |
+
+If any of those fields hold a literal email address (like `gary.ricke@orbisdesign.com`) instead of the curly-brace variable, that's almost certainly the bug.
 
 ## Future TODOs
 
