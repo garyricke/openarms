@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     /* ── PASSWORD GATE ──────────────────────────────────── */
     #gate {
@@ -241,6 +242,28 @@
     .staff-card-info h4 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
     .staff-card-info .role { font-size: 12px; color: var(--gray); font-weight: 500; }
     .staff-card-info .dept { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+    .staff-contact-btn { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; padding: 7px 16px; border-radius: 20px; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+    .staff-contact-btn:hover { background: #1e5a94; transform: translateY(-1px); }
+    /* ── STAFF CONTACT MODAL ─────────────────────────────── */
+    #contact-modal .modal { max-width: 480px; }
+    .cm-staff-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid #F3F4F6; }
+    .cm-avatar { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 20px; color: #fff; flex-shrink: 0; }
+    .cm-staff-info strong { display: block; font-size: 15px; font-weight: 800; }
+    .cm-staff-info span { font-size: 12px; color: var(--gray); }
+    .cm-field { margin-bottom: 14px; }
+    .cm-field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; }
+    .cm-field input, .cm-field textarea { width: 100%; padding: 10px 13px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-family: 'Open Sans', sans-serif; font-size: 14px; color: var(--black); transition: border-color 0.2s; box-sizing: border-box; }
+    .cm-field textarea { resize: vertical; min-height: 110px; }
+    .cm-field input:focus, .cm-field textarea:focus { outline: none; border-color: var(--blue); }
+    .cm-submit { width: 100%; padding: 13px; border-radius: 50px; border: none; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; margin-top: 4px; }
+    .cm-submit:hover:not(:disabled) { background: #1e5a94; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,113,176,0.3); }
+    .cm-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .cm-error { display: none; margin-top: 12px; padding: 10px 14px; background: #FEF2F2; border-radius: 8px; font-size: 13px; color: #DC2626; }
+    .cm-success { display: none; text-align: center; padding: 20px 0 8px; }
+    .cm-success-icon { width: 56px; height: 56px; border-radius: 50%; background: #D1FAE5; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .cm-success-icon svg { color: #059669; }
+    .cm-success h3 { font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+    .cm-success p { font-size: 14px; color: var(--gray); line-height: 1.6; }
 
     /* ── TESTIMONIALS ───────────────────────────────────── */
     #testimonials { padding: 96px 0; background: var(--blue); color: #fff; }
@@ -1367,6 +1390,55 @@
   </div>
 </div>
 
+<!-- ── STAFF CONTACT MODAL ──────────────────────────────────────────── -->
+<div id="contact-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="cm-title" style="font-size:20px;font-weight:900;margin:0;">Send a Message</h2>
+      <button class="modal-close" onclick="closeContactModal()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="cm-staff-header">
+        <div class="cm-avatar" id="cm-avatar"></div>
+        <div class="cm-staff-info">
+          <strong id="cm-staff-name"></strong>
+          <span id="cm-staff-role"></span>
+        </div>
+      </div>
+      <div id="cm-form-wrap">
+        <form id="cm-form" novalidate>
+          <input type="text" name="cm_trap" style="display:none" tabindex="-1" autocomplete="off" />
+          <div class="cm-field">
+            <label for="cm-from-name">Your Name <span style="color:var(--red)">*</span></label>
+            <input type="text" id="cm-from-name" name="from_name" required placeholder="Jane Smith" />
+          </div>
+          <div class="cm-field">
+            <label for="cm-from-email">Your Email <span style="color:var(--red)">*</span></label>
+            <input type="email" id="cm-from-email" name="from_email" required placeholder="jane@email.com" />
+          </div>
+          <div class="cm-field">
+            <label for="cm-subject">Subject <span style="color:var(--red)">*</span></label>
+            <input type="text" id="cm-subject" name="subject" required placeholder="Question about my child's class" />
+          </div>
+          <div class="cm-field">
+            <label for="cm-message">Message <span style="color:var(--red)">*</span></label>
+            <textarea id="cm-message" name="message" required placeholder="Write your message here…"></textarea>
+          </div>
+          <button type="submit" class="cm-submit" id="cm-submit-btn">Send Message →</button>
+          <div class="cm-error" id="cm-error">Something went wrong. Please try again or call us at (907) 455-9466.</div>
+        </form>
+      </div>
+      <div class="cm-success" id="cm-success">
+        <div class="cm-success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Message sent!</h3>
+        <p>Your message has been delivered.<br>Expect a reply within 1–2 business days.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── PASSWORD GATE ──────────────────────────────────────────────────────
 (function() {
@@ -1464,28 +1536,30 @@ const programs = [
 ];
 
 const staff = [
-  { name:'Lori', role:'Director', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Tina', role:'Assistant Director', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Dana', role:'Administrative Assistant', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Linda', role:'Food Program Liaison', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Jacki', role:'Benefit Coordinator', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Charles', role:'Kitchen Manager', dept:'Administration', deptColor:'#2A71B0', img:null },
-  { name:'Sherry', role:'Teacher', dept:'Infants', deptColor:'#E94E41', img:null },
-  { name:'Brandon', role:'Assistant Teacher & Driver', dept:'Infants', deptColor:'#E94E41', img:null },
-  { name:'Ella', role:'Teacher', dept:'Wobblers', deptColor:'#B8960A', img:null },
-  { name:'Macey', role:'Teacher', dept:'Wobblers', deptColor:'#B8960A', img:null },
-  { name:'Carol', role:'Teacher', dept:'Toddlers 1', deptColor:'#4A9B4E', img:null },
-  { name:'Edelyn', role:'Assistant Teacher', dept:'Toddlers 1', deptColor:'#4A9B4E', img:null },
-  { name:'Chandeth', role:'Teacher', dept:'Toddlers 2', deptColor:'#4A9B4E', img:null },
-  { name:'Lauren', role:'Assistant Teacher', dept:'Toddlers 2', deptColor:'#4A9B4E', img:null },
-  { name:'Beth', role:'Teacher', dept:'Preschool 3', deptColor:'#2A71B0', img:null },
-  { name:'Shonti', role:'Assistant Teacher', dept:'Preschool 3', deptColor:'#2A71B0', img:null },
-  { name:'Margarita', role:'Teacher', dept:'Preschool 4', deptColor:'#2A71B0', img:null },
-  { name:'Erika', role:'Assistant Teacher', dept:'Preschool 4', deptColor:'#2A71B0', img:null },
-  { name:'Mrudula', role:'Teacher', dept:'School Age', deptColor:'#E94E41', img:null },
-  { name:'Sunshine', role:'Teacher & Driver', dept:'School Age', deptColor:'#E94E41', img:null },
-  { name:'Wesley', role:'Assistant Teacher', dept:'All Classrooms', deptColor:'#4A9B4E', img:null },
-  { name:'Paetynn', role:'Assistant Teacher', dept:'All Classrooms', deptColor:'#4A9B4E', img:null },
+  { name:'Lori',     role:'Director',                    dept:'Administration', deptColor:'#2A71B0', img:null, email:'LAndrews@openarmsfairbanks.org' },
+  { name:'Tina',     role:'Assistant Director',          dept:'Administration', deptColor:'#2A71B0', img:null, email:'cingram@openarmsfairbanks.org' },
+  { name:'Dana',     role:'Administrative Assistant',    dept:'Administration', deptColor:'#2A71B0', img:null, email:'adminassist@openarmsfairbanks.org' },
+  { name:'Linda',    role:'Food Program Liaison',        dept:'Administration', deptColor:'#2A71B0', img:null, email:'Frontdesk@openarmsfairbanks.org' },
+  { name:'Jacki',    role:'Benefit Coordinator',         dept:'Administration', deptColor:'#2A71B0', img:null, email:'jbarkdull@openarmsfairbanks.org' },
+  { name:'Charles',  role:'Kitchen Manager',             dept:'Administration', deptColor:'#2A71B0', img:null, email:'Kitchen@openarmsfairbanks.org' },
+  { name:'Sherry',   role:'Teacher',                     dept:'Infants',        deptColor:'#E94E41', img:null, email:'Infant@openarmsfairbanks.org' },
+  { name:'Brandon',  role:'Assistant Teacher & Driver',  dept:'Infants',        deptColor:'#E94E41', img:null, email:'Infant@openarmsfairbanks.org' },
+  { name:'Ella',     role:'Teacher',                     dept:'Wobblers',       deptColor:'#B8960A', img:null, email:'Wobbler-1@openarmsfairbanks.org' },
+  { name:'Macey',    role:'Teacher',                     dept:'Wobblers',       deptColor:'#B8960A', img:null, email:'Wobbler-1@openarmsfairbanks.org' },
+  { name:'Carol',    role:'Teacher',                     dept:'Toddlers 1',     deptColor:'#4A9B4E', img:null, email:'Toddler@openarmsfairbanks.org' },
+  { name:'Edelyn',   role:'Assistant Teacher',           dept:'Toddlers 1',     deptColor:'#4A9B4E', img:null, email:'Toddler@openarmsfairbanks.org' },
+  { name:'Chandeth', role:'Teacher',                     dept:'Toddlers 2',     deptColor:'#4A9B4E', img:null, email:'Toddler2@openarmsfairbanks.org' },
+  { name:'Lauren',   role:'Assistant Teacher',           dept:'Toddlers 2',     deptColor:'#4A9B4E', img:null, email:'Toddler2@openarmsfairbanks.org' },
+  { name:'Beth',     role:'Teacher',                     dept:'Preschool 3',    deptColor:'#2A71B0', img:null, email:'Preschool-3@openarmsfairbanks.org' },
+  { name:'Shonti',   role:'Assistant Teacher',           dept:'Preschool 3',    deptColor:'#2A71B0', img:null, email:'Preschool-3@openarmsfairbanks.org' },
+  { name:'Margarita',role:'Teacher',                     dept:'Preschool 4',    deptColor:'#2A71B0', img:null, email:'Preschool-4@openarmsfairbanks.org' },
+  { name:'Erika',    role:'Assistant Teacher',           dept:'Preschool 4',    deptColor:'#2A71B0', img:null, email:'Preschool-4@openarmsfairbanks.org' },
+  { name:'Mrudula',  role:'Teacher',                     dept:'School Age',     deptColor:'#E94E41', img:null, email:'SchoolAge@openarmsfairbanks.org' },
+  { name:'Sunshine', role:'Teacher & Driver',            dept:'School Age',     deptColor:'#E94E41', img:null, email:'SchoolAge@openarmsfairbanks.org' },
+  { name:'Wesley',   role:'Assistant Teacher',           dept:'All Classrooms', deptColor:'#4A9B4E', img:null, email:null },
+  { name:'Paetynn',  role:'Assistant Teacher',           dept:'All Classrooms', deptColor:'#4A9B4E', img:null, email:null },
+  // TEST ENTRY — remove after EmailJS routing is verified end-to-end
+  { name:'Gary',     role:'Test Account',                dept:'Administration', deptColor:'#2A71B0', img:null, email:'grickesecret@gmail.com' },
 ];
 
 // ── RENDER PROGRAMS ────────────────────────────────────────────────────
@@ -1601,13 +1675,23 @@ staff.forEach(s => {
   const avatar = s.img
     ? `<img src="${s.img}" alt="${s.name}" loading="lazy" />`
     : `<div class="staff-avatar-placeholder" style="background:${s.deptColor}" aria-label="${s.name}">${initial}</div>`;
+  const msgBtn = s.email
+    ? `<button type="button" class="staff-contact-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Message
+      </button>`
+    : '';
   card.innerHTML = `
     <div class="staff-card-avatar-wrap">${avatar}</div>
     <div class="staff-card-info">
       <h4>${s.name}</h4>
       <div class="role">${s.role}</div>
       <span class="dept" style="background:${s.deptColor}22;color:${s.deptColor}">${s.dept}</span>
+      ${msgBtn}
     </div>`;
+  if (s.email) {
+    card.querySelector('.staff-contact-btn').addEventListener('click', () => openContactModal(s));
+  }
   sgrid.appendChild(card);
 });
 
@@ -1801,6 +1885,72 @@ function closeMobile() { document.getElementById('mobile-menu').classList.remove
   // Fallback if the browser fires 'ended' before our timeupdate threshold
   video.addEventListener('ended', startReverse);
 })();
+
+// ── STAFF CONTACT FORM (EmailJS) ───────────────────────────────────────
+// After setting up EmailJS, replace the three placeholder values below.
+// See instructions in status.html for the setup steps.
+emailjs.init('3cvbFuZhPz0TF9qZg');
+
+const EMAILJS_SERVICE_ID  = 'service_5lsr80d';
+const EMAILJS_TEMPLATE_ID = 'template_ki4y3nv';
+
+let _contactStaff = null;
+
+function openContactModal(s) {
+  _contactStaff = s;
+  document.getElementById('cm-avatar').textContent = s.name.charAt(0).toUpperCase();
+  document.getElementById('cm-avatar').style.background = s.deptColor;
+  document.getElementById('cm-staff-name').textContent = s.name;
+  document.getElementById('cm-staff-role').textContent = s.role + ' · ' + s.dept;
+  document.getElementById('cm-form').reset();
+  document.getElementById('cm-error').style.display = 'none';
+  document.getElementById('cm-form-wrap').style.display = '';
+  document.getElementById('cm-success').style.display = 'none';
+  const btn = document.getElementById('cm-submit-btn');
+  btn.disabled = false;
+  btn.textContent = 'Send Message →';
+  document.getElementById('contact-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('cm-from-name').focus(), 50);
+}
+
+function closeContactModal() {
+  closeModal('contact-modal');
+  _contactStaff = null;
+}
+
+document.getElementById('cm-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (!_contactStaff) return;
+  if (this.cm_trap.value) return; // honeypot
+  const fromName  = document.getElementById('cm-from-name').value.trim();
+  const fromEmail = document.getElementById('cm-from-email').value.trim();
+  const subject   = document.getElementById('cm-subject').value.trim();
+  const message   = document.getElementById('cm-message').value.trim();
+  if (!fromName || !fromEmail || !subject || !message) return;
+  const btn   = document.getElementById('cm-submit-btn');
+  const errEl = document.getElementById('cm-error');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  errEl.style.display = 'none';
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    to_email:   _contactStaff.email,
+    to_name:    _contactStaff.name,
+    from_name:  fromName,
+    from_email: fromEmail,
+    subject:    subject,
+    message:    message,
+  })
+  .then(() => {
+    document.getElementById('cm-form-wrap').style.display = 'none';
+    document.getElementById('cm-success').style.display = 'block';
+  })
+  .catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+    errEl.style.display = 'block';
+  });
+});
 </script>
 </body>
 </html>
