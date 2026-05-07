@@ -194,8 +194,82 @@
   <!-- ════════════════════ TIMELINE ════════════════════ -->
   <div class="timeline">
 
-    <!-- ── 2026-05-05 (round 2) ── -->
+    <!-- ── 2026-05-07 ── -->
     <div class="entry is-latest">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 7, 2026</span>
+          <span class="entry-day">Thursday</span>
+          <span class="entry-tag">Latest</span>
+        </div>
+        <p class="entry-summary">Staff contact form is <b>live</b>. EmailJS account configured, credentials wired into the site, and an end-to-end test confirmed messages are delivered to the correct routing inbox. Documentation below explains how the plumbing works and what to watch for.</p>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <h4>How the staff contact form works</h4>
+          </div>
+          <p class="decisions-sub">Plain-language overview of the moving parts so you (or whoever takes over the site later) knows what each piece does.</p>
+          <ol>
+            <li>
+              <b>Where messages are sent from</b>
+              <span class="answer">When a parent submits the form, their browser calls a service called <b>EmailJS</b> directly — no Open Arms server is involved. EmailJS is a free third-party "send email from a webpage" service that handles the actual email delivery for us. Netlify just hosts the static site files; it has nothing to do with sending these messages.</span>
+            </li>
+            <li>
+              <b>Who owns the EmailJS account</b>
+              <span class="answer">Gary set up the EmailJS account under his own login on the <b>free tier</b>. Three IDs from that account (a public key, a service ID, and a template ID) are saved inside <code>index.html</code> so the form knows which account to use. If Gary ever needs to hand the account to Open Arms, the login can be transferred or a new account created and the three IDs swapped — no code rewrite needed.</span>
+            </li>
+            <li>
+              <b>Free-tier limits</b>
+              <span class="answer">The free EmailJS plan allows <b>200 sends per month</b> and <b>1 allowed origin domain</b> (currently <code>openarmsak.netlify.app</code>). Both are comfortable for a contact form. The dashboard shows a running count of sends per month — if it ever gets close to the limit, that's the signal to upgrade.</span>
+            </li>
+            <li>
+              <b>How messages route to the right staffer</b>
+              <span class="answer">Each staff member's card carries a routing email in the site's data. When the modal opens for "Sherry — Infants," for example, the form is pre-set to deliver to <code>Infant@openarmsfairbanks.org</code>. The parent's email is set as Reply-To, so when the staffer hits Reply, it goes back to the parent (not to Gary or the EmailJS account). Eight unique routing addresses are wired up across the 20 staff members who have one assigned.</span>
+            </li>
+            <li>
+              <b>Spam &amp; abuse protections in place</b>
+              <span class="answer">Three layers: (1) a hidden honeypot field that bots fill in but humans don't see — submissions with anything in it are silently dropped; (2) the EmailJS allowed-origin restriction blocks anyone from using these credentials from a site other than <code>openarmsak.netlify.app</code>; (3) the 200/month cap puts a hard ceiling on volume even if abuse occurs.</span>
+            </li>
+            <li>
+              <b>What to do if the form ever stops working</b>
+              <span class="answer">Open the EmailJS dashboard → <b>History</b> tab. It logs every send attempt with success/failure status. The most common breakage is the connected email account (Gmail/M365) revoking authorization — fix is to reconnect it under <b>Email Services</b>. Less commonly, hitting the monthly cap shows a clear error in the dashboard.</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h4>Future TODO — when the site moves to a custom domain</h4>
+          </div>
+          <p class="decisions-sub">One thing to remember the day Open Arms migrates the site away from <code>openarmsak.netlify.app</code> to a real domain (e.g., <code>openarmsfairbanks.org</code> or a subdomain).</p>
+          <ol>
+            <li>
+              <b>Update the EmailJS allowed domain</b>
+              <span class="answer">Log in to EmailJS → <b>Account → General → Domains</b> → <b>replace</b> <code>https://openarmsak.netlify.app</code> with the new domain (e.g., <code>https://openarmsfairbanks.org</code>). The free tier only allows one domain, so this is a swap, not an add. Until you do this, the contact form will silently fail on the new domain.</span>
+            </li>
+            <li>
+              <b>No code change needed</b>
+              <span class="answer">The three EmailJS credentials in <code>index.html</code> stay the same — they're tied to the account, not the domain. Just the dashboard setting changes.</span>
+            </li>
+          </ol>
+        </div>
+
+        <ul class="entry-list">
+          <li class="t-new"><span class="pill p-new">New</span><b>EmailJS credentials wired in</b> — the three placeholder values in <code>index.html</code> have been replaced with the live public key, service ID, and template ID from Gary's free EmailJS account. The form is now functional end-to-end.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>End-to-end test passed</b> — a test submission via a temporary "Gary — Test Account" staff entry confirmed messages are delivered to the routing inbox within seconds. Test entry has been removed.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Allowed-origin lock</b> — the EmailJS account is restricted to accept requests only from <code>openarmsak.netlify.app</code>, so the credentials can't be reused from any other website.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>"Action required" callout from May 5 marked resolved</b> — see the May 5 entry below for the original setup steps if you ever need to reproduce them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-05-05 (round 2) ── -->
+    <div class="entry">
       <div class="entry-marker">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
@@ -203,14 +277,13 @@
         <div class="entry-header">
           <span class="entry-date">May 5, 2026</span>
           <span class="entry-day">Tuesday</span>
-          <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">Staff section upgraded: each card now has a "Message" button that opens a polished in-page contact form — no email client needed. Messages route directly to the correct staff email address.</p>
 
         <div class="decisions">
           <div class="decisions-head">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            <h4>Action required before the contact form goes live — EmailJS setup</h4>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <h4>EmailJS setup steps (completed May 7) — kept for reference</h4>
           </div>
           <p class="decisions-sub">The contact form uses <b>EmailJS</b> (free, no backend needed). Three placeholder values in the code need to be replaced with your real credentials. Steps:</p>
           <ol>
