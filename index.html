@@ -585,6 +585,41 @@
       .staff-grid { grid-template-columns: repeat(2,1fr); }
       .trust-card .num { font-size: 32px; }
     }
+
+    /* ── PRINT (Calendar) ──────────────────────────────────
+       Triggered by the "Print / Save PDF" button on the calendar.
+       Hides every non-calendar section so the print dialog (or
+       "Save as PDF" in any modern browser) yields a clean handout. */
+    @media print {
+      @page { size: letter portrait; margin: 0.5in; }
+      body { background: #fff !important; }
+      #gate, #nav, #hero, #trust, #philosophy, #programs,
+      #tuition, #staff, #testimonials, #enrollment, #faq, #employment,
+      #contact, #footer, .modal-backdrop, .cal-print-row { display: none !important; }
+      #calendar { padding: 0 !important; background: #fff !important; }
+      #calendar .container { max-width: 100% !important; padding: 0 !important; }
+      #calendar .header { margin-bottom: 16px !important; text-align: left !important; }
+      #calendar .section-label { font-size: 11px !important; }
+      #calendar .section-title { font-size: 22px !important; margin: 4px 0 6px !important; }
+      #calendar .section-sub { font-size: 12px !important; }
+      .legend-strip { padding: 10px 14px !important; margin-bottom: 16px !important; gap: 14px !important; box-shadow: none !important; page-break-inside: avoid; }
+      .legend-item { font-size: 11px !important; }
+      .calendar-grid { gap: 8px !important; grid-template-columns: repeat(3, 1fr) !important; }
+      .month-tile { padding: 10px 12px !important; min-height: 0 !important; box-shadow: none !important; border: 1px solid #999 !important; page-break-inside: avoid; transform: none !important; }
+      .month-tile.past { opacity: 1 !important; background: #fff !important; }
+      .month-tile.past .month-name, .month-tile.past .event-day, .month-tile.past .event-name { color: #1A1A1A !important; }
+      .month-tile.past .event-dot { filter: none !important; opacity: 1 !important; }
+      .month-name { font-size: 11px !important; margin-bottom: 6px !important; padding-bottom: 4px !important; }
+      .month-event { font-size: 10px !important; line-height: 1.25 !important; }
+      .month-now-badge { display: none !important; }
+      .fade-up { opacity: 1 !important; transform: none !important; }
+    }
+
+    /* The print button itself (screen only) */
+    .cal-print-row { display: flex; justify-content: center; margin-bottom: 28px; }
+    #cal-print { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--blue); border: 2px solid var(--blue); border-radius: 50px; padding: 10px 20px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    #cal-print:hover { background: var(--blue); color: #fff; }
+    #cal-print svg { width: 16px; height: 16px; }
   </style>
 </head>
 <body>
@@ -888,7 +923,7 @@
         <ul>
           <li>Breakfast — 7:30 AM to 8:30 AM</li>
           <li>Morning snack — 10:00 AM to 10:30 AM</li>
-          <li>Lunch — 11:00 AM to 12:30 PM (depending on age group)</li>
+          <li>Lunch — 11:15 AM to 12:30 PM (depending on age group)</li>
           <li>Afternoon snack — 3:00 PM to 4:30 PM (depending on age group)</li>
         </ul>
       </div>
@@ -912,6 +947,13 @@
       <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Program Start / End</div>
       <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Registration Opens</div>
       <div class="legend-item"><span class="legend-dot" style="background:#B8960A"></span>Early Close</div>
+    </div>
+
+    <div class="cal-print-row fade-up">
+      <button type="button" id="cal-print" onclick="window.print()" aria-label="Print or save the 2026 calendar as PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save PDF
+      </button>
     </div>
 
     <div class="calendar-grid fade-up" id="calendar-grid"></div>
@@ -1328,6 +1370,7 @@
           <li><a href="#contact">Contact</a></li>
           <li style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1)"><a href="admin-video-interview-guide.html" style="opacity:0.45;font-size:12px;">Staff Guide</a></li>
           <li><a href="status.html" style="opacity:0.45;font-size:12px;">Status</a></li>
+          <li><a href="launch.html" style="opacity:0.45;font-size:12px;">Launch Plan</a></li>
         </ul>
       </div>
       <div>
@@ -1593,8 +1636,8 @@ const calendar2026 = [
   ]},
   { month:'April',     events:[] },
   { month:'May',       events:[
-    { day:21, name:'Last Day of School Care',         type:'transition' },
     { day:25, name:'Memorial Day (Observed)',          type:'closed' },
+    { day:27, name:'Last Day of School Care',          type:'transition' },
   ]},
   { month:'June',      events:[
     { day:1,  name:'Summer Program Starts (School Age)', type:'transition' },

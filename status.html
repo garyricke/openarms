@@ -179,7 +179,7 @@
     <h1>What's New on the Site</h1>
     <p>A running log of every update made to the Open Arms preview site, from the initial build to this week's changes. Most recent at the top.</p>
     <div class="page-meta">
-      <span><strong>Last update:</strong> May 5, 2026</span>
+      <span><strong>Last update:</strong> May 8, 2026</span>
       <span><strong>Repo:</strong> <a href="https://github.com/garyricke/openarms" target="_blank" rel="noopener">github.com/garyricke/openarms</a></span>
     </div>
   </div>
@@ -193,6 +193,59 @@
 
   <!-- ════════════════════ TIMELINE ════════════════════ -->
   <div class="timeline">
+
+    <!-- ── 2026-05-08 (round 2) — Launch plan page ── -->
+    <div class="entry is-latest">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 8, 2026</span>
+          <span class="entry-day">Friday</span>
+          <span class="entry-tag">Latest</span>
+        </div>
+        <p class="entry-summary">New <b>Launch Day Steps</b> page added — focused step-by-step guide for the actual launch-day cutover, with every step tagged Orbis / Open Arms / Joint so it's clear who is doing what.</p>
+        <ul class="entry-list">
+          <li class="t-new"><span class="pill p-new">New</span><b>Launch Day Steps page</b> — admin-only, password-gated like Status. Linked from the muted Quick Links area in the footer ("Launch Plan" alongside "Staff Guide" and "Status"). Direct URL: <code>launch.html</code>.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>9 numbered steps in order.</b> Each step has an owner pill (Orbis / Open Arms / Joint), a clear title, and a description. Steps cover: removing the password gate, adding the custom domain in Netlify, updating DNS at the registrar, SSL verification, canonical domain choice, swapping the EmailJS allowed origin, configuring Netlify form-notification recipients, end-to-end testing on the live domain, and adding Netlify + EmailJS to the safe-senders list on recipient inboxes.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>The two Open Arms steps (3 and 9) are now visually elevated and walk-through detailed.</b> A green "Quick orientation for Open Arms" callout at the top of the page tells Lori &amp; Tina exactly which two steps they own. Step 3 (DNS) now includes plain-language "what this is", a "find your registrar" tip, the actual records table with the concrete Netlify load-balancer IP <code>75.2.60.5</code> ready to paste in, numbered field-by-field instructions, "what success looks like", and a "don't guess — screenshot and ask" warning. Step 9 (safe senders) now lists the three sender addresses to allow and gives separate, click-by-click instructions for Gmail, Outlook, and Apple Mail.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ── 2026-05-08 (round 1) — Small client edits + printable calendar ── -->
+    <div class="entry">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 8, 2026</span>
+          <span class="entry-day">Friday</span>
+        </div>
+        <p class="entry-summary">Three small edits from Lori — two content corrections and one new feature. The 2026 Calendar is now printable / saveable as PDF directly from the page.</p>
+
+        <ul class="entry-list">
+          <li class="t-content"><span class="pill p-content">Content</span><b>Lunch hours updated</b> on the Tuition section's "Meals included with tuition" strip — now reads <b>11:15 AM to 12:30 PM (depending on age group)</b> (was 11:00 AM).</li>
+          <li class="t-fix"><span class="pill p-fix">Fix</span><b>Last Day of School Care moved May 21 → May 27</b> on the 2026 Calendar. The May tile now shows Memorial Day (May 25) followed by Last Day of School Care (May 27) in date order.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Printable / downloadable calendar</b> — a "Print / Save PDF" button now appears beneath the legend in the 2026 Calendar section. Clicking it opens the browser's print dialog, where parents can either send to a printer or choose <b>"Save as PDF"</b> (every modern browser on Mac, Windows, iPhone, and Android offers this in the same dialog). The print view is styled separately: only the calendar prints — no nav, hero, staff, or footer — and it fits cleanly on a single letter-size page.</li>
+        </ul>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <h4>Why a Print/Save-PDF button instead of a static PDF file?</h4>
+          </div>
+          <p class="decisions-sub">Two reasonable approaches; we picked the one that's easier to maintain:</p>
+          <ol>
+            <li><b>Static PDF file uploaded to the site (the alternative).</b><span class="answer">Pro: a single download link. Con: every time you change a calendar date, the PDF has to be regenerated and re-uploaded, or it silently goes out of sync with the on-page calendar. Today's "May 21 → May 27" edit is a perfect example — a stale PDF would still say May 21.</span></li>
+            <li><b>Print-from-page (what we built).</b><span class="answer">Pro: the printed/saved PDF always reflects whatever the on-page calendar currently shows, including future updates. The user gets <b>both</b> options — print-to-paper or save-as-PDF — from the same one button. Con: requires the user to click "Save as PDF" in the print dialog rather than a single "Download" link, but every modern browser exposes this prominently and parents are already used to it from school forms, tickets, etc.</span></li>
+          </ol>
+          <p class="decisions-sub">Net: lower maintenance burden, zero risk of drift, same end result for the parent. If you'd prefer a one-click static PDF download instead, that's a 10-minute swap — let us know.</p>
+        </div>
+      </div>
+    </div>
 
     <!-- ── 2026-05-07 (round 2) — Photos TODO + research ── -->
     <div class="entry">
@@ -282,7 +335,7 @@
     </div>
 
     <!-- ── 2026-05-07 (round 1) — EmailJS go-live ── -->
-    <div class="entry is-latest">
+    <div class="entry">
       <div class="entry-marker">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
@@ -290,7 +343,6 @@
         <div class="entry-header">
           <span class="entry-date">May 7, 2026</span>
           <span class="entry-day">Thursday</span>
-          <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">Staff contact form is <b>live</b>. EmailJS account configured, credentials wired into the site, and an end-to-end test confirmed messages are delivered to the correct routing inbox. Documentation below explains how the plumbing works and what to watch for.</p>
 

@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Launch Day Steps · Open Arms Child Development Center</title>
+  <meta name="description" content="Step-by-step plan for launch day, with owner tags on every step." />
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green:  #7BC07E;
+      --green-d:#2F8033;
+      --blue:   #2A71B0;
+      --blue-d: #1E5A8E;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --yellow-d: #6E5A06;
+      --black:  #1A1A1A;
+      --gray:   #6B7280;
+      --line:   #E5E7EB;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--black); background: #F8FAFC; line-height: 1.6; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; border: 0; cursor: pointer; background: none; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; background: #F1F5F9; padding: 1px 6px; border-radius: 4px; }
+
+    /* ── Password gate ────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; background: linear-gradient(135deg, var(--black) 0%, var(--blue-d) 100%);
+      display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 24px;
+    }
+    .gate-box { background: #fff; border-radius: 24px; padding: 40px 36px; max-width: 420px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.25); text-align: center; }
+    .gate-box img { width: 130px; margin-bottom: 20px; }
+    .gate-box h1 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+    .gate-box p { color: var(--gray); margin-bottom: 20px; font-size: 14px; }
+    .gate-input-wrap { position: relative; margin-bottom: 12px; }
+    .gate-box input { width: 100%; padding: 14px 48px 14px 16px; border: 2px solid var(--line); border-radius: 12px; font-size: 15px; font-family: inherit; }
+    .gate-box input:focus { outline: none; border-color: var(--blue); }
+    .gate-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); padding: 6px; border-radius: 6px; }
+    .gate-toggle:hover { color: var(--blue); }
+    .gate-box .gate-error { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 18px; }
+    .gate-box button[type=submit] { width: 100%; padding: 14px; border-radius: 12px; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; }
+    .gate-box button[type=submit]:hover { background: var(--blue-d); }
+
+    /* ── Topbar ────────────────────────────────────────────── */
+    .topbar { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 100; }
+    .topbar-inner { max-width: 960px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topbar-logo img { height: 38px; }
+    .topbar-back { display: inline-flex; align-items: center; gap: 6px; color: var(--gray); font-size: 14px; font-weight: 600; }
+    .topbar-back:hover { color: var(--blue); text-decoration: none; }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    .container { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+    .page-head { padding: 56px 0 24px; }
+    .eyebrow { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .page-head h1 { font-family: 'Nunito', sans-serif; font-size: clamp(32px, 4.5vw, 42px); font-weight: 900; line-height: 1.1; margin-bottom: 14px; }
+    .page-head p { font-size: 16px; color: var(--gray); max-width: 660px; line-height: 1.65; }
+    .page-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; font-size: 13px; color: var(--gray); }
+    .page-meta span { display: inline-flex; align-items: center; gap: 6px; }
+    .page-meta strong { color: var(--black); font-weight: 700; }
+
+    /* ── Owner-pill legend at top ───────────────────────────── */
+    .owner-legend { display: flex; flex-wrap: wrap; gap: 16px; padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 14px; margin: 8px 0 32px; font-size: 13px; }
+    .owner-legend .ol-item { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--black); }
+    .owner-legend .ol-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* ── Intro line above the steps ─────────────────────────── */
+    .intro-line { font-size: 14px; color: var(--gray); margin: 0 0 20px; line-height: 1.6; }
+
+    /* ── Step card ──────────────────────────────────────────── */
+    .step { display: grid; grid-template-columns: 44px 1fr; gap: 16px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: #F1F5F9; color: var(--gray); font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-body { min-width: 0; }
+    .step-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .step-meta h4 { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; color: var(--black); line-height: 1.3; }
+    .step-body p { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 6px; }
+    .step-body p:last-child { margin-bottom: 0; }
+    .step-body ul { margin: 6px 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+    .step-body ul li { font-size: 13.5px; color: var(--black); line-height: 1.55; }
+    .step-body ul li code { font-size: 12.5px; }
+
+    /* ── Owner pills ────────────────────────────────────────── */
+    .owner { display: inline-block; font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 3px 9px; border-radius: 50px; }
+    .owner.orbis     { background: rgba(42,113,176,0.14); color: var(--blue-d); }
+    .owner.client    { background: rgba(123,192,126,0.20); color: var(--green-d); }
+    .owner.joint     { background: rgba(184,150,10,0.16); color: var(--yellow-d); }
+
+    /* ── Open Arms action steps — visually elevated ─────────── */
+    .step.client-action {
+      border-left: 6px solid var(--green);
+      background: linear-gradient(to right, rgba(123,192,126,0.07), #fff 30%);
+      box-shadow: 0 4px 16px rgba(123,192,126,0.12);
+    }
+    .step.client-action .step-num {
+      background: var(--green);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(123,192,126,0.18);
+    }
+    .step.client-action .step-meta h4 {
+      font-size: 17px;
+    }
+
+    /* ── Quick-orientation callout for Open Arms ────────────── */
+    .client-callout {
+      background: #F0FAF1;
+      border: 1px solid rgba(123,192,126,0.45);
+      border-left: 5px solid var(--green);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 28px;
+    }
+    .client-callout-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .client-callout-head svg { color: var(--green-d); flex-shrink: 0; }
+    .client-callout-head h3 { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900; color: var(--green-d); }
+    .client-callout p { font-size: 14px; color: var(--black); margin-bottom: 8px; line-height: 1.6; }
+    .client-callout p:last-child { margin-bottom: 0; }
+    .client-callout b { color: var(--green-d); }
+
+    /* ── Plain-language explanation block ───────────────────── */
+    .plain-def {
+      background: #FFFBEB;
+      border: 1px dashed rgba(255,212,59,0.65);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 10px 0 14px;
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.55;
+    }
+    .plain-def strong { color: var(--yellow-d); font-family: 'Nunito', sans-serif; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+    /* ── Sub-step container (for high-detail steps) ─────────── */
+    .substep {
+      background: #F8FAFC;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 10px 0;
+    }
+    .substep h5 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 1.4px; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 10px;
+    }
+    .substep ol { margin: 0 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .substep ol li { font-size: 13.5px; color: var(--black); line-height: 1.55; }
+    .substep ol li b { color: var(--black); }
+
+    /* ── DNS records table ──────────────────────────────────── */
+    .dns-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 4px 0 12px;
+    }
+    .dns-table th {
+      text-align: left; padding: 10px 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 10.5px; font-weight: 800;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--gray); background: #F8FAFC;
+      border-bottom: 1px solid var(--line);
+    }
+    .dns-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12.5px;
+      color: var(--black);
+    }
+    .dns-table tr:last-child td { border-bottom: 0; }
+    .dns-table td.type {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      color: var(--blue-d);
+      letter-spacing: 0.5px;
+      font-size: 13px;
+    }
+
+    /* ── Per-platform tabs (Gmail / Outlook / Apple Mail) ───── */
+    .platform { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 8px 0; }
+    .platform h6 { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; color: var(--blue-d); letter-spacing: 0.8px; margin-bottom: 8px; }
+    .platform ol { margin: 0 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .platform ol li { font-size: 13px; color: var(--black); line-height: 1.5; }
+
+    /* ── Warning block for "if something goes wrong" ────────── */
+    .warn-block {
+      background: #FEF2F2;
+      border: 1px solid rgba(233,78,65,0.30);
+      border-left: 4px solid var(--red);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin: 12px 0 0;
+      font-size: 13.5px;
+      color: var(--black);
+      line-height: 1.55;
+    }
+    .warn-block strong { color: #B5392E; font-family: 'Nunito', sans-serif; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    .page-footer { text-align: center; padding: 32px 24px 56px; color: var(--gray); font-size: 13px; }
+    .page-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .page-head { padding: 36px 0 20px; }
+      .step { grid-template-columns: 32px 1fr; gap: 12px; padding: 14px 16px; }
+      .step-num { width: 28px; height: 28px; font-size: 13px; }
+      .topbar-inner { padding: 12px 16px; }
+      .container { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ PASSWORD GATE ════════════════════ -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms" />
+    <h1>Internal Document</h1>
+    <p>Launch day plan for Orbis + Open Arms — password-protected.</p>
+    <form id="gate-form" autocomplete="off">
+      <div class="gate-input-wrap">
+        <input id="gate-input" type="password" placeholder="Enter password" autofocus />
+        <button type="button" class="gate-toggle" id="gate-toggle" aria-label="Show password">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="gate-error" id="gate-error"></div>
+      <button type="submit" id="gate-submit">Continue</button>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════ TOPBAR ════════════════════ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-logo" href="index.html">
+      <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms Child Development Center" />
+    </a>
+    <a class="topbar-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to site
+    </a>
+  </div>
+</header>
+
+<!-- ════════════════════ HEAD ════════════════════ -->
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Launch Day</div>
+    <h1>Launch Day Steps</h1>
+    <p>Every step required, in order, to flip the site from its current preview URL (<code>openarmsak.netlify.app</code>) over to a public custom domain. Each step is tagged with an owner so it's clear who is doing what.</p>
+    <div class="page-meta">
+      <span><strong>Document owner:</strong> Orbis (Gary)</span>
+      <span><strong>Currently live at:</strong> <a href="https://openarmsak.netlify.app" target="_blank" rel="noopener">openarmsak.netlify.app</a></span>
+    </div>
+  </div>
+
+  <div class="owner-legend">
+    <span class="ol-item"><span class="ol-dot" style="background:var(--blue)"></span><b>Orbis</b> &nbsp;= Gary at Orbis Design</span>
+    <span class="ol-item"><span class="ol-dot" style="background:var(--green)"></span><b>Open Arms</b> &nbsp;= Lori, Tina, or staff</span>
+    <span class="ol-item"><span class="ol-dot" style="background:var(--yellow)"></span><b>Joint</b> &nbsp;= both teams collaborate</span>
+  </div>
+
+  <div class="client-callout">
+    <div class="client-callout-head">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <h3>Quick orientation for Open Arms (Lori, Tina) — read this first</h3>
+    </div>
+    <p>You only handle <b>two of the nine steps</b> below: <b>Step 3</b> (updating DNS at your domain registrar) and <b>Step 9</b> (adding our notification senders to your safe-senders list so emails don't get spam-filtered). Both are highlighted in green and marked with a green-numbered circle so they're easy to find.</p>
+    <p>Everything else on this page is Orbis's job — you don't need to read or do anything for those steps. They're listed so you can see the full picture and know what's happening behind the scenes.</p>
+    <p><b>Important:</b> if anything is unclear or doesn't match what you're seeing on your screen, <b>screenshot it and email Gary at <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a> — don't guess.</b> DNS mistakes can knock out your domain's email at the same time, so we'd much rather lose 30 minutes to a question than half a day to a fix.</p>
+  </div>
+
+  <p class="intro-line">Pick a low-traffic morning — Tuesday or Wednesday is ideal. DNS propagation runs in the background and can take up to 24 hours, so plan around that. Avoid Friday afternoons.</p>
+
+  <!-- ════════════════════ STEPS ════════════════════ -->
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner orbis">Orbis</span><h4>Remove password gates from public pages</h4></div>
+      <p>Strip the gate from <code>index.html</code>, <code>employment.html</code>, and <code>waitlist.html</code>. Keep the gate on <code>status.html</code>, <code>admin-video-interview-guide.html</code>, and <code>launch.html</code> (this page) — those stay admin-only. Commit + push. Netlify auto-deploys within 1–2 minutes.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner orbis">Orbis</span><h4>Add custom domain in Netlify</h4></div>
+      <p>Netlify dashboard → Domains → Add custom domain → enter target domain (e.g., <code>openarmsfairbanks.org</code>). Add <code>www.openarmsfairbanks.org</code> as an alias in the same step. Netlify will display the exact DNS records that need to be set at the registrar.</p>
+    </div>
+  </div>
+
+  <div class="step client-action">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner client">Open Arms — your action</span><h4>Update DNS at your domain registrar</h4></div>
+
+      <div class="plain-def">
+        <strong>What this is, in plain English</strong>
+        When someone types your website address into a browser, their computer first asks "where does this address actually live?" That lookup happens at your <b>domain registrar</b> (the company you bought the domain name from). Right now your domain points nowhere; we need to update its DNS settings to point at our website on Netlify.
+      </div>
+
+      <div class="substep">
+        <h5>Before you start — find your registrar</h5>
+        <ol>
+          <li>Your <b>registrar</b> is whoever you bought the domain from. Most likely <b>GoDaddy, Namecheap, Squarespace, Google Domains</b> (now Squarespace), or <b>Network Solutions</b>.</li>
+          <li>If you're not sure, search your email inbox for "<b>domain renewal</b>" or "<b>invoice</b>" — the receipt will tell you the registrar's name.</li>
+          <li>Make sure you have the login credentials for that account before you start.</li>
+        </ol>
+      </div>
+
+      <div class="substep">
+        <h5>The exact records to enter</h5>
+        <p style="font-size:13px; margin: 0 0 8px;">Add these two records. Gary will confirm the exact values the morning of launch — Netlify also displays them in the dashboard during step 2 — but as of now (the IP has been stable for years) the values are:</p>
+        <table class="dns-table">
+          <thead>
+            <tr><th>Type</th><th>Host / Name</th><th>Value / Points To</th><th>TTL</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="type">A</td>
+              <td>@ &nbsp;<span style="color:var(--gray); font-family:'Open Sans', sans-serif; font-size:11.5px;">(or leave blank, or your domain name — depends on registrar)</span></td>
+              <td>75.2.60.5</td>
+              <td>Auto / 3600</td>
+            </tr>
+            <tr>
+              <td class="type">CNAME</td>
+              <td>www</td>
+              <td>openarmsak.netlify.app</td>
+              <td>Auto / 3600</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="substep">
+        <h5>Step-by-step — at the registrar</h5>
+        <ol>
+          <li>Log in to your registrar.</li>
+          <li>Find your domain in the list of domains you own and click <b>Manage</b> (or <b>DNS</b>, or <b>DNS Settings</b>).</li>
+          <li>Look for a section called <b>DNS Records</b>, <b>Manage DNS</b>, or <b>Zone Editor</b>. (It might be hidden under an <b>Advanced</b> tab.) <b>Do not touch the Nameservers section</b> — that's a different setting and changing it would break things.</li>
+          <li><b>Add the A record</b> using the row from the table above. The registrar will prompt you for "Type" (choose A), "Host" or "Name" (enter <code>@</code> or leave blank — varies by registrar), and "Value" or "Points To" (enter <code>75.2.60.5</code>).</li>
+          <li><b>Add the CNAME record</b> using the second row from the table. "Type" = CNAME, "Host"/"Name" = <code>www</code>, "Value"/"Points To" = <code>openarmsak.netlify.app</code>.</li>
+          <li><b>Delete any existing record that conflicts</b> — i.e., any other A record on <code>@</code>, or any other CNAME on <code>www</code>. The registrar will usually warn you if there's a conflict. <b>Don't delete MX records</b> — those are for your email and are unrelated to the website.</li>
+          <li>Click <b>Save</b> (sometimes labeled <b>Apply</b>, <b>Update</b>, or <b>Confirm</b>).</li>
+        </ol>
+      </div>
+
+      <div class="substep">
+        <h5>What success looks like</h5>
+        <ol>
+          <li>The DNS records list now shows your two new entries (A on <code>@</code> and CNAME on <code>www</code>).</li>
+          <li>The registrar may display a message like "It can take up to 48 hours for changes to take effect." That's normal worst-case wording — in practice, propagation is usually 15 minutes to 4 hours.</li>
+          <li>Reply to Gary's launch-day email letting him know you've saved the records. He'll watch the propagation and confirm when the site is live on the new domain.</li>
+        </ol>
+      </div>
+
+      <div class="warn-block">
+        <strong>If something doesn't look right</strong>
+        Don't guess. Take a screenshot of whatever screen you're stuck on and email it to Gary at <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a>. DNS mistakes can interrupt email service to anyone using <code>@yourdomain.org</code> addresses, so the cost of a wrong click is much higher than the cost of a 5-minute pause to ask.
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner orbis">Orbis</span><h4>Verify SSL certificate provisioned</h4></div>
+      <p>Once DNS resolves, Netlify auto-provisions a free Let's Encrypt SSL certificate (usually within 5 min of DNS hitting). Verify <code>https://openarmsfairbanks.org</code> loads with a valid cert and that <code>http://</code> auto-redirects to <code>https://</code>.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner orbis">Orbis</span><h4>Set canonical domain (apex vs. www)</h4></div>
+      <p>In Netlify: Domain settings → set the primary domain to either <code>openarmsfairbanks.org</code> (apex) or <code>www.openarmsfairbanks.org</code>. The other one auto-redirects. Apex is the modern default; recommend that unless Open Arms already advertises a www version anywhere.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner orbis">Orbis</span><h4>Swap EmailJS allowed origin</h4></div>
+      <p>EmailJS dashboard → Account → General → Domains → remove <code>openarmsak.netlify.app</code>, add the new domain. Save. The free tier allows 1 origin, so this is a replace, not an add. <b>No code change required</b> — credentials stay the same. (Documented in <code>docs/EMAILJS.md</code>.)</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">7</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner orbis">Orbis</span><h4>Configure Netlify form-notification recipients</h4></div>
+      <p>Netlify dashboard → Forms → for each form (<code>enrollment</code>, <code>employment-application</code>, <code>waitlist</code>, <code>proposal-acceptance</code>): Settings → Form notifications → Add email notification → enter the recipient address(es) Open Arms designated for that form.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">8</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner joint">Joint</span><h4>End-to-end test on the live domain</h4></div>
+      <p>Submit one real test through every form and confirm the notification lands in the right inbox. Orbis runs the submissions; Open Arms confirms receipt:</p>
+      <ul>
+        <li><b>Enrollment Inquiry</b> on landing page → check designated inbox</li>
+        <li><b>Employment Application</b> (full multi-step form) → check designated inbox</li>
+        <li><b>Waitlist Application</b> → check designated inbox</li>
+        <li><b>Staff Message</b> (click any staff card → send) → check that staffer's inbox</li>
+        <li><b>Calendar Print/Save PDF</b> → confirm clean output</li>
+        <li><b>Mobile spot-check</b> on a real phone (not just a desktop simulator)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step client-action">
+    <div class="step-num">9</div>
+    <div class="step-body">
+      <div class="step-meta"><span class="owner client">Open Arms — your action</span><h4>Add Netlify + EmailJS to your safe-senders list</h4></div>
+
+      <div class="plain-def">
+        <strong>Why this matters</strong>
+        When a parent fills out a form on the new website, the site sends a notification to the inbox(es) you designated in step 7 (likely <code>frontdesk@</code> plus Lori or Tina). The first time these notifications arrive, your email service may flag them as spam because the sender is unfamiliar. Adding the senders to a safe list now prevents that — so you don't miss a real enrollment inquiry because it got buried in junk mail.
+      </div>
+
+      <div class="substep">
+        <h5>Senders to allow (add all three)</h5>
+        <ol>
+          <li><code>team@netlify.com</code> &nbsp;— sends notifications for the Enrollment, Employment, and Waitlist forms</li>
+          <li><code>noreply@netlify.com</code> &nbsp;— Netlify's secondary notification address, included for safety</li>
+          <li><code>noreply@emailjs.com</code> &nbsp;— sends notifications when a parent uses a staff "Message" button on the staff page</li>
+        </ol>
+      </div>
+
+      <div class="substep">
+        <h5>How to add them — pick the email service your inbox uses</h5>
+        <p style="font-size:13px; margin: 0 0 6px;">Repeat this for <b>every recipient inbox</b> from step 7. If multiple staff are receiving notifications (e.g. Lori + Tina + frontdesk), each person needs to do this on their own inbox.</p>
+
+        <div class="platform">
+          <h6>Gmail / Google Workspace</h6>
+          <ol>
+            <li>Open Gmail. Click the <b>gear icon</b> (top-right) → <b>"See all settings"</b>.</li>
+            <li>Click the <b>"Filters and Blocked Addresses"</b> tab.</li>
+            <li>Click <b>"Create a new filter"</b>.</li>
+            <li>In the <b>From</b> field, paste <code>team@netlify.com</code> → click <b>"Create filter"</b>.</li>
+            <li>On the next screen, check <b>"Never send it to Spam"</b> and <b>"Always mark it as important"</b> → click <b>"Create filter"</b>.</li>
+            <li>Repeat for <code>noreply@netlify.com</code> and <code>noreply@emailjs.com</code> (one filter per address).</li>
+          </ol>
+        </div>
+
+        <div class="platform">
+          <h6>Outlook / Microsoft 365 / Hotmail</h6>
+          <ol>
+            <li>Click the <b>gear icon</b> (top-right) → <b>"View all Outlook settings"</b>.</li>
+            <li>Go to <b>Mail</b> → <b>Junk email</b>.</li>
+            <li>Under <b>"Safe senders and domains"</b>, click <b>"Add"</b>.</li>
+            <li>Enter <code>team@netlify.com</code> and press Enter.</li>
+            <li>Repeat for <code>noreply@netlify.com</code> and <code>noreply@emailjs.com</code>.</li>
+            <li>Click <b>Save</b>.</li>
+          </ol>
+        </div>
+
+        <div class="platform">
+          <h6>Apple Mail / iCloud Mail</h6>
+          <ol>
+            <li>Open the <b>Contacts</b> app on the Mac (or Contacts on iCloud.com).</li>
+            <li>Add a contact for each sender — name doesn't matter; just enter <code>team@netlify.com</code> as the email. Apple Mail trusts senders that exist in Contacts.</li>
+            <li>Repeat for <code>noreply@netlify.com</code> and <code>noreply@emailjs.com</code>.</li>
+            <li>If a notification still ends up in Junk after step 8's test, find it, right-click → <b>"Move to Inbox"</b>, then right-click the sender → <b>"Add Sender to Address Book"</b> if not already there.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="substep">
+        <h5>Test it</h5>
+        <ol>
+          <li>Once Gary confirms the test submissions in step 8 are sent, check the inbox(es) for those test emails.</li>
+          <li>If the test emails are in the <b>Inbox</b> — you're done.</li>
+          <li>If they're in <b>Spam / Junk</b> — open them and click <b>"Not spam"</b> (or <b>"Mark as not junk"</b>) to retrain the filter, then double-check the safe-sender entries above.</li>
+        </ol>
+      </div>
+
+      <div class="warn-block">
+        <strong>If you can't find a setting</strong>
+        Email Gary at <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a> with the name of your email service (Gmail, Outlook, etc.) and a screenshot of where you're stuck. He'll send you the exact path for that service.
+      </div>
+    </div>
+  </div>
+
+  <p class="page-footer">
+    Orbis Design · Gary Ricke · <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a>
+    <br><br>
+    Questions or changes to this plan — just reply to the email it was shared in.
+  </p>
+</div>
+
+<script>
+// ──────────────── Password gate ────────────────
+(function () {
+  const PW = 'openarms';
+  const KEY = 'oa-access';
+  const gate = document.getElementById('gate');
+  if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
+  const form = document.getElementById('gate-form');
+  const input = document.getElementById('gate-input');
+  const err = document.getElementById('gate-error');
+  const toggle = document.getElementById('gate-toggle');
+  toggle.addEventListener('click', () => {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (input.value.trim().toLowerCase() === PW) {
+      sessionStorage.setItem(KEY, '1');
+      gate.style.display = 'none';
+    } else {
+      err.textContent = 'Sorry, that password is not correct.';
+      input.value = '';
+      input.focus();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
