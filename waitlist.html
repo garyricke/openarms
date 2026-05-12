@@ -35,24 +35,6 @@
     a:hover { text-decoration: underline; }
     button { font: inherit; border: 0; cursor: pointer; background: none; }
 
-    /* ── Password gate ────────────────────────────────────── */
-    #gate {
-      position: fixed; inset: 0; background: linear-gradient(135deg, var(--green) 0%, var(--blue) 100%);
-      display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 24px;
-    }
-    .gate-box { background: #fff; border-radius: 24px; padding: 40px 36px; max-width: 420px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.25); text-align: center; }
-    .gate-box img { width: 130px; margin-bottom: 20px; }
-    .gate-box h1 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
-    .gate-box p { color: var(--gray); margin-bottom: 20px; font-size: 14px; }
-    .gate-input-wrap { position: relative; margin-bottom: 12px; }
-    .gate-box input { width: 100%; padding: 14px 48px 14px 16px; border: 2px solid var(--line); border-radius: 12px; font-size: 15px; font-family: inherit; }
-    .gate-box input:focus { outline: none; border-color: var(--blue); }
-    .gate-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); padding: 6px; border-radius: 6px; }
-    .gate-toggle:hover { color: var(--blue); }
-    .gate-box .gate-error { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 18px; }
-    .gate-box button[type=submit] { width: 100%; padding: 14px; border-radius: 12px; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; }
-    .gate-box button[type=submit]:hover { background: var(--blue-d); }
-
     /* ── Topbar ────────────────────────────────────────────── */
     .topbar { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 100; }
     .topbar-inner { max-width: 1100px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
@@ -164,25 +146,6 @@
   </style>
 </head>
 <body>
-
-<!-- ════════════════════ PASSWORD GATE ════════════════════ -->
-<div id="gate">
-  <div class="gate-box">
-    <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms" />
-    <h1>Preview Access</h1>
-    <p>This site is currently password-protected for client review.</p>
-    <form id="gate-form" autocomplete="off">
-      <div class="gate-input-wrap">
-        <input id="gate-input" type="password" placeholder="Enter password" autofocus />
-        <button type="button" class="gate-toggle" id="gate-toggle" aria-label="Show password">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        </button>
-      </div>
-      <div class="gate-error" id="gate-error"></div>
-      <button type="submit" id="gate-submit">Continue</button>
-    </form>
-  </div>
-</div>
 
 <!-- ════════════════════ TOPBAR ════════════════════ -->
 <header class="topbar">
@@ -435,32 +398,6 @@
 </div>
 
 <script>
-// ──────────────── Password gate ────────────────
-(function () {
-  const PW = 'openarms';
-  const KEY = 'oa-access';
-  const gate = document.getElementById('gate');
-  if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
-  const form = document.getElementById('gate-form');
-  const input = document.getElementById('gate-input');
-  const err = document.getElementById('gate-error');
-  const toggle = document.getElementById('gate-toggle');
-  toggle.addEventListener('click', () => {
-    input.type = input.type === 'password' ? 'text' : 'password';
-  });
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (input.value.trim().toLowerCase() === PW) {
-      sessionStorage.setItem(KEY, '1');
-      gate.style.display = 'none';
-    } else {
-      err.textContent = 'Sorry, that password is not correct.';
-      input.value = '';
-      input.focus();
-    }
-  });
-})();
-
 // ──────────────── Children ────────────────
 const childrenWrap = document.getElementById('children-wrap');
 const addChildBtn = document.getElementById('add-child-btn');
