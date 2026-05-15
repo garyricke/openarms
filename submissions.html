@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Submissions · Open Arms Child Development Center</title>
+  <meta name="description" content="Internal review of submissions from the Enrollment, Waitlist, and Employment Application forms." />
+  <meta name="robots" content="noindex,nofollow" />
+
+  <link rel="icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green:  #7BC07E;
+      --green-d:#2F8033;
+      --blue:   #2A71B0;
+      --blue-d: #1E5A8E;
+      --red:    #E94E41;
+      --yellow: #FFD43B;
+      --black:  #1A1A1A;
+      --gray:   #6B7280;
+      --gray-d: #4B5563;
+      --line:   #E5E7EB;
+      --bg:     #F8FAFC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--black); background: var(--bg); line-height: 1.6; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; border: 0; cursor: pointer; background: none; }
+
+    /* ── Password gate ────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0; background: linear-gradient(135deg, var(--black) 0%, var(--blue-d) 100%);
+      display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 24px;
+    }
+    .gate-box { background: #fff; border-radius: 24px; padding: 40px 36px; max-width: 420px; width: 100%; box-shadow: 0 30px 60px rgba(0,0,0,0.25); text-align: center; }
+    .gate-box img { width: 130px; margin-bottom: 20px; }
+    .gate-box h1 { font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+    .gate-box p { color: var(--gray); margin-bottom: 20px; font-size: 14px; }
+    .gate-input-wrap { position: relative; margin-bottom: 12px; }
+    .gate-box input { width: 100%; padding: 14px 48px 14px 16px; border: 2px solid var(--line); border-radius: 12px; font-size: 15px; font-family: inherit; }
+    .gate-box input:focus { outline: none; border-color: var(--blue); }
+    .gate-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--gray); padding: 6px; border-radius: 6px; }
+    .gate-toggle:hover { color: var(--blue); }
+    .gate-box .gate-error { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 18px; }
+    .gate-box button[type=submit] { width: 100%; padding: 14px; border-radius: 12px; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; }
+    .gate-box button[type=submit]:hover { background: var(--blue-d); }
+
+    /* ── Topbar ────────────────────────────────────────────── */
+    .topbar { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 100; }
+    .topbar-inner { max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .topbar-logo img { height: 38px; }
+    .topbar-back { display: inline-flex; align-items: center; gap: 6px; color: var(--gray); font-size: 14px; font-weight: 600; }
+    .topbar-back:hover { color: var(--blue); text-decoration: none; }
+
+    /* ── Layout ────────────────────────────────────────────── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .page-head { padding: 48px 0 20px; }
+    .eyebrow { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .page-head h1 { font-family: 'Nunito', sans-serif; font-size: clamp(30px, 4.2vw, 40px); font-weight: 900; line-height: 1.1; margin-bottom: 14px; }
+    .page-head p { font-size: 15.5px; color: var(--gray-d); max-width: 700px; line-height: 1.65; }
+    .privacy-note { margin-top: 18px; background: #FFF7E6; border: 1px solid rgba(255,212,59,0.55); border-left: 4px solid var(--yellow); border-radius: 12px; padding: 14px 18px; font-size: 13.5px; color: #6E5A06; line-height: 1.55; }
+    .privacy-note b { font-weight: 800; }
+    .routing-note {
+      margin-top: 14px; background: #F1F8F2; border: 1px solid rgba(123,192,126,0.45);
+      border-left: 4px solid var(--green); border-radius: 12px; padding: 16px 20px;
+      font-size: 14px; color: #1F4F22; line-height: 1.6;
+    }
+    .routing-note h3 {
+      font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 900;
+      letter-spacing: 1.2px; text-transform: uppercase; color: var(--green-d);
+      margin-bottom: 8px;
+    }
+    .routing-note b { font-weight: 800; color: #143816; }
+    .routing-note a { color: var(--blue-d); font-weight: 700; }
+    .routing-note ul { margin: 8px 0 10px 22px; padding: 0; }
+    .routing-note ul li { margin: 4px 0; }
+    .routing-note .sub-note { display: block; margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(123,192,126,0.55); font-size: 13px; color: #2F5D32; }
+    .action-note {
+      margin-top: 14px; background: #EEF5FB; border: 1px solid rgba(42,113,176,0.35);
+      border-left: 4px solid var(--blue); border-radius: 12px; padding: 18px 22px;
+      font-size: 14px; color: #163A5B; line-height: 1.6; position: relative;
+    }
+    .action-note .badge {
+      display: inline-block; font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 900;
+      letter-spacing: 1.3px; text-transform: uppercase; color: #fff; background: var(--blue);
+      padding: 4px 10px; border-radius: 50px; margin-bottom: 10px;
+    }
+    .action-note h3 {
+      font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 900;
+      color: var(--blue-d); margin-bottom: 8px;
+    }
+    .action-note b { font-weight: 800; color: #0B2640; }
+    .action-note a { color: var(--blue-d); font-weight: 700; }
+    .action-note .checklist { list-style: none; padding: 0; margin: 12px 0 4px; display: flex; flex-direction: column; gap: 8px; }
+    .action-note .checklist li {
+      position: relative;
+      padding: 10px 14px 10px 42px;
+      background: #fff; border: 1px solid rgba(42,113,176,0.18); border-radius: 10px;
+      font-size: 13.5px; line-height: 1.5;
+    }
+    .action-note .checklist li::before {
+      content: ''; position: absolute; left: 14px; top: 12px;
+      width: 18px; height: 18px;
+      border: 2px solid var(--blue); border-radius: 5px; background: #fff;
+    }
+    .action-note .checklist li b { color: var(--blue-d); }
+    .action-note .why {
+      margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(42,113,176,0.35);
+      font-size: 13px; color: #2F5D86;
+    }
+
+    /* ── Tabs ──────────────────────────────────────────────── */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin: 26px 0 22px; }
+    .tab {
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+      padding: 12px 18px; border-radius: 12px 12px 0 0; color: var(--gray);
+      border-bottom: 3px solid transparent; margin-bottom: -1px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .tab:hover { color: var(--blue-d); background: #fff; }
+    .tab.is-active { color: var(--blue-d); background: #fff; border-bottom-color: var(--blue); }
+    .tab .count {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 22px; height: 20px; padding: 0 7px;
+      background: var(--blue); color: #fff;
+      border-radius: 50px; font-size: 11px; font-weight: 800; letter-spacing: 0.3px;
+    }
+    .tab:not(.is-active) .count { background: var(--gray); }
+
+    /* ── Toolbar ───────────────────────────────────────────── */
+    .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 18px; }
+    .search-wrap { position: relative; flex: 1 1 280px; min-width: 240px; }
+    .search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--gray); }
+    .search-wrap input {
+      width: 100%; padding: 11px 14px 11px 42px;
+      border: 1px solid var(--line); border-radius: 10px; font-size: 14px; font-family: inherit;
+      background: #fff;
+    }
+    .search-wrap input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42,113,176,0.12); }
+    .result-count { font-size: 13px; color: var(--gray); font-weight: 600; }
+    .btn-ghost {
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px;
+      padding: 9px 14px; border-radius: 10px;
+      color: var(--blue-d); background: #fff; border: 1px solid var(--line);
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ── Submission cards ─────────────────────────────────── */
+    .panel { display: none; padding-bottom: 56px; }
+    .panel.is-active { display: block; }
+    .empty { text-align: center; padding: 48px 20px; color: var(--gray); font-size: 14px; background: #fff; border: 1px dashed var(--line); border-radius: 14px; }
+
+    .sub {
+      background: #fff; border: 1px solid var(--line); border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 16px; overflow: hidden;
+    }
+    .sub-head {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+      padding: 16px 20px; border-bottom: 1px solid var(--line); background: #FBFCFD;
+    }
+    .sub-name {
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 17px; color: var(--black);
+      flex: 0 0 auto;
+    }
+    .sub-meta-inline { color: var(--gray); font-size: 13px; display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .sub-meta-inline strong { color: var(--gray-d); font-weight: 700; }
+    .sub-when { margin-left: auto; font-size: 12px; color: var(--gray); font-weight: 600; font-family: 'Nunito', sans-serif; letter-spacing: 0.3px; }
+
+    .sub-body { padding: 6px 20px 18px; }
+    .field-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px 22px; padding-top: 14px; }
+    .field-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .f-label { font-family: 'Nunito', sans-serif; font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray); margin-bottom: 3px; }
+    .f-value { font-size: 14px; color: var(--black); word-wrap: break-word; overflow-wrap: anywhere; }
+    .f-value.empty-v { color: var(--gray); font-style: italic; }
+    .f-value.multiline { white-space: pre-wrap; line-height: 1.55; }
+    .f-value a { color: var(--blue); }
+
+    .section-head {
+      font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue-d);
+      margin: 20px 0 0; padding-bottom: 8px; border-bottom: 1px solid var(--line);
+    }
+    .section-head:first-child { margin-top: 6px; }
+
+    .child-block {
+      background: #F4F8FB; border: 1px solid rgba(42,113,176,0.18); border-radius: 12px;
+      padding: 12px 16px 14px; margin-top: 12px;
+    }
+    .child-head { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--blue-d); font-size: 13px; margin-bottom: 6px; }
+
+    .disclosure-block {
+      background: #FFF7F5; border: 1px solid rgba(233,78,65,0.18); border-radius: 12px;
+      padding: 12px 16px 14px; margin-top: 12px;
+    }
+    .disclosure-head { font-family: 'Nunito', sans-serif; font-weight: 800; color: #B5392E; font-size: 13px; margin-bottom: 6px; }
+
+    .essay-block { margin-top: 12px; }
+    .essay-label { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; color: var(--blue-d); letter-spacing: 0.5px; margin-bottom: 4px; }
+    .essay-body { font-size: 14px; line-height: 1.6; white-space: pre-wrap; background: #FBFCFD; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+
+    .pill {
+      display: inline-block; font-family: 'Nunito', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 50px;
+    }
+    .pill-yes { background: rgba(123,192,126,0.18); color: var(--green-d); }
+    .pill-no  { background: rgba(107,114,128,0.15); color: var(--gray-d); }
+    .pill-flag { background: rgba(233,78,65,0.14); color: #B5392E; }
+    .pill-agreed { background: rgba(42,113,176,0.14); color: var(--blue-d); }
+
+    .toggle-btn {
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+      padding: 9px 16px; border-radius: 10px; color: var(--blue-d); background: #EFF5FA;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 8px;
+    }
+    .toggle-btn:hover { background: #E2ECF4; }
+    .toggle-btn .chev { transition: transform 0.2s; }
+    .sub.is-open .toggle-btn .chev { transform: rotate(180deg); }
+    .collapsed-detail { display: none; }
+    .sub.is-open .collapsed-detail { display: block; }
+
+    .tech-row {
+      margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line);
+      font-size: 12px; color: var(--gray); display: flex; flex-wrap: wrap; gap: 14px;
+    }
+    .tech-row code { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 11.5px; color: var(--gray-d); }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    .page-footer { text-align: center; padding: 24px 24px 56px; color: var(--gray); font-size: 13px; }
+    .page-footer a { color: var(--blue); }
+
+    @media (max-width: 720px) {
+      .page-head { padding: 32px 0 16px; }
+      .topbar-inner { padding: 12px 16px; }
+      .container { padding: 0 16px; }
+      .sub-when { margin-left: 0; width: 100%; }
+      .field-grid.cols-2 { grid-template-columns: 1fr; }
+      .sub-body { padding: 6px 16px 16px; }
+      .sub-head { padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ PASSWORD GATE ════════════════════ -->
+<div id="gate">
+  <div class="gate-box">
+    <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms" />
+    <h1>Internal Access</h1>
+    <p>This page contains submitted applicant information and is password-protected.</p>
+    <form id="gate-form" autocomplete="off">
+      <div class="gate-input-wrap">
+        <input id="gate-input" type="password" placeholder="Enter password" autofocus />
+        <button type="button" class="gate-toggle" id="gate-toggle" aria-label="Show password">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="gate-error" id="gate-error"></div>
+      <button type="submit" id="gate-submit">Continue</button>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════ TOPBAR ════════════════════ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="topbar-logo" href="index.html">
+      <img src="images/open-arms-logo-black-letters-with-tag.png" alt="Open Arms Child Development Center" />
+    </a>
+    <a class="topbar-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to site
+    </a>
+  </div>
+</header>
+
+<!-- ════════════════════ HEAD ════════════════════ -->
+<div class="container">
+  <div class="page-head">
+    <div class="eyebrow">Form Submissions</div>
+    <h1>Submissions for Team Review</h1>
+    <p>Every Enrollment Inquiry, Waitlist Application, and Employment Application that has been submitted through the website, in one place. Newest first. Switch between forms using the tabs below.</p>
+    <div class="privacy-note">
+      <b>Reminder — applicant information.</b> The data below includes names, phone numbers, addresses, and (for employment) personal-history answers. Keep this page closed when sharing your screen.
+    </div>
+
+    <div class="routing-note">
+      <h3>Where these submissions go</h3>
+      <p>Every form submitted through the website is now being routed to <b>adminassist@openarmsfairbanks.org</b>. That single inbox receives notifications for:</p>
+      <ul>
+        <li><b>Enrollment Inquiry</b> — the short form on the landing page.</li>
+        <li><b>Waitlist Application</b> — the full parent/guardian + child form on <code>/waitlist</code>.</li>
+        <li><b>Employment Application</b> — the multi-step job application on <code>/employment</code>.</li>
+      </ul>
+      <p>If you'd like different forms going to different email addresses — for example, sending employment applications to Lori and enrollment inquiries to the front desk — please email <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a> with the routing you want and Gary will update Netlify.</p>
+    </div>
+
+    <div class="action-note">
+      <span class="badge">Please test — staff messages</span>
+      <h3>The staff "Message" buttons are a separate system. Please test every one.</h3>
+      <p>On the landing page, each staff card has a <b>Message</b> button that opens a contact form. Those messages do <b>not</b> go to adminassist@. They are routed directly to that individual staff member's own email address using a different service (EmailJS). Because each card has its own destination, every card needs to be tested individually before we can trust the system.</p>
+
+      <p style="margin-top:10px;"><b>What to do:</b> visit the public site, scroll to the <b>Our Staff</b> section, and for each staff member with a Message button:</p>
+      <ul class="checklist">
+        <li>Click <b>Message</b> on the staff card.</li>
+        <li>Send a short test message (e.g., <i>"Test from Open Arms team — please confirm receipt."</i>).</li>
+        <li>Confirm with that staff member that the email arrived in their inbox — and that it didn't land in spam.</li>
+        <li>If anyone reports they did not receive the test, email <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a> with the staff member's name and the email address it was supposed to go to. Gary will fix the routing.</li>
+      </ul>
+
+      <p class="why"><b>Why this matters:</b> the Message buttons are how families reach a specific teacher or administrator without an email address being exposed publicly on the site. If even one staff member's button is mis-routed (typo in the email address, missing entry, full inbox), messages meant for them will silently fail. A full top-to-bottom test of every card is the only way to verify the whole system before launch.</p>
+
+      <p style="margin-top:10px;font-size:13px;color:#2F5D86;"><b>Note:</b> Two staff members — <b>Wesley</b> and <b>Paetynn</b> — currently have no Message button shown because we don't have email addresses for them yet. If you'd like them included, please send their addresses to Gary.</p>
+    </div>
+  </div>
+
+  <!-- ════════════════════ TABS ════════════════════ -->
+  <div class="tabs" role="tablist">
+    <button type="button" class="tab is-active" data-tab="enrollment" role="tab">
+      Enrollment Inquiries <span class="count" id="count-enrollment">0</span>
+    </button>
+    <button type="button" class="tab" data-tab="waitlist" role="tab">
+      Waitlist <span class="count" id="count-waitlist">0</span>
+    </button>
+    <button type="button" class="tab" data-tab="employment" role="tab">
+      Employment Applications <span class="count" id="count-employment">0</span>
+    </button>
+  </div>
+
+  <!-- ════════════════════ TOOLBAR ════════════════════ -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="search" placeholder="Search submissions by name, email, phone, program…" autocomplete="off" />
+    </div>
+    <span class="result-count" id="result-count"></span>
+    <button type="button" class="btn-ghost" id="expand-all">Expand all details</button>
+  </div>
+
+  <!-- ════════════════════ PANELS ════════════════════ -->
+  <div class="panel is-active" id="panel-enrollment" data-panel="enrollment"></div>
+  <div class="panel" id="panel-waitlist" data-panel="waitlist"></div>
+  <div class="panel" id="panel-employment" data-panel="employment"></div>
+
+  <p class="page-footer">
+    Open Arms Child Development Center · 2980 Davis Road, Fairbanks AK 99709 ·
+    <a href="tel:+19074559466">(907) 455-9466</a>
+    <br><br>
+    Need to update or remove a submission? Email <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a>.
+  </p>
+</div>
+
+<script>
+// ──────────────── Password gate ────────────────
+(function () {
+  const PW = 'openarms';
+  const KEY = 'oa-access';
+  const gate = document.getElementById('gate');
+  if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
+  const form = document.getElementById('gate-form');
+  const input = document.getElementById('gate-input');
+  const err = document.getElementById('gate-error');
+  const toggle = document.getElementById('gate-toggle');
+  toggle.addEventListener('click', () => {
+    input.type = input.type === 'password' ? 'text' : 'password';
+  });
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (input.value.trim().toLowerCase() === PW) {
+      sessionStorage.setItem(KEY, '1');
+      gate.style.display = 'none';
+    } else {
+      err.textContent = 'Sorry, that password is not correct.';
+      input.value = '';
+      input.focus();
+    }
+  });
+})();
+
+// ──────────────── Submission data ────────────────
+const ENROLLMENT = [
+  {
+    first_name: "Lily", last_name: "Borem",
+    email: "lilyborem64@gmail.com", phone: "6149298015",
+    program: "Infants (6 wks – 1 yr)", start_date: "2026-09-30",
+    message: "My child has not been born and my husband and I are dual military.",
+    ip: "66.58.225.11",
+    user_agent: "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.4 Mobile/15E148 Safari/604.1",
+    referrer: "https://openarmsfairbanks.org/",
+    created_at: "2026-05-14T23:32:06.975Z"
+  },
+  {
+    first_name: "Linda", last_name: "Gronewold",
+    email: "3klmalaska@gmail.com", phone: "907-388-4163",
+    program: "Infants (6 wks – 1 yr)", start_date: "2026-09-01",
+    message: "This is a test to see who gets this form.",
+    ip: "98.96.183.42",
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0",
+    referrer: "https://openarmsfairbanks.org/",
+    created_at: "2026-05-14T22:24:25.907Z"
+  },
+  {
+    first_name: "Alyssia", last_name: "Willis",
+    email: "alyssia.r.willis@icloud.com", phone: "7572155037",
+    program: "Toddlers (18 mo – 3 yrs)", start_date: "2026-11-16",
+    message: "",
+    ip: "57.140.32.47",
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    referrer: "https://openarmsfairbanks.org/",
+    created_at: "2026-05-14T17:20:46.561Z"
+  },
+  {
+    first_name: "Kara", last_name: "Lucke",
+    email: "karalucke@gmail.com", phone: "9375455173",
+    program: "Infants (6 wks – 1 yr)", start_date: "2026-05-25",
+    message: "We recently lost our childcare & are searching for care for our 5 month old. We would need Monday-Thursday 9 am until 2:30 pm. Thanks!",
+    ip: "65.74.102.125",
+    user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    referrer: "https://openarmsfairbanks.org/",
+    created_at: "2026-05-14T04:54:03.843Z"
+  }
+];
+
+const WAITLIST = [
+  {
+    mother_name: "Kara Nicole Lucke", application_date: "2026-05-14",
+    mother_address: "4757-1 Plum Street",
+    mother_home_phone: "9375455173", mother_work_phone: "", mother_cell_phone: "9375455173", mother_cell_carrier: "Verizon",
+    father_name: "Andrew Edward Lucke", father_address: "4757-1 Plum Street",
+    father_home_phone: "", father_work_phone: "", father_cell_phone: "5135785586", father_cell_carrier: "Verizon",
+    contact_email: "karalucke@gmail.com",
+    children: [
+      { name: "Elowyn Kay Lucke", dob: "2025-12-04", sex: "Female", date_of_care: "2026-05-25", iep: "No" }
+    ],
+    ip: "57.140.64.18",
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    referrer: "https://openarmsfairbanks.org/waitlist",
+    created_at: "2026-05-14T22:29:53.953Z"
+  },
+  {
+    mother_name: "Linda Gronewold", application_date: "2026-05-14",
+    mother_address: "P O Box 70266 Fairbanks, AK  99707",
+    mother_home_phone: "907-388-4163", mother_work_phone: "", mother_cell_phone: "", mother_cell_carrier: "GCI",
+    father_name: "", father_address: "",
+    father_home_phone: "", father_work_phone: "", father_cell_phone: "", father_cell_carrier: "",
+    contact_email: "3klmalaska@gmail.com",
+    children: [
+      { name: "Mickey Mouse", dob: "2026-01-01", sex: "Female", date_of_care: "2026-09-01", iep: "" }
+    ],
+    ip: "98.96.183.42",
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0",
+    referrer: "https://openarmsfairbanks.org/waitlist",
+    created_at: "2026-05-14T22:26:38.331Z"
+  }
+];
+
+const EMPLOYMENT = [
+  {
+    first_name: "Erin", last_name: "Wade", middle_name: "",
+    birth_date: "1985-09-06", cell: "907-799-4995", email: "kherina2371@gmail.com",
+    mailing_address: "401 7th Ave Apt ",
+    position: "PT Classroom Support (Closers)",
+    start_date: "2026-05-20",
+    hours_available: "Monday - Friday 12pm - 6pm",
+    overtime: "Yes",
+    age_18: "Yes", age_21: "Yes",
+    prior_oa: "No", prior_oa_when: "",
+    criminal_conviction: "No", criminal_report: "No", other_languages: "",
+    criminal_report_date: "",
+    drivers_license: "No", license_expiration: "", license_restrictions: "",
+    work_eligible: "Yes", continuing_ed: "Yes", professional_licenses: "N/A",
+    hs_name: "North Pole High School, North Pole, AK", hs_years: "2000-2004", hs_diploma: "2004", hs_major: "General Studies",
+    college_name: "University Alaska Fairbanks, Fairbanks Alaska ", college_years: "2018", college_degree: "N/A", college_major: "Early Childhood Education, 6 credits",
+    voc_name: "N/A", voc_years: "N/A", voc_year: "N/A", voc_field: "N/A",
+    other_training_name: "N/A", other_training_years: "N/A", other_training_year: "N/A", other_training_subject: "N/A",
+    job_0_dates: "2025-present", job_0_title: "Volunteer/Teacher Aides", job_0_type: "Part-Time",
+    job_0_supervisor: "Stephanie Thompson",
+    job_0_employer: "Fairbanks Children's Museum, 302 Cushman St, Fairbanks, AK  907-374-7060",
+    job_0_duties: "Maintain a safe play environment, monitor children's activities, stock and serve snacks to children and parents, sanitize play areas, interact with children to create positive play while making sure they follow rules",
+    childcare_relevant_duties: "My current volunteer experience at the Children’s Museum has helped me build patience, communication skills, and experience working with children in a positive and active environment. My previous childcare assistant positions also gave me experience supervising children, helping with daily activities, and supporting a safe and organized setting. These experiences have helped me become dependable, caring, and comfortable working with children and families.",
+    other_experience: "Fairbanks Children's Museum (Current)",
+    special_skills: "N/A",
+    ref_1_name: "Stephanie Thompson, Manager, Fairbanks Children's Museum", ref_1_address: "Fairbanks, AK ", ref_1_phone: "907-374-7060",
+    ref_2_name: "Liz Markle, Vocational Rehabiltiation Counselor ", ref_2_address: "Fairbanks, AK", ref_2_phone: "907-451-3170",
+    ref_3_name: "Amy Parker, Employment Specialist", ref_3_address: "Fairbanks, AK", ref_3_phone: "907-347-5808",
+    prev_licensed: "No", prev_licensed_detail: "",
+    license_revoked: "No", license_revoked_detail: "",
+    abuse_investigation: "No", abuse_investigation_detail: "",
+    health_concern: "No", health_concern_detail: "",
+    crime_10yr: "No", crime_10yr_detail: "",
+    serious_crime: "No", serious_crime_detail: "",
+    story_experience: "I have a significant amount of experience working with children in the capacity of a childcare assistant.  I truly enjoy working with children and helping them engage in positive and safe play and learning.  I have volunteered at the Children's Museum over the last year and love the educational environment it provides the kids while giving a place to be energetic.",
+    story_environment: "To provide a sanitized, positive, and supportive environment where children can safely play and learn with guidance from adults.",
+    story_faith: "I am not religious, but other people's religion or spirituality does not bother me.  ",
+    story_asset: "I am a very reliable employee.  I do great with maintaining a safe and clean environment for kids and genuinely care about the safety and well-being of children while taking care of them.  ",
+    story_records: "I have experience with maintaining basic logs of activities for children.",
+    church_member: "No", congregation: "", contact_pastor: "", pastor_name: "", pastor_phone: "",
+    ack_investigate: "agreed", ack_misrepresentation: "agreed", ack_rules: "agreed", ack_i9: "agreed", ack_at_will: "agreed", ack_certify: "agreed",
+    signature: "Erin Wade", signature_date: "2026-05-14",
+    ip: "75.127.12.180",
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0",
+    referrer: "https://openarmsfairbanks.org/employment",
+    created_at: "2026-05-14T23:26:34.007Z"
+  }
+];
+
+// ──────────────── Helpers ────────────────
+function fmtDateTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return iso;
+  const opts = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+  return d.toLocaleString('en-US', opts);
+}
+function fmtDate(s) {
+  if (!s) return '';
+  // YYYY-MM-DD → readable
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (!m) return s;
+  const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+function esc(v) {
+  if (v === null || v === undefined) return '';
+  return String(v).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+function field(label, value, opts = {}) {
+  const v = value == null ? '' : String(value).trim();
+  const isEmpty = v === '';
+  const display = isEmpty ? '—' : esc(v);
+  const cls = 'f-value' + (isEmpty ? ' empty-v' : '') + (opts.multiline ? ' multiline' : '');
+  return `<div><div class="f-label">${esc(label)}</div><div class="${cls}">${display}</div></div>`;
+}
+function yesNoPill(v) {
+  if (!v) return '<span class="pill pill-no">—</span>';
+  const lc = String(v).trim().toLowerCase();
+  if (lc === 'yes') return '<span class="pill pill-yes">Yes</span>';
+  if (lc === 'no')  return '<span class="pill pill-no">No</span>';
+  return esc(v);
+}
+function agreedPill(v) {
+  return String(v).trim().toLowerCase() === 'agreed'
+    ? '<span class="pill pill-agreed">Agreed</span>'
+    : '<span class="pill pill-no">—</span>';
+}
+function essay(label, value) {
+  const v = (value == null ? '' : String(value)).trim();
+  if (!v) return `<div class="essay-block"><div class="essay-label">${esc(label)}</div><div class="essay-body" style="color:var(--gray);font-style:italic;">—</div></div>`;
+  return `<div class="essay-block"><div class="essay-label">${esc(label)}</div><div class="essay-body">${esc(v)}</div></div>`;
+}
+function emailLink(v) {
+  if (!v) return '—';
+  return `<a href="mailto:${esc(v)}">${esc(v)}</a>`;
+}
+function phoneLink(v) {
+  if (!v) return '—';
+  const digits = String(v).replace(/[^\d+]/g, '');
+  return `<a href="tel:${esc(digits)}">${esc(v)}</a>`;
+}
+
+// ──────────────── Renderers ────────────────
+function renderEnrollment(rows) {
+  return rows.map(r => {
+    const fullName = `${r.first_name || ''} ${r.last_name || ''}`.trim() || '(no name)';
+    return `
+      <div class="sub" data-search="${esc((fullName + ' ' + r.email + ' ' + r.phone + ' ' + r.program + ' ' + (r.message || '')).toLowerCase())}">
+        <div class="sub-head">
+          <div class="sub-name">${esc(fullName)}</div>
+          <div class="sub-meta-inline">
+            <span><strong>Program:</strong> ${esc(r.program || '—')}</span>
+            <span><strong>Desired start:</strong> ${esc(fmtDate(r.start_date) || '—')}</span>
+          </div>
+          <div class="sub-when">${esc(fmtDateTime(r.created_at))}</div>
+        </div>
+        <div class="sub-body">
+          <div class="field-grid">
+            <div><div class="f-label">Email</div><div class="f-value">${emailLink(r.email)}</div></div>
+            <div><div class="f-label">Phone</div><div class="f-value">${phoneLink(r.phone)}</div></div>
+            <div><div class="f-label">Program</div><div class="f-value">${esc(r.program || '—')}</div></div>
+            <div><div class="f-label">Desired Start Date</div><div class="f-value">${esc(fmtDate(r.start_date) || '—')}</div></div>
+          </div>
+          ${r.message ? essay('Message', r.message) : ''}
+          <div class="tech-row">
+            <span><strong>Submitted:</strong> ${esc(fmtDateTime(r.created_at))}</span>
+            <span><strong>IP:</strong> <code>${esc(r.ip)}</code></span>
+            <span><strong>Referrer:</strong> <code>${esc(r.referrer)}</code></span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderWaitlist(rows) {
+  return rows.map(r => {
+    const motherShort = r.mother_name || '(no parent name)';
+    const childList = (r.children || []).map(c => c.name).filter(Boolean).join(', ') || '(no child listed)';
+    const search = (r.mother_name + ' ' + r.father_name + ' ' + r.contact_email + ' ' + r.mother_cell_phone + ' ' + r.father_cell_phone + ' ' + r.mother_home_phone + ' ' + childList).toLowerCase();
+    return `
+      <div class="sub" data-search="${esc(search)}">
+        <div class="sub-head">
+          <div class="sub-name">${esc(motherShort)}</div>
+          <div class="sub-meta-inline">
+            <span><strong>Child${(r.children || []).length > 1 ? 'ren' : ''}:</strong> ${esc(childList)}</span>
+          </div>
+          <div class="sub-when">${esc(fmtDateTime(r.created_at))}</div>
+        </div>
+        <div class="sub-body">
+          <div class="section-head">Application</div>
+          <div class="field-grid">
+            ${field('Application Date', fmtDate(r.application_date))}
+            <div><div class="f-label">Contact Email</div><div class="f-value">${emailLink(r.contact_email)}</div></div>
+          </div>
+
+          <div class="section-head">Mother / Guardian</div>
+          <div class="field-grid">
+            ${field('Legal Name', r.mother_name)}
+            ${field('Address', r.mother_address)}
+            <div><div class="f-label">Cell Phone</div><div class="f-value">${r.mother_cell_phone ? phoneLink(r.mother_cell_phone) : '—'}</div></div>
+            ${field('Cell Carrier', r.mother_cell_carrier)}
+            <div><div class="f-label">Home Phone</div><div class="f-value">${r.mother_home_phone ? phoneLink(r.mother_home_phone) : '—'}</div></div>
+            <div><div class="f-label">Work Phone</div><div class="f-value">${r.mother_work_phone ? phoneLink(r.mother_work_phone) : '—'}</div></div>
+          </div>
+
+          ${(r.father_name || r.father_cell_phone || r.father_address) ? `
+            <div class="section-head">Father / Guardian</div>
+            <div class="field-grid">
+              ${field('Legal Name', r.father_name)}
+              ${field('Address', r.father_address)}
+              <div><div class="f-label">Cell Phone</div><div class="f-value">${r.father_cell_phone ? phoneLink(r.father_cell_phone) : '—'}</div></div>
+              ${field('Cell Carrier', r.father_cell_carrier)}
+              <div><div class="f-label">Home Phone</div><div class="f-value">${r.father_home_phone ? phoneLink(r.father_home_phone) : '—'}</div></div>
+              <div><div class="f-label">Work Phone</div><div class="f-value">${r.father_work_phone ? phoneLink(r.father_work_phone) : '—'}</div></div>
+            </div>` : ''}
+
+          <div class="section-head">Children to Enroll</div>
+          ${(r.children || []).map((c, i) => `
+            <div class="child-block">
+              <div class="child-head">Child ${i + 1}</div>
+              <div class="field-grid">
+                ${field('Full Name', c.name)}
+                ${field('Date of Birth', fmtDate(c.dob))}
+                ${field('Sex', c.sex)}
+                ${field('Target Date of Care', fmtDate(c.date_of_care))}
+                <div><div class="f-label">IEP</div><div class="f-value">${c.iep ? yesNoPill(c.iep) : '—'}</div></div>
+              </div>
+            </div>`).join('')}
+
+          <div class="tech-row">
+            <span><strong>Submitted:</strong> ${esc(fmtDateTime(r.created_at))}</span>
+            <span><strong>IP:</strong> <code>${esc(r.ip)}</code></span>
+            <span><strong>Referrer:</strong> <code>${esc(r.referrer)}</code></span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderEmployment(rows) {
+  return rows.map(r => {
+    const fullName = [r.first_name, r.middle_name, r.last_name].filter(Boolean).join(' ').trim() || '(no name)';
+    const search = (fullName + ' ' + r.email + ' ' + r.cell + ' ' + r.position).toLowerCase();
+
+    // Personal history disclosures — only highlight the ones answered "Yes"
+    const historyItems = [
+      ['Previously licensed for childcare', r.prev_licensed, r.prev_licensed_detail],
+      ['License ever revoked / suspended', r.license_revoked, r.license_revoked_detail],
+      ['Investigation for child abuse / neglect', r.abuse_investigation, r.abuse_investigation_detail],
+      ['Health condition affecting work', r.health_concern, r.health_concern_detail],
+      ['Crime / arrest in last 10 years', r.crime_10yr, r.crime_10yr_detail],
+      ['Convicted of a serious crime', r.serious_crime, r.serious_crime_detail],
+    ];
+
+    return `
+      <div class="sub" data-search="${esc(search)}">
+        <div class="sub-head">
+          <div class="sub-name">${esc(fullName)}</div>
+          <div class="sub-meta-inline">
+            <span><strong>Position:</strong> ${esc(r.position || '—')}</span>
+            <span><strong>Start:</strong> ${esc(fmtDate(r.start_date) || '—')}</span>
+          </div>
+          <div class="sub-when">${esc(fmtDateTime(r.created_at))}</div>
+        </div>
+        <div class="sub-body">
+
+          <div class="section-head">Quick Summary</div>
+          <div class="field-grid">
+            <div><div class="f-label">Email</div><div class="f-value">${emailLink(r.email)}</div></div>
+            <div><div class="f-label">Cell</div><div class="f-value">${phoneLink(r.cell)}</div></div>
+            ${field('Mailing Address', r.mailing_address)}
+            ${field('Hours Available', r.hours_available)}
+            <div><div class="f-label">18 or older</div><div class="f-value">${yesNoPill(r.age_18)}</div></div>
+            <div><div class="f-label">21 or older</div><div class="f-value">${yesNoPill(r.age_21)}</div></div>
+            <div><div class="f-label">Prior OA Employment</div><div class="f-value">${yesNoPill(r.prior_oa)}${r.prior_oa_when ? ' · ' + esc(r.prior_oa_when) : ''}</div></div>
+            <div><div class="f-label">Eligible to work in US</div><div class="f-value">${yesNoPill(r.work_eligible)}</div></div>
+          </div>
+
+          <button type="button" class="toggle-btn" data-toggle="detail">
+            Show full application
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+
+          <div class="collapsed-detail">
+
+            <div class="section-head">About You</div>
+            <div class="field-grid">
+              ${field('First Name', r.first_name)}
+              ${field('Middle Name', r.middle_name)}
+              ${field('Last Name', r.last_name)}
+              ${field('Date of Birth', fmtDate(r.birth_date))}
+              <div><div class="f-label">Cell</div><div class="f-value">${phoneLink(r.cell)}</div></div>
+              <div><div class="f-label">Email</div><div class="f-value">${emailLink(r.email)}</div></div>
+              ${field('Mailing Address', r.mailing_address)}
+            </div>
+
+            <div class="section-head">The Role</div>
+            <div class="field-grid">
+              ${field('Position', r.position)}
+              ${field('Earliest Start Date', fmtDate(r.start_date))}
+              ${field('Hours Available', r.hours_available)}
+              <div><div class="f-label">Available for Overtime</div><div class="f-value">${yesNoPill(r.overtime)}</div></div>
+              <div><div class="f-label">18 or Older</div><div class="f-value">${yesNoPill(r.age_18)}</div></div>
+              <div><div class="f-label">21 or Older</div><div class="f-value">${yesNoPill(r.age_21)}</div></div>
+              <div><div class="f-label">Prior OA Employment</div><div class="f-value">${yesNoPill(r.prior_oa)}</div></div>
+              ${r.prior_oa_when ? field('Prior OA — When', r.prior_oa_when) : ''}
+            </div>
+
+            <div class="section-head">Background &amp; Eligibility</div>
+            <div class="field-grid">
+              <div><div class="f-label">Criminal Conviction</div><div class="f-value">${yesNoPill(r.criminal_conviction)}</div></div>
+              <div><div class="f-label">AK Criminal Background Report</div><div class="f-value">${yesNoPill(r.criminal_report)}</div></div>
+              ${field('Criminal Report Date', fmtDate(r.criminal_report_date))}
+              ${field('Other Languages', r.other_languages)}
+              <div><div class="f-label">AK Driver's License</div><div class="f-value">${yesNoPill(r.drivers_license)}</div></div>
+              ${field('License Expiration', fmtDate(r.license_expiration))}
+              ${field('License Restrictions', r.license_restrictions)}
+              <div><div class="f-label">Eligible to Work in US</div><div class="f-value">${yesNoPill(r.work_eligible)}</div></div>
+              <div><div class="f-label">Continuing Education</div><div class="f-value">${yesNoPill(r.continuing_ed)}</div></div>
+              ${field('Professional Licenses', r.professional_licenses)}
+            </div>
+
+            <div class="section-head">Education</div>
+            <div class="field-grid">
+              ${field('High School', r.hs_name)}
+              ${field('HS — Years', r.hs_years)}
+              ${field('HS — Diploma', r.hs_diploma)}
+              ${field('HS — Major', r.hs_major)}
+              ${field('College', r.college_name)}
+              ${field('College — Years', r.college_years)}
+              ${field('College — Degree', r.college_degree)}
+              ${field('College — Major', r.college_major)}
+              ${field('Vocational', r.voc_name)}
+              ${field('Vocational — Years', r.voc_years)}
+              ${field('Vocational — Year Completed', r.voc_year)}
+              ${field('Vocational — Field', r.voc_field)}
+              ${field('Other Training', r.other_training_name)}
+              ${field('Other Training — Years', r.other_training_years)}
+              ${field('Other Training — Year', r.other_training_year)}
+              ${field('Other Training — Subject', r.other_training_subject)}
+            </div>
+
+            <div class="section-head">Experience</div>
+            <div class="field-grid">
+              ${field('Dates', r.job_0_dates)}
+              ${field('Title', r.job_0_title)}
+              ${field('Type', r.job_0_type)}
+              ${field('Supervisor', r.job_0_supervisor)}
+              ${field('Employer', r.job_0_employer)}
+            </div>
+            ${essay('Duties', r.job_0_duties)}
+            ${essay('Childcare-Relevant Duties', r.childcare_relevant_duties)}
+            ${essay('Other Experience', r.other_experience)}
+            ${essay('Special Skills', r.special_skills)}
+
+            <div class="section-head">References</div>
+            <div class="field-grid cols-2">
+              <div>
+                <div class="f-label">Reference 1</div>
+                <div class="f-value multiline">${esc([r.ref_1_name, r.ref_1_address, r.ref_1_phone].filter(Boolean).join('\n')) || '—'}</div>
+              </div>
+              <div>
+                <div class="f-label">Reference 2</div>
+                <div class="f-value multiline">${esc([r.ref_2_name, r.ref_2_address, r.ref_2_phone].filter(Boolean).join('\n')) || '—'}</div>
+              </div>
+              <div>
+                <div class="f-label">Reference 3</div>
+                <div class="f-value multiline">${esc([r.ref_3_name, r.ref_3_address, r.ref_3_phone].filter(Boolean).join('\n')) || '—'}</div>
+              </div>
+            </div>
+
+            <div class="section-head">Personal History</div>
+            ${historyItems.map(([label, ans, detail]) => {
+              const isYes = String(ans || '').trim().toLowerCase() === 'yes';
+              if (isYes) {
+                return `<div class="disclosure-block">
+                  <div class="disclosure-head">${esc(label)}: Yes</div>
+                  <div class="f-value multiline">${esc(detail || '') || '<span style="color:var(--gray);font-style:italic;">No detail provided.</span>'}</div>
+                </div>`;
+              }
+              return `<div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 12px;background:#FBFCFD;border:1px solid var(--line);border-radius:10px;">
+                <span style="font-size:13.5px;color:var(--gray-d);">${esc(label)}</span>
+                ${yesNoPill(ans)}
+              </div>`;
+            }).join('')}
+
+            <div class="section-head">Your Story</div>
+            ${essay('Why I want to work with children', r.story_experience)}
+            ${essay('Environment I would create', r.story_environment)}
+            ${essay('Personal faith / values', r.story_faith)}
+            ${essay('What I bring to Open Arms', r.story_asset)}
+            ${essay('Records / documentation experience', r.story_records)}
+
+            <div class="section-head">Faith Community (optional)</div>
+            <div class="field-grid">
+              <div><div class="f-label">Church Member</div><div class="f-value">${r.church_member ? yesNoPill(r.church_member) : '—'}</div></div>
+              ${field('Congregation', r.congregation)}
+              <div><div class="f-label">Contact Pastor</div><div class="f-value">${r.contact_pastor ? yesNoPill(r.contact_pastor) : '—'}</div></div>
+              ${field('Pastor Name', r.pastor_name)}
+              <div><div class="f-label">Pastor Phone</div><div class="f-value">${r.pastor_phone ? phoneLink(r.pastor_phone) : '—'}</div></div>
+            </div>
+
+            <div class="section-head">Acknowledgments &amp; Signature</div>
+            <div class="field-grid">
+              <div><div class="f-label">Permission to investigate references</div><div class="f-value">${agreedPill(r.ack_investigate)}</div></div>
+              <div><div class="f-label">Misrepresentation = grounds for dismissal</div><div class="f-value">${agreedPill(r.ack_misrepresentation)}</div></div>
+              <div><div class="f-label">Agree to abide by rules</div><div class="f-value">${agreedPill(r.ack_rules)}</div></div>
+              <div><div class="f-label">Will provide I-9 documentation</div><div class="f-value">${agreedPill(r.ack_i9)}</div></div>
+              <div><div class="f-label">Understand at-will employment</div><div class="f-value">${agreedPill(r.ack_at_will)}</div></div>
+              <div><div class="f-label">Certify information is true</div><div class="f-value">${agreedPill(r.ack_certify)}</div></div>
+              ${field('Typed Signature', r.signature)}
+              ${field('Signature Date', fmtDate(r.signature_date))}
+            </div>
+          </div>
+
+          <div class="tech-row">
+            <span><strong>Submitted:</strong> ${esc(fmtDateTime(r.created_at))}</span>
+            <span><strong>IP:</strong> <code>${esc(r.ip)}</code></span>
+            <span><strong>Referrer:</strong> <code>${esc(r.referrer)}</code></span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ──────────────── Init ────────────────
+function sortByDateDesc(arr) {
+  return [...arr].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+}
+
+document.getElementById('count-enrollment').textContent = ENROLLMENT.length;
+document.getElementById('count-waitlist').textContent = WAITLIST.length;
+document.getElementById('count-employment').textContent = EMPLOYMENT.length;
+
+const panels = {
+  enrollment: document.getElementById('panel-enrollment'),
+  waitlist:   document.getElementById('panel-waitlist'),
+  employment: document.getElementById('panel-employment'),
+};
+
+panels.enrollment.innerHTML = ENROLLMENT.length
+  ? renderEnrollment(sortByDateDesc(ENROLLMENT))
+  : '<div class="empty">No enrollment inquiries yet.</div>';
+
+panels.waitlist.innerHTML = WAITLIST.length
+  ? renderWaitlist(sortByDateDesc(WAITLIST))
+  : '<div class="empty">No waitlist applications yet.</div>';
+
+panels.employment.innerHTML = EMPLOYMENT.length
+  ? renderEmployment(sortByDateDesc(EMPLOYMENT))
+  : '<div class="empty">No employment applications yet.</div>';
+
+// Tab switching
+const tabs = document.querySelectorAll('.tab');
+const allPanels = document.querySelectorAll('.panel');
+let activeTab = 'enrollment';
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    activeTab = tab.dataset.tab;
+    tabs.forEach(t => t.classList.toggle('is-active', t === tab));
+    allPanels.forEach(p => p.classList.toggle('is-active', p.dataset.panel === activeTab));
+    applySearch();
+  });
+});
+
+// Search filter — works within the active panel
+const search = document.getElementById('search');
+const resultCount = document.getElementById('result-count');
+function applySearch() {
+  const q = (search.value || '').trim().toLowerCase();
+  const panel = panels[activeTab];
+  const items = panel.querySelectorAll('.sub');
+  let visible = 0;
+  items.forEach(el => {
+    const hay = el.dataset.search || '';
+    const show = !q || hay.includes(q);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  resultCount.textContent = q
+    ? `${visible} of ${items.length} matching`
+    : (items.length ? `${items.length} total` : '');
+}
+search.addEventListener('input', applySearch);
+applySearch();
+
+// Expand all toggle
+const expandBtn = document.getElementById('expand-all');
+let allExpanded = false;
+expandBtn.addEventListener('click', () => {
+  allExpanded = !allExpanded;
+  const panel = panels[activeTab];
+  panel.querySelectorAll('.sub').forEach(el => el.classList.toggle('is-open', allExpanded));
+  expandBtn.textContent = allExpanded ? 'Collapse all details' : 'Expand all details';
+});
+
+// Per-card expand toggle (employment "Show full application")
+document.addEventListener('click', e => {
+  const btn = e.target.closest('[data-toggle="detail"]');
+  if (!btn) return;
+  const sub = btn.closest('.sub');
+  sub.classList.toggle('is-open');
+  const isOpen = sub.classList.contains('is-open');
+  btn.firstChild.nodeValue = isOpen ? 'Hide full application ' : 'Show full application ';
+});
+</script>
+
+</body>
+</html>
