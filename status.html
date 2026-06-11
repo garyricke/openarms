@@ -179,7 +179,7 @@
     <h1>What's New on the Site</h1>
     <p>A running log of every update made to the Open Arms preview site, from the initial build to this week's changes. Most recent at the top.</p>
     <div class="page-meta">
-      <span><strong>Last update:</strong> May 8, 2026</span>
+      <span><strong>Last update:</strong> June 11, 2026</span>
       <span><strong>Repo:</strong> <a href="https://github.com/garyricke/openarms" target="_blank" rel="noopener">github.com/garyricke/openarms</a></span>
     </div>
   </div>
@@ -194,8 +194,94 @@
   <!-- ════════════════════ TIMELINE ════════════════════ -->
   <div class="timeline">
 
-    <!-- ── 2026-05-08 (round 2) — Launch plan page ── -->
+    <!-- ── 2026-06-11 — Form recipient routing + staff-message sender name ── -->
     <div class="entry is-latest">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">June 11, 2026</span>
+          <span class="entry-day">Thursday</span>
+          <span class="entry-tag">Latest</span>
+        </div>
+        <p class="entry-summary">Closing out the second half of Lori's May 15 note: the per-staff <b>"Message" form now shows the website as the sender</b> instead of Gary's name. (The first half — routing Employment Applications to Lori &amp; Tina — was handled back in mid-May when she asked; confirming it here for the record.)</p>
+
+        <ul class="entry-list">
+          <li class="t-fix"><span class="pill p-fix">Fix</span><b>Staff "Message" emails now show "Open Arms Fairbanks Website" as the sender.</b> Previously a message sent from a staff card showed Gary's name/address in the From line (an artifact of EmailJS sending through Gary's connected account). The EmailJS template's <b>From Name</b> is now set to <code>Open Arms Fairbanks Website</code>, so the inbox shows the site as the sender. The parent's real name and email are preserved in the message body and in <b>Reply-To</b>, so a staffer hitting Reply still goes straight back to the parent.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Employment Applications → Lori &amp; Tina (confirmed).</b> This routing was set up in mid-May right after Lori's request: submissions from the Employment Application form (<code>/employment</code>) notify <code>landrews@openarmsfairbanks.org</code> and <code>cingram@openarmsfairbanks.org</code> directly, while Waitlist and Enrollment still go to <code>adminassist@</code>. It went unnoticed only because the employment form has had no real traffic yet — just 1 submission (a setup test on May 14) versus 19 on Waitlist and 28 on Enrollment.</li>
+        </ul>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>Note on the sender address</h4>
+          </div>
+          <p class="decisions-sub">The display name now reads as the website, which is what shows in the inbox list. The underlying email <em>address</em> is still Gary's connected Gmail — a hard limit of sending through a Gmail-connected service, which overrides the address to the authenticated account. If you'd like the address itself to end in <code>@openarmsfairbanks.org</code>, that's a follow-up: connect an Open Arms email account to EmailJS. Just send Gary the word and the credentials to set it up.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2026-05-15 — Form routing, Submissions admin page, password gates removed ── -->
+    <div class="entry">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">May 15, 2026</span>
+          <span class="entry-day">Friday</span>
+        </div>
+        <p class="entry-summary">Three changes that move the site from preview to public: <b>form routing consolidated</b> to a single admin inbox, a new <b>Submissions admin page</b> for reviewing every form a parent or applicant sends, and the <b>password gates have been removed</b> from the public-facing pages.</p>
+
+        <ul class="entry-list">
+          <li class="t-update"><span class="pill p-update">Update</span><b>All three Netlify forms now route to <code>adminassist@openarmsfairbanks.org</code>.</b> The Enrollment Inquiry (landing page), Waitlist Application (<code>/waitlist</code>), and Employment Application (<code>/employment</code>) all deliver to that single inbox. If different forms should go to different addresses — e.g., employment applications to Lori, enrollment inquiries to the front desk — email Gary and the routing can be split per form inside Netlify.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Submissions admin page</b> at <code>/submissions</code> (password-gated, linked from the muted Quick Links in the footer as "Submissions"). Every Enrollment, Waitlist, and Employment submission is rendered as a readable card with tabs to switch between form types, per-card expand, and search. Pulls directly from Netlify's form data, so nothing extra has to be exported or shared.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Password gates removed</b> from the landing page, the Waitlist page, and the Employment page (May 12). These are now publicly accessible — anyone with the URL can view them and submit a form. The Status page, Launch Plan page, and admin-only Interview Guide remain gated.</li>
+          <li class="t-content"><span class="pill p-content">Content</span><b>Staff "Message" buttons are a separate system — please test every one.</b> The per-staff Message buttons on the landing page route directly to each staffer's own email via EmailJS, <b>not</b> to <code>adminassist@</code>. Because each card has its own destination, every Message button needs to be tested individually. See the action callout below for the steps.</li>
+        </ul>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <h4>Why a single admin inbox for all three forms?</h4>
+          </div>
+          <p class="decisions-sub">The simplest routing that still works for launch — one inbox someone is already watching, with the option to split later. Reasoning:</p>
+          <ol>
+            <li>
+              <b>One owner, no missed messages.</b>
+              <span class="answer">With three separate inboxes, every recipient has to remember to check theirs daily. A single admin inbox means there is exactly one person responsible for triage on day one, and nothing falls between the cracks while the team gets used to how the site flows.</span>
+            </li>
+            <li>
+              <b>Easy to split when the volume tells you to.</b>
+              <span class="answer">Netlify's form notification recipients are configured per form, not per site, so we can re-route any one of the three (e.g., Employment Applications → Lori) without touching the others or changing any code. It's a 30-second change in the Netlify dashboard once you decide who should own which.</span>
+            </li>
+            <li>
+              <b>Submissions admin page is the backstop.</b>
+              <span class="answer">Even if a notification email is missed or filtered to spam, every submission is still visible on <code>/submissions</code>. So the email is the convenience layer; the admin page is the source of truth.</span>
+            </li>
+          </ol>
+          <p class="decisions-sub">If you'd like a different split now rather than later, email Gary with the routing you want and he'll update Netlify the same day.</p>
+        </div>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <h4>Action — please test every staff "Message" button</h4>
+          </div>
+          <p class="decisions-sub">The staff Message buttons are routed per-person via EmailJS (a different system from the Netlify forms above), and the only way to catch a typo or a missing entry is a top-to-bottom test before launch.</p>
+          <ol>
+            <li><b>Open the public site</b> and scroll to the <b>Our Staff</b> section.</li>
+            <li><b>For each staff card with a Message button:</b> click Message, send a short test (e.g., <i>"Test from the Open Arms team — please confirm receipt"</i>), and confirm with that staff member that the email arrived and didn't land in spam.</li>
+            <li><b>If anyone reports nothing arrived,</b> email <a href="mailto:gary.ricke@orbisdesign.com">gary.ricke@orbisdesign.com</a> with the staff member's name and the address it should have gone to. Gary will fix the routing.</li>
+          </ol>
+          <p class="decisions-sub"><b>Note:</b> Wesley and Paetynn currently have no Message button because we don't have email addresses for them yet. If you'd like them included, send their addresses to Gary.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2026-05-08 (round 2) — Launch plan page ── -->
+    <div class="entry">
       <div class="entry-marker">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
@@ -203,7 +289,6 @@
         <div class="entry-header">
           <span class="entry-date">May 8, 2026</span>
           <span class="entry-day">Friday</span>
-          <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">New <b>Launch Day Steps</b> page added — focused step-by-step guide for the actual launch-day cutover, with every step tagged Orbis / Open Arms / Joint so it's clear who is doing what.</p>
         <ul class="entry-list">
