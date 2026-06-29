@@ -1181,7 +1181,7 @@
   const submitBtn = document.getElementById('gate-submit');
   const toggleBtn = document.getElementById('gate-toggle');
 
-  if (sessionStorage.getItem('oa-access') === '1') {
+  if (sessionStorage.getItem('oa-access-2026') === '1') {
     gate.style.display = 'none';
     return;
   }
@@ -1189,8 +1189,8 @@
   document.body.style.overflow = 'hidden';
 
   function unlock() {
-    if (input.value.trim().toLowerCase() === 'openarms') {
-      sessionStorage.setItem('oa-access', '1');
+    if (input.value.trim().toLowerCase() === 'northstar-2026') {
+      sessionStorage.setItem('oa-access-2026', '1');
       gate.classList.add('hidden');
       document.body.style.overflow = '';
       setTimeout(() => gate.style.display = 'none', 500);

@@ -137,7 +137,7 @@
   </style>
   <script>
   (function() {
-    if (sessionStorage.getItem('oa-access') === '1') return;
+    if (sessionStorage.getItem('oa-access-2026') === '1') return;
     document.documentElement.style.visibility = 'hidden';
 
     function showGate() {
@@ -158,8 +158,8 @@
       var inp = document.getElementById('ag-pw'), btn = document.getElementById('ag-btn'), err = document.getElementById('ag-err');
       function attempt() {
         if (!inp.value) { err.textContent = 'Please enter the password.'; return; }
-        if (inp.value.trim().toLowerCase() === 'openarms') {
-          sessionStorage.setItem('oa-access', '1');
+        if (inp.value.trim().toLowerCase() === 'northstar-2026') {
+          sessionStorage.setItem('oa-access-2026', '1');
           o.remove();
         } else {
           err.textContent = 'Incorrect password. Please try again.';
