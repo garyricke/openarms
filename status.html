@@ -162,7 +162,7 @@
     <h1>What's New on the Site</h1>
     <p>A running log of every update made to the Open Arms preview site, from the initial build to this week's changes. Most recent at the top.</p>
     <div class="page-meta">
-      <span><strong>Last update:</strong> June 11, 2026</span>
+      <span><strong>Last update:</strong> June 29, 2026</span>
       <span><strong>Repo:</strong> <a href="https://github.com/garyricke/openarms" target="_blank" rel="noopener">github.com/garyricke/openarms</a></span>
     </div>
   </div>
@@ -177,8 +177,38 @@
   <!-- ════════════════════ TIMELINE ════════════════════ -->
   <div class="timeline">
 
-    <!-- ── 2026-06-11 — Form recipient routing + staff-message sender name ── -->
+    <!-- ── 2026-06-29 — Staff change + server-side access protection ── -->
     <div class="entry is-latest">
+      <div class="entry-marker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="entry-card">
+        <div class="entry-header">
+          <span class="entry-date">June 29, 2026</span>
+          <span class="entry-day">Monday</span>
+          <span class="entry-tag">Latest</span>
+        </div>
+        <p class="entry-summary">Two things this round: a <b>staffing change</b> reflected on the site, and a <b>security upgrade</b> to how the internal pages are protected. Lori's information was removed from the public site and her contact points now route to Tina, and the internal/admin pages moved from a shared in-page password to proper <b>server-side protection</b> with a fresh password.</p>
+
+        <ul class="entry-list">
+          <li class="t-content"><span class="pill p-content">Content</span><b>Lori removed from the public site.</b> Her staff card is gone from the Staff section, and the &ldquo;other ways to apply&rdquo; and employment contact links now point to Tina (<code>cingram@openarmsfairbanks.org</code>) instead of Lori. Sam was never listed on the public site, so nothing needed to change there.</li>
+          <li class="t-new"><span class="pill p-new">New</span><b>Internal pages now have real server-side password protection.</b> The Status, Submissions, Launch Plan, Staff Guide, and proposal pages are now gated by the web host <em>before</em> the page loads — previously the lock lived inside the page itself. It's a single password box (no username), and one sign-in covers all of those pages for about 12 hours. The public pages (home, employment, waitlist) are unchanged and stay open to everyone.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Password reset.</b> The shared password for the internal pages was changed. Gary shared the new password with Tina directly — it isn't written here on purpose. The old password no longer works anywhere.</li>
+          <li class="t-update"><span class="pill p-update">Update</span><b>Employment Application notifications now go to Tina.</b> Those submissions previously also notified Lori; they now route to <code>cingram@openarmsfairbanks.org</code>. Waitlist and Enrollment continue to go to <code>adminassist@</code>.</li>
+        </ul>
+
+        <div class="decisions">
+          <div class="decisions-head">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <h4>A note on the security upgrade</h4>
+          </div>
+          <p class="decisions-sub">The internal pages used to be protected by a password that lived inside the page — fine for casual privacy, but not a true lock. They're now protected by the web host itself, with the password stored securely on the server, so it's never visible in the page and can be changed anytime without a code update. One item remains on Open Arms' side to fully close out the staffing change: disabling Lori's <code>@openarmsfairbanks.org</code> email account, which the center controls directly.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 2026-06-11 — Form recipient routing + staff-message sender name ── -->
+    <div class="entry">
       <div class="entry-marker">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
@@ -186,7 +216,6 @@
         <div class="entry-header">
           <span class="entry-date">June 11, 2026</span>
           <span class="entry-day">Thursday</span>
-          <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">Closing out the second half of Lori's May 15 note: the per-staff <b>"Message" form now shows the website as the sender</b> instead of Gary's name. (The first half — routing Employment Applications to Lori &amp; Tina — was handled back in mid-May when she asked; confirming it here for the record.)</p>
 
@@ -622,7 +651,6 @@
         <div class="entry-header">
           <span class="entry-date">May 5, 2026</span>
           <span class="entry-day">Tuesday</span>
-          <span class="entry-tag">Latest</span>
         </div>
         <p class="entry-summary">Quick round of polish from Lori: tighter tuition label, smoother hero video, USDA non-discrimination statement, and a calendar correction.</p>
 
