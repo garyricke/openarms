@@ -273,7 +273,7 @@
     #tuition { padding: 96px 0; background: var(--white); }
     #tuition .header { text-align: center; margin-bottom: 48px; }
     #tuition .header .section-sub { margin: 0 auto; }
-    .tuition-rate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 32px; }
+    .tuition-rate-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 32px; }
     .rate-card { background: #fff; border-radius: 18px; padding: 24px 20px; border: 1px solid #E5E7EB; box-shadow: 0 4px 12px rgba(0,0,0,0.04); position: relative; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
     .rate-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.08); }
     .rate-card-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; }
@@ -507,7 +507,6 @@
       #trust .container { grid-template-columns: repeat(2,1fr); }
       .trust-card:nth-child(2) { border-right: none; }
       .employment-grid { grid-template-columns: 1fr; }
-      .tuition-rate-grid { grid-template-columns: repeat(2, 1fr); }
       .calendar-grid { grid-template-columns: repeat(2, 1fr); }
       .summer-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -526,7 +525,7 @@
       .employment-pitch h3 { font-size: 26px; }
       .positions-panel { padding: 24px 20px; }
       .apply-other { grid-template-columns: 1fr; padding: 20px; gap: 12px; text-align: left; }
-      .tuition-rate-grid { grid-template-columns: 1fr 1fr; }
+      .tuition-rate-grid { grid-template-columns: 1fr; }
       .calendar-grid { grid-template-columns: 1fr; }
       .summer-grid { grid-template-columns: 1fr; }
       .school-table th, .school-table td { padding: 10px 12px; font-size: 13px; }
@@ -763,66 +762,60 @@
     <div class="header fade-up">
       <p class="section-label">Investment</p>
       <h2 class="section-title">Tuition Rates</h2>
-      <p class="section-sub">Monthly rates for 2025-26. Hours of operation: Monday – Friday, 7:00 AM – 5:30 PM.</p>
+      <p class="section-sub">Monthly rates effective November 1, 2026. Hours of operation: Monday – Friday, 7:00 AM – 5:30 PM.</p>
     </div>
 
     <div class="tuition-rate-grid fade-up">
       <div class="rate-card">
         <div class="rate-card-top" style="background:var(--red)"></div>
-        <div class="age-tag" style="color:var(--red)">6 weeks – 12 mo</div>
-        <h3>Infant</h3>
-        <div class="price">$1,500<small>/mo</small></div>
-      </div>
-      <div class="rate-card">
-        <div class="rate-card-top" style="background:#B8960A"></div>
-        <div class="age-tag" style="color:#B8960A">12 – 18 mo</div>
-        <h3>Wobbler / Mobile Infant</h3>
-        <div class="price">$1,350<small>/mo</small></div>
+        <div class="age-tag" style="color:var(--red)">6 weeks – 19 mo</div>
+        <h3>Infant / Mobile Infant</h3>
+        <div class="price">$1,550<small>/mo</small></div>
       </div>
       <div class="rate-card">
         <div class="rate-card-top" style="background:var(--green)"></div>
-        <div class="age-tag" style="color:var(--green)">18 mo – 3 yrs</div>
-        <h3>Toddler</h3>
-        <div class="price">$1,260<small>/mo</small></div>
+        <div class="age-tag" style="color:var(--green)">19 mo – 3 yrs</div>
+        <h3>Wobbler / Toddler</h3>
+        <div class="price">$1,400<small>/mo</small></div>
       </div>
       <div class="rate-card">
         <div class="rate-card-top" style="background:var(--blue)"></div>
         <div class="age-tag" style="color:var(--blue)">3 – 5 yrs</div>
         <h3>Preschool</h3>
-        <div class="price">$1,035<small>/mo</small></div>
+        <div class="price">$1,100<small>/mo</small></div>
       </div>
     </div>
 
     <div class="tuition-block fade-up">
       <h3><span class="badge-dot" style="background:var(--red)"></span>School Program</h3>
-      <p class="meta">Before- and after-school care for school-age children, with optional transportation.</p>
+      <p class="meta">Before- and after-school care for school-age children (5 – 12 years). Transportation to local elementary schools is included.</p>
       <table class="school-table">
         <thead>
           <tr>
             <th>Program</th>
-            <th class="num">With Transportation</th>
-            <th class="num">No Transportation</th>
+            <th class="num">Monthly</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Before School Only <span style="color:var(--gray);font-size:12px;">(7:00 AM – 9:15 AM)</span></td>
-            <td class="num">$295.00</td>
-            <td class="num">$235.00</td>
+            <td class="num">$300.00</td>
           </tr>
           <tr>
             <td>After School Only <span style="color:var(--gray);font-size:12px;">(2:30 PM – 5:30 PM)</span></td>
-            <td class="num">$375.00</td>
-            <td class="num">$300.00</td>
+            <td class="num">$400.00</td>
           </tr>
           <tr>
             <td>Before &amp; After School</td>
             <td class="num">$675.00</td>
-            <td class="num">$575.00</td>
           </tr>
           <tr>
-            <td>Drop-in fee, full non-school day <span style="color:var(--gray);font-size:12px;">(currently enrolled)</span></td>
-            <td class="num" colspan="2" style="text-align:left;">$35.00 per day</td>
+            <td>Drop-in fee, early-out days and full non-school days <span style="color:var(--gray);font-size:12px;">(currently enrolled)</span></td>
+            <td class="num">$15.00 per day</td>
+          </tr>
+          <tr>
+            <td>Drop-in fee, full non-school day <span style="color:var(--gray);font-size:12px;">(previously attended Summer Program)</span></td>
+            <td class="num">$50.00 per day</td>
           </tr>
         </tbody>
       </table>
@@ -830,11 +823,11 @@
 
     <div class="tuition-block fade-up">
       <h3><span class="badge-dot" style="background:var(--yellow)"></span>Summer Program</h3>
-      <p class="meta">Summer school-age program with full days of activities, field trips, and meals.</p>
+      <p class="meta">Summer school-age program with full days of activities, field trips, breakfast, and snacks.</p>
       <div class="summer-grid">
         <div class="summer-cell">
           <div class="lbl">Summer Program</div>
-          <div class="val">$848<span style="font-size:14px;color:var(--gray);font-weight:600">/mo</span></div>
+          <div class="val">$875<span style="font-size:14px;color:var(--gray);font-weight:600">/mo</span></div>
         </div>
         <div class="summer-cell">
           <div class="lbl">Activity Fee</div>
@@ -842,7 +835,7 @@
         </div>
         <div class="summer-cell">
           <div class="lbl">Registration</div>
-          <div class="val">$25</div>
+          <div class="val">$50</div>
         </div>
       </div>
     </div>
@@ -852,17 +845,17 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2.5"><path d="M3 11h18M5 11V8a7 7 0 0 1 14 0v3"/><path d="M5 11v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8"/></svg>
       </div>
       <div>
-        <h4>Meals included with tuition</h4>
+        <h4>Meals &amp; snacks included with tuition</h4>
         <ul>
           <li>Breakfast — 7:30 AM to 8:30 AM</li>
           <li>Morning snack — 10:00 AM to 10:30 AM</li>
-          <li>Lunch — 11:15 AM to 12:30 PM (depending on age group)</li>
+          <li>Lunch — families send a nut-free lunch from home</li>
           <li>Afternoon snack — 3:00 PM to 4:30 PM (depending on age group)</li>
         </ul>
       </div>
     </div>
 
-    <p class="tuition-footnote">Rates corrected 8/29/2025. A non-refundable annual registration fee applies at enrollment. <a href="#enrollment" style="color:var(--blue);font-weight:700;">Inquire about enrollment →</a></p>
+    <p class="tuition-footnote">Rates effective November 1, 2026. A non-refundable annual registration fee of $100 per child applies at enrollment. <a href="#enrollment" style="color:var(--blue);font-weight:700;">Inquire about enrollment →</a></p>
   </div>
 </section>
 
@@ -971,7 +964,7 @@
       <p class="section-sub" style="margin-bottom:36px;">Enrollment spots fill quickly. Complete this form and our team will reach out within one business day to discuss availability and next steps.</p>
       <div class="enroll-form">
         <h3>Enrollment Inquiry</h3>
-        <p class="sub">Non-refundable annual registration fee: $70/child · $130/family</p>
+        <p class="sub">Non-refundable annual registration fee: $100 per child</p>
         <form name="enrollment" method="POST" netlify data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="enrollment" />
           <p style="display:none;"><input name="bot-field" /></p>
@@ -998,11 +991,12 @@
               <label for="program">Program of Interest *</label>
               <select id="program" name="program" required>
                 <option value="">Select a program…</option>
-                <option>Infants (6 wks – 1 yr)</option>
-                <option>Wobblers (12–18 mo)</option>
-                <option>Toddlers (18 mo – 3 yrs)</option>
+                <option>Infants (6 wks – 12 mo)</option>
+                <option>Mobile Infants (12–19 mo)</option>
+                <option>Wobblers (19–24 mo)</option>
+                <option>Toddlers (2–3 yrs)</option>
                 <option>Preschool (3–5 yrs)</option>
-                <option>Before &amp; After School</option>
+                <option>Before &amp; After School (5–12 yrs)</option>
                 <option>Summer Program</option>
               </select>
             </div>
@@ -1060,7 +1054,7 @@
           What meals and snacks are provided?
           <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="faq-body" id="f4">Open Arms participates in the USDA Food Program, which ensures all children receive nutritious, balanced meals throughout the day. The Before &amp; After School program includes breakfast and afternoon snacks. Charles, our Cook, oversees daily meal preparation with care and consistency.</div>
+        <div class="faq-body" id="f4">Open Arms participates in the USDA Food Program, which ensures all children receive nutritious, balanced breakfast and two snacks each day. Families provide a nut-free lunch from home. The Before &amp; After School program includes breakfast and afternoon snacks. Charles, our Cook, oversees daily meal preparation with care and consistency.</div>
       </div>
       <div class="faq-item">
         <button class="faq-btn" data-faq="f5">
@@ -1074,7 +1068,7 @@
           What are the registration fees?
           <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="faq-body" id="f6">The annual registration fee is $70 per child or $130 per family. This fee is non-refundable and is required at the time of enrollment to secure your placement. Monthly tuition rates vary by program — please contact our office for the current tuition schedule and to discuss subsidy eligibility.</div>
+        <div class="faq-body" id="f6">The annual registration fee is $100 per child. This fee is non-refundable and is required at the time of enrollment to secure your placement. Monthly tuition rates vary by program — please contact our office for the current tuition schedule and to discuss subsidy eligibility.</div>
       </div>
     </div>
   </div>
@@ -1421,15 +1415,15 @@
 // ── DATA ──────────────────────────────────────────────────────────────
 const programs = [
   {
-    id: 'infants', title: 'Infant Care', age: '6 Weeks to 1 Year',
+    id: 'infants', title: 'Infant Care', age: '6 Weeks to 19 Months',
     color: '#E94E41', bg: 'rgba(233,78,65,0.10)',
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
     ratio: '5:1', schedule: 'Full-day, Mon–Fri',
-    desc: 'Our infant room is a warm, nurturing haven designed around bonding, sensory exploration, and developmental milestones. Caregivers build secure, consistent relationships with every baby.',
+    desc: 'Our Infant (6–12 months) and Mobile Infant (12–19 months) rooms are a warm, nurturing haven designed around bonding, sensory exploration, and developmental milestones. Caregivers build secure, consistent relationships with every baby.',
     highlights: ['Secure, calm environment tailored to each infant\'s rhythm','Sensory play, tummy time, and milestone tracking','Daily communication with families on feeding, sleep, and development','Small group sizes for maximum one-on-one attention']
   },
   {
-    id: 'wobblers', title: 'Wobblers', age: '12 to 18 Months',
+    id: 'wobblers', title: 'Wobblers', age: '19 to 24 Months',
     color: '#FFD43B', bg: 'rgba(255,212,59,0.15)',
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B8960A" stroke-width="2"><circle cx="12" cy="5" r="3"/><path d="M12 8v8"/><path d="M9 12l-3 5"/><path d="M15 12l3 5"/></svg>`,
     ratio: '5:1', schedule: 'Full-day, Mon–Fri',
@@ -1437,7 +1431,7 @@ const programs = [
     highlights: ['Safe, padded environments for confident exploration','Language-rich activities: songs, books, and simple words','Introduction to social play alongside peers','Daily outdoor time (weather permitting)']
   },
   {
-    id: 'toddlers', title: 'Toddlers', age: '18 Months to 3 Years',
+    id: 'toddlers', title: 'Toddlers', age: '2 to 3 Years',
     color: '#7BC07E', bg: 'rgba(123,192,126,0.12)',
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>`,
     ratio: '6:1', schedule: 'Full-day, Mon–Fri',
@@ -1453,12 +1447,12 @@ const programs = [
     highlights: ['Pre-reading, early math & science curriculum','Field trips and special community experiences','Weekly pastoral visits for character development','School readiness preparation with a 1:10 ratio']
   },
   {
-    id: 'afterschool', title: 'Before & After School', age: '6 to 12 Years',
+    id: 'afterschool', title: 'Before & After School', age: '5 to 12 Years',
     color: '#7BC07E', bg: 'rgba(123,192,126,0.12)',
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
     ratio: '14:1', schedule: 'Before & After school hours',
-    desc: 'Our Before & After School program provides a safe, structured bridge between school and home. Children receive homework support, nutritious meals, and enrichment activities.',
-    highlights: ['Morning breakfast program before school','Homework help and quiet reading time','Transportation coordination with local elementary schools','Afternoon snacks and creative enrichment activities']
+    desc: 'Our Before & After School program provides a safe, structured bridge between school and home. Children receive homework support, breakfast and snacks, and enrichment activities.',
+    highlights: ['Morning breakfast program before school','Homework help and quiet reading time','Transportation to and from local elementary schools','Afternoon snacks and creative enrichment activities']
   },
   {
     id: 'summer', title: 'Summer Program', age: 'School-Age through 6th Grade',
